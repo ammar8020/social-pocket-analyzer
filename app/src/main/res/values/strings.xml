@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">SPA</string>
+
+    <string name="engage"><u>Engage</u></string>
+    <string name="reply">Reply</string>
+    <string name="share">Share</string>
+    <string name="post">Post</string>
+    <string name="newfeed">New feed</string>
+    <string name="name"><b>First name</b></string>
+    <string name="sur_name"><b>Surname</b></string>
+    <string name="dialog_text">"What's up?</string>
+
+
+    <!-- Navigation Drawer -->
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Ammar Ahmed</string>
+    <string name="nav_header_subtitle">140 Sentiments</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!-- menu.xml -->
+    <string name="action_appreciative">Appreciative</string>
+    <string name="action_abusive">Abusive</string>
+    <string name="action_suggestive">Suggestive</string>
+
+
+    <!-- Bottom Navigation -->
+    <string name="title_search">Search</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Home</string>
+
+
+    <!-- fragment_search.xml -->
+    <string name="bottom_nav_search">Search</string>
+
+
+    <!-- fragment_notifications.xml -->
+    <string name="bottom_nav_notifications">Notifications</string>
+
+</resources>
