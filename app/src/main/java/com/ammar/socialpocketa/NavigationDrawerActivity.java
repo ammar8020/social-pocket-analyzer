@@ -1,5 +1,6 @@
 package com.ammar.socialpocketa;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,6 +19,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.ammar.socialpocketa.helper.SharedPrefManager;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
@@ -127,6 +130,15 @@ public class NavigationDrawerActivity extends AppCompatActivity
             case R.id.nav_lists:
                 fragment = new ListsFragment();
                 break;
+
+            case R.id.nav_logout:
+                SharedPrefManager sharedPrefManager = new SharedPrefManager(getApplicationContext());
+                sharedPrefManager.logout();
+
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
 
             case R.id.navigation_home:
                 fragment = new MainActivity();

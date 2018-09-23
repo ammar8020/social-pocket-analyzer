@@ -11,9 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ammar.socialpocketa.models.Post;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -21,13 +23,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
     private static final String TAG = "PostAdapter";
 
-    private ArrayList<String> mNames = new ArrayList<>();
+    //private ArrayList<String> mNames = new ArrayList<>();
+    private List<String> mNames = new ArrayList<>();
+
     private ArrayList<String> mImages = new ArrayList<>();
     private ArrayList<String> mTimes = new ArrayList<>();
-    private ArrayList<String> mTweets = new ArrayList<>();
+
+    //private ArrayList<String> mTweets = new ArrayList<>();
+    private List<String> mTweets = new ArrayList<>();
+
+
     private Context mContext;
 
-    public PostAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images, ArrayList<String> times, ArrayList<String> tweets ) {
+    /*private List<Post> postList;
+
+
+
+    /*public PostAdapter(Context mContext, ArrayList<String> mTweets) {
+        this.mTweets = mTweets;
+        this.mContext = mContext;
+    }*/
+
+    public PostAdapter(Context context, List<String> imageNames, ArrayList<String> images, ArrayList<String> times, List<String> tweets ) {
         mNames = imageNames;
         mImages = images;
         mContext = context;
