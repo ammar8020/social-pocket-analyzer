@@ -1,45 +1,94 @@
 package com.ammar.socialpocketa;
 
+import android.app.Application;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ammar.socialpocketa.models.Comment;
+import com.ammar.socialpocketa.models.Replies.Reply;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class PostDetailsActivity extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class PostDetailsActivity extends Fragment {
 
     private static final String TAG = "PostDetailsActivity";
 
+
+    RecyclerView recyclerView;
+
+
+    //private static List<Reply> replyList;
+
+
     //vars
-    private ArrayList<String> mNames = new ArrayList<>();
+    //private ArrayList<String> mNames = new ArrayList<>();
+    private List<String> mNames = new ArrayList<>();
+
     private ArrayList<String> mImages = new ArrayList<>();
 
     private ArrayList<String> mTimes = new ArrayList<>();
-    private ArrayList<String> mComments = new ArrayList<>();
+    //private ArrayList<String> mComments = new ArrayList<>();
+
+    private List<String> mComments = new ArrayList<>();
 
 
+    /*@Nullable
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_details);
-        Log.d(TAG, "onCreate: started.");
+        Log.d(TAG, "onCreate: started. " + TAG);
 
         getIncomingIntent();
         initComments();
+
+        apiResponse();
+    }*/
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.activity_post_details , container, false);
+
+        Log.d(TAG, "onCreate: started.");
+
+        recyclerView = rootView.findViewById(R.id.rvComments);
+
+        //getIncomingIntent();
+        initComments();
+
+        apiResponse();
+
+        return rootView;
     }
 
-    private void getIncomingIntent(){
+
+
+    /*private void getIncomingIntent(){
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
 
         if(getIntent().hasExtra("image") && getIntent().hasExtra("name")){
@@ -50,9 +99,9 @@ public class PostDetailsActivity extends AppCompatActivity {
 
             setImage(image, name);
         }
-    }
+    }*/
 
-    private void setImage(String image, String name){
+    /*private void setImage(String image, String name){
         Log.d(TAG, "setImage: setting the image and name to widgets.");
 
         TextView tvName = findViewById(R.id.tv_name);
@@ -63,17 +112,17 @@ public class PostDetailsActivity extends AppCompatActivity {
                 .asBitmap()
                 .load(image)
                 .into(ivImage);
-    }
+    }*/
 
     private void initComments(){
         Log.d(TAG, "initComments: preparing comments.");
 
         mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNames.add("Talk");
+        //mNames.add("Talk");
         mTimes.add("3 days ago");
-        mComments.add("This is the content of comment");
+        //mComments.add("This is the content of comment");
 
-        mImages.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+        /*mImages.add("https://i.redd.it/tpsnoz5bzo501.jpg");
         mNames.add("Trondheim");
         mTimes.add("2 days ago");
         mComments.add("This is the content of tweet");
@@ -102,25 +151,104 @@ public class PostDetailsActivity extends AppCompatActivity {
         mNames.add("Rock");
         mTimes.add("3 weeks ago");
         mComments.add("This is another content of comment");
-
-        initRecyclerView();
+*/
+        //initRecyclerView();
     }
 
-    private void initRecyclerView() {
+    /*private void initRecyclerView() {
 
         Log.d(TAG, "initRecyclerView: init recyclerview.");
         RecyclerView recyclerView = findViewById(R.id.rvComments);
         CommentAdapter adapter = new CommentAdapter(this, mNames, mImages, mTimes, mComments);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }*/
+
+
+
+
+
+    public void apiResponse() {
+
+
+
+        //now making the call object
+        //Here using the api method that we created inside the api interface
+        Call<Comment> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                //.getComments("5b951359d498032e88f99844");
+                .getComments();
+
+
+            call.enqueue(new Callback<Comment>() {
+
+            @Override
+            public void onResponse(Call<Comment> call, Response<Comment> response) {
+
+                Comment replyList1 = response.body();
+                Log.d(TAG, "onResponse: from bhai \n\n " + replyList1 + "\n\n");
+
+                //In this point we got our Post list
+                List<Reply> replyList = response.body().getReplies();
+                Log.d(TAG, "onResponse: from bhai2 " + replyList);
+
+                //Creating a String array for the ListView
+                String[] texts = new String[replyList.size()];
+                String[] names = new String[replyList.size()];
+
+                //looping through all the texts and inserting the text inside the string array
+                for (int i = 0; i < replyList.size(); i++) {
+                    texts[i] = replyList.get(i).getText();
+
+                    names[i] = replyList.get(i).getScreenName();
+
+                    //mRTweets.get(i).concat(texts[i]);
+
+
+
+                    //List<Integer> newList = new ArrayList<Post>(texts);
+                }
+
+                mComments = Arrays.asList(texts);
+
+                mNames = Arrays.asList(names);
+
+                //displaying the string array into listview
+                //listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, heroes));
+
+                //displaying the string array into recycler view
+                //PostAdapter adapter = new PostAdapter(getContext(), mRTweets);
+
+
+                //recyclerView.setLayoutManager(manager);
+                CommentAdapter adapter = new CommentAdapter(getContext(), mNames, mImages, mTimes ,mComments);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+
+
+            }
+
+
+            @Override
+            public void onFailure(Call<Comment> call, Throwable t) {
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
 
-    @Override
+
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -130,10 +258,10 @@ public class PostDetailsActivity extends AppCompatActivity {
         switch(menuItemThatWasSelected) {
             case R.id.action_appreciative:
                 String message = "Appreciative clicked !";
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
 
-    }
+    }*/
 
 }

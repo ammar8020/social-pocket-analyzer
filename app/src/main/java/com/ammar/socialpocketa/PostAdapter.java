@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ammar.socialpocketa.models.Post;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -44,8 +43,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         this.mContext = mContext;
     }*/
 
-    public PostAdapter(Context context, List<String> imageNames, ArrayList<String> images, ArrayList<String> times, List<String> tweets ) {
-        mNames = imageNames;
+    public PostAdapter(Context context, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> tweets ) {
+        mNames = names;
         mImages = images;
         mContext = context;
         mTimes = times;

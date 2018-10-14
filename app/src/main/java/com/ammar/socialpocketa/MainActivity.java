@@ -80,41 +80,41 @@ public class MainActivity extends Fragment {
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
         mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        //mNames.add("Havasu Falls");
+        mNames.add("Havasu Falls");
         mTimes.add("2 days ago");
-        //mTweets.add("This is the content of tweet");
+//        mTweets.add("This is the content of tweet");
         //mTweets.add(s.get(0));
 
         mImages.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-//        mNames.add("Trondheim");
+        mNames.add("Trondheim");
         mTimes.add("2 days ago");
-        //mTweets.add("This is the content of tweet");
+//        mTweets.add("This is the content of tweet");
 
         mImages.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-//        mNames.add("Portugal");
+        mNames.add("Portugal");
         mTimes.add("2 days ago");
-        //mTweets.add("This is the content of tweet");
+//        mTweets.add("This is the content of tweet");
 
         mImages.add("https://i.redd.it/j6myfqglup501.jpg");
-//        mNames.add("Rocky Mountain National Park");
+        mNames.add("Rocky Mountain National Park");
         mTimes.add("2 days ago");
-        //mTweets.add("This is the content of tweet");
+//        mTweets.add("This is the content of tweet");
 
 
         mImages.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-//        mNames.add("Mahahual");
+        mNames.add("Mahahual");
         mTimes.add("2 days ago");
-        //mTweets.add("This is the content of tweet");
+//        mTweets.add("This is the content of tweet");
 
         mImages.add("https://i.redd.it/k98uzl68eh501.jpg");
-//        mNames.add("Frozen Lake");
+        mNames.add("Frozen Lake");
         mTimes.add("2 days ago");
-        //mTweets.add("This is the content of tweet");
+//        mTweets.add("This is the content of tweet");
 
         mImages.add("https://i.redd.it/glin0nwndo501.jpg");
-        //mNames.add("White Sands Desert");
+        mNames.add("White Sands Desert");
         mTimes.add("2 weeks ago");
-        //mTweets.add("This is another content of tweet");
+//        mTweets.add("This is another content of tweet");
         //initRecyclerView();
     }
 
@@ -132,7 +132,7 @@ public class MainActivity extends Fragment {
     public void apiResponse() {
 
         //now making the call object
-        //Here we are using the api method that we created inside the api interface
+        //Here using the api method that we created inside the api interface
         Call<List<Post>> call = RetrofitClient
                 .getInstance()
                 .getApi()
@@ -148,15 +148,15 @@ public class MainActivity extends Fragment {
                 //In this point we got our Post list
                 postList = response.body();
 
-                //Creating an String array for the ListView
+                //Creating a String array for the ListView
                 String[] texts = new String[postList.size()];
-                String[] names = new String[postList.size()];
+                //String[] names = new String[postList.size()];
 
                 //looping through all the texts and inserting the text inside the string array
                 for (int i = 0; i < postList.size(); i++) {
                     texts[i] = postList.get(i).getText();
 
-                    names[i] = postList.get(i).getUser();
+                    //names[i] = postList.get(i).getUser();
 
                     //mRTweets.get(i).concat(texts[i]);
 
@@ -167,7 +167,7 @@ public class MainActivity extends Fragment {
 
                 mTweets = Arrays.asList(texts);
 
-                mNames = Arrays.asList(names);
+                //mNames = Arrays.asList(names);
 
                 //displaying the string array into listview
                 //listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, heroes));

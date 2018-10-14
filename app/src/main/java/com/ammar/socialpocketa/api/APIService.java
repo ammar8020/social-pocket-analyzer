@@ -1,5 +1,6 @@
 package com.ammar.socialpocketa.api;
 
+import com.ammar.socialpocketa.models.Comment;
 import com.ammar.socialpocketa.models.Login;
 import com.ammar.socialpocketa.models.Post;
 import com.ammar.socialpocketa.models.Register;
@@ -13,6 +14,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 
 public interface APIService {
@@ -41,6 +43,16 @@ public interface APIService {
     // defined the Call type as a List and the List type as Post.
     @GET("api/posts")
     Call<List<Post>> getPosts();
+
+
+    //the comment call
+    // defined the Call type as a List and the List type as Comment.
+
+    //@GET("api/posts/detail/{postId}")
+    //Call<Comment> getComments(@Path("postId") String postId);
+    @GET("api/posts/detail/5b951359d498032e88f99844")
+    Call<Comment> getComments();
+
 
 
 

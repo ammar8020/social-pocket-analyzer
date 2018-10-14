@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -21,18 +22,25 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     private static final String TAG = "PostAdapter";
 
-    private ArrayList<String> mNames = new ArrayList<>();
+    //private ArrayList<String> mNames = new ArrayList<>();
+    private List<String> mNames = new ArrayList<>();
+
     private ArrayList<String> mImages = new ArrayList<>();
     private ArrayList<String> mTimes = new ArrayList<>();
-    private ArrayList<String> mComments = new ArrayList<>();
+
+    //private ArrayList<String> mComments = new ArrayList<>();
+    private List<String> mComments = new ArrayList<>();
+
     private Context mContext;
 
-    public CommentAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images, ArrayList<String> times, ArrayList<String> tweets ) {
-        mNames = imageNames;
+    public CommentAdapter(Context context, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> comments ) {
+
+        mNames = names;
         mImages = images;
         mContext = context;
         mTimes = times;
-        mComments = tweets;
+        mComments = comments;
+
     }
 
     @Override
