@@ -48,10 +48,10 @@ public interface APIService {
     //the comment call
     // defined the Call type as a List and the List type as Comment.
 
-    //@GET("api/posts/detail/{postId}")
-    //Call<Comment> getComments(@Path("postId") String postId);
-    @GET("api/posts/detail/5b951359d498032e88f99844")
-    Call<Comment> getComments();
+    @GET("api/posts/detail/{postId}")
+    Call<Comment> getComments(@Path("postId") String postId);
+//    @GET("api/posts/detail/5b951359d498032e88f99844")
+//    Call<Comment> getComments();
 
 
 

@@ -31,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostDetailsActivity extends Fragment {
+public class PostDetailsActivity extends AppCompatActivity {
 
     private static final String TAG = "PostDetailsActivity";
 
@@ -43,6 +43,11 @@ public class PostDetailsActivity extends Fragment {
 
 
     //vars
+
+    private static int noOfReplies = 0;
+
+    String _id = "";
+
     //private ArrayList<String> mNames = new ArrayList<>();
     private List<String> mNames = new ArrayList<>();
 
@@ -53,22 +58,25 @@ public class PostDetailsActivity extends Fragment {
 
     private List<String> mComments = new ArrayList<>();
 
+    private ArrayList<Reply> data;
 
-    /*@Nullable
+    @Nullable
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_details);
         Log.d(TAG, "onCreate: started. " + TAG);
 
+        recyclerView = findViewById(R.id.rvComments);
+
         getIncomingIntent();
         initComments();
 
         apiResponse();
-    }*/
+    }
 
 
-    @Nullable
+    /*@Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -85,23 +93,26 @@ public class PostDetailsActivity extends Fragment {
 
         return rootView;
     }
+*/
 
 
-
-    /*private void getIncomingIntent(){
+    private void getIncomingIntent(){
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
 
         if(getIntent().hasExtra("image") && getIntent().hasExtra("name")){
             Log.d(TAG, "getIncomingIntent: found intent extras.");
 
-            String image = getIntent().getStringExtra("image");
+            _id = getIntent().getStringExtra("_id");
+            Log.d(TAG, "getIncomingIntent: The value of _id is: " + _id);
+
             String name = getIntent().getStringExtra("name");
+            String image = getIntent().getStringExtra("image");
 
             setImage(image, name);
         }
-    }*/
+    }
 
-    /*private void setImage(String image, String name){
+    private void setImage(String image, String name){
         Log.d(TAG, "setImage: setting the image and name to widgets.");
 
         TextView tvName = findViewById(R.id.tv_name);
@@ -112,21 +123,22 @@ public class PostDetailsActivity extends Fragment {
                 .asBitmap()
                 .load(image)
                 .into(ivImage);
-    }*/
+    }
 
     private void initComments(){
         Log.d(TAG, "initComments: preparing comments.");
 
-        mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+        /*mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
         //mNames.add("Talk");
         mTimes.add("3 days ago");
         //mComments.add("This is the content of comment");
 
-        /*mImages.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNames.add("Trondheim");
-        mTimes.add("2 days ago");
-        mComments.add("This is the content of tweet");
+        mImages.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+//        mNames.add("Trondheim");
+        mTimes.add("2 days ago");*/
+//        mComments.add("This is the content of tweet");
 
+        /*
         mImages.add("https://i.redd.it/qn7f9oqu7o501.jpg");
         mNames.add("Portugal");
         mTimes.add("2 days ago");
@@ -171,14 +183,14 @@ public class PostDetailsActivity extends Fragment {
     public void apiResponse() {
 
 
-
         //now making the call object
         //Here using the api method that we created inside the api interface
         Call<Comment> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                //.getComments("5b951359d498032e88f99844");
-                .getComments();
+                .getComments(_id);
+//                .getComments("5b951359d498032e88f99844");
+//                .getComments();
 
 
             call.enqueue(new Callback<Comment>() {
@@ -186,11 +198,24 @@ public class PostDetailsActivity extends Fragment {
             @Override
             public void onResponse(Call<Comment> call, Response<Comment> response) {
 
-                Comment replyList1 = response.body();
-                Log.d(TAG, "onResponse: from bhai \n\n " + replyList1 + "\n\n");
+//                Comment replyList1 = response.body();
+//                Log.d(TAG, "onResponse: from bhai \n\n " + replyList1 + "\n\n");
 
                 //In this point we got our Post list
+                Log.d(TAG, "onResponse: from bhai3 \n\n " + response.body().getReplies() + "\n\n");
+
                 List<Reply> replyList = response.body().getReplies();
+
+                try {
+                    noOfReplies = replyList.size();
+
+
+                //looping through all the texts and inserting the text inside the string array
+                for (int i = 0; i < replyList.size(); i++) {
+                    Toast.makeText(PostDetailsActivity.this, "data is " + response.body().getReplies().get(i).getText(), Toast.LENGTH_LONG).show();
+                }
+
+
                 Log.d(TAG, "onResponse: from bhai2 " + replyList);
 
                 //Creating a String array for the ListView
@@ -199,8 +224,8 @@ public class PostDetailsActivity extends Fragment {
 
                 //looping through all the texts and inserting the text inside the string array
                 for (int i = 0; i < replyList.size(); i++) {
+                    //Toast.makeText(PostDetailsActivity.this, "data is " + response.body().getReplies().get(i).getText(), Toast.LENGTH_SHORT).show();
                     texts[i] = replyList.get(i).getText();
-
                     names[i] = replyList.get(i).getScreenName();
 
                     //mRTweets.get(i).concat(texts[i]);
@@ -214,6 +239,11 @@ public class PostDetailsActivity extends Fragment {
 
                 mNames = Arrays.asList(names);
 
+                for(int i = 0; i < noOfReplies; i++) {
+                    mImages.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+                    mTimes.add("2 days ago");
+                }
+
                 //displaying the string array into listview
                 //listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, heroes));
 
@@ -222,19 +252,25 @@ public class PostDetailsActivity extends Fragment {
 
 
                 //recyclerView.setLayoutManager(manager);
-                CommentAdapter adapter = new CommentAdapter(getContext(), mNames, mImages, mTimes ,mComments);
+                CommentAdapter adapter = new CommentAdapter(getApplicationContext(), mNames, mImages, mTimes ,mComments);
                 recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
 
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "onResponse: NullPointerException " + e.getMessage() );
+                    noOfReplies = 0;
+                }
 
 
             }
 
 
+
+
             @Override
             public void onFailure(Call<Comment> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 

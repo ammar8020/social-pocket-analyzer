@@ -36,6 +36,10 @@ public class MainActivity extends Fragment {
     private static List<Post> postList;
 
     //vars
+    private static int noOfTweets = 0;
+
+    private List<String> m_Ids = new ArrayList<>();
+
     //private ArrayList<String> mNames = new ArrayList<>();
     private List<String> mNames = new ArrayList<>();
 
@@ -69,9 +73,9 @@ public class MainActivity extends Fragment {
 
         recyclerView = rootView.findViewById(R.id.rvPosts);
 
-        initImageBitmaps();
-
         apiResponse();
+
+        initImageBitmaps();
 
         return rootView;
     }
@@ -79,13 +83,16 @@ public class MainActivity extends Fragment {
     private void initImageBitmaps(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
-        mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNames.add("Havasu Falls");
-        mTimes.add("2 days ago");
+        /*for (int i = 0; i < noOfTweets; i++ ){
+            mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+            mNames.add("Havasu Falls");
+            mTimes.add("2 days ago");
+        }*/
+
 //        mTweets.add("This is the content of tweet");
         //mTweets.add(s.get(0));
 
-        mImages.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+        /*mImages.add("https://i.redd.it/tpsnoz5bzo501.jpg");
         mNames.add("Trondheim");
         mTimes.add("2 days ago");
 //        mTweets.add("This is the content of tweet");
@@ -113,7 +120,7 @@ public class MainActivity extends Fragment {
 
         mImages.add("https://i.redd.it/glin0nwndo501.jpg");
         mNames.add("White Sands Desert");
-        mTimes.add("2 weeks ago");
+        mTimes.add("2 weeks ago");*/
 //        mTweets.add("This is another content of tweet");
         //initRecyclerView();
     }
@@ -148,12 +155,19 @@ public class MainActivity extends Fragment {
                 //In this point we got our Post list
                 postList = response.body();
 
+                try {
+                    noOfTweets = postList.size();
+
+
                 //Creating a String array for the ListView
+                String[] _ids = new String[postList.size()];
                 String[] texts = new String[postList.size()];
                 //String[] names = new String[postList.size()];
 
                 //looping through all the texts and inserting the text inside the string array
                 for (int i = 0; i < postList.size(); i++) {
+
+                    _ids[i] = postList.get(i).getId();
                     texts[i] = postList.get(i).getText();
 
                     //names[i] = postList.get(i).getUser();
@@ -165,7 +179,14 @@ public class MainActivity extends Fragment {
                     //List<Integer> newList = new ArrayList<Post>(texts);
                 }
 
+                m_Ids = Arrays.asList(_ids);
                 mTweets = Arrays.asList(texts);
+
+                for (int i = 0; i < noOfTweets; i++ ){
+                    mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+                    mNames.add("Havasu Falls");
+                    mTimes.add("2 days ago");
+                }
 
                 //mNames = Arrays.asList(names);
 
@@ -177,7 +198,7 @@ public class MainActivity extends Fragment {
 
 
                 //recyclerView.setLayoutManager(manager);
-                PostAdapter adapter = new PostAdapter(getContext(), mNames, mImages, mTimes ,mTweets);
+                PostAdapter adapter = new PostAdapter(getContext(), m_Ids, mNames, mImages, mTimes ,mTweets);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -224,7 +245,10 @@ public class MainActivity extends Fragment {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));*/
 
 
-
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "onResponse: NullPointerException " + e.getMessage() );
+                    noOfTweets = 0;
+                }
 
 
             }

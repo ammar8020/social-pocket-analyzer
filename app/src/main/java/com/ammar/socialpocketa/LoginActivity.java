@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        //if user is already logged in openeing the profile activity
+        //if user is already logged in openeing the main activity
         if (authToken != null) {
             if (SharedPrefManager.getInstance(this).isLoggedIn()) {
                 finish();
@@ -100,7 +100,6 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
 
         APIService service = retrofit.create(APIService.class);
-
 
         Call<Login> call = service.userLogin(email, password);
 

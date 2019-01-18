@@ -22,6 +22,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
     private static final String TAG = "PostAdapter";
 
+    private List<String> m_Ids = new ArrayList<>();
+
     //private ArrayList<String> mNames = new ArrayList<>();
     private List<String> mNames = new ArrayList<>();
 
@@ -43,12 +45,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         this.mContext = mContext;
     }*/
 
-    public PostAdapter(Context context, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> tweets ) {
+    public PostAdapter(Context context, List<String> ids, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> tweets ) {
         mNames = names;
         mImages = images;
         mContext = context;
         mTimes = times;
         mTweets = tweets;
+        m_Ids = ids;
     }
 
     @Override
@@ -81,6 +84,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 Intent intent = new Intent(mContext, PostDetailsActivity.class);
                 intent.putExtra("image", mImages.get(position));
                 intent.putExtra("name", mNames.get(position));
+                intent.putExtra("_id", m_Ids.get(position));
                 mContext.startActivity(intent);
             }
         });
