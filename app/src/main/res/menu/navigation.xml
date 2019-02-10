@@ -16,5 +16,9 @@
         android:icon="@drawable/baseline_notifications_black_24dp"
         android:title="@string/title_notifications" />
 
+    <item
+        android:id="@+id/navigation_mentions"
+        android:icon="@drawable/icon_mentions"
+        android:title="@string/title_mentions" />
 
 </menu>

@@ -1,7 +1,11 @@
 package com.ammar.socialpocketa;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.ammar.socialpocketa.api.APIService;
 import com.ammar.socialpocketa.api.APIUrl;
+import com.ammar.socialpocketa.helper.SharedPrefManager;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -20,9 +24,9 @@ public class RetrofitClient {
 
     //LoginActivity loginActivity = new LoginActivity();
 
+//    public String authToken = LoginActivity.getAuthToken();
 
-    public String authToken = LoginActivity.getAuthToken();
-
+    public String authToken = SharedPrefManager.getKeyToken();
 
 
     private RetrofitClient() {

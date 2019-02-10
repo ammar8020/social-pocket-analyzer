@@ -1,6 +1,7 @@
 package com.ammar.socialpocketa;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
+    private Context mContext;
     TextView linkSignup;
     EditText txtEmail, txtPassword;
     Button btnLogin;
@@ -39,13 +41,20 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        mContext = LoginActivity.this;
         //if user is already logged in openeing the main activity
-        if (authToken != null) {
+
+        /*if (authToken != null) {
             if (SharedPrefManager.getInstance(this).isLoggedIn()) {
                 finish();
                 startActivity(new Intent(this, NavigationDrawerActivity.class));
             }
+        }*/
+
+        if (SharedPrefManager.getInstance(mContext).isLoggedIn()){
+//            finish();
+            startActivity(new Intent(this, NavigationDrawerActivity.class));
+            finish();
         }
 
         linkSignup = findViewById(R.id.link_signup);

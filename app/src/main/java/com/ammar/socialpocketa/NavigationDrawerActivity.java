@@ -151,6 +151,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
             case R.id.navigation_notifications:
                 fragment = new NotificationsFragment();
                 break;
+
+            case R.id.navigation_mentions:
+                fragment = new MentionsFragment();
+                break;
         }
 
         //replacing the fragment

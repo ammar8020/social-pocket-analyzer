@@ -2,6 +2,7 @@ package com.ammar.socialpocketa.api;
 
 import com.ammar.socialpocketa.models.Comment;
 import com.ammar.socialpocketa.models.Login;
+import com.ammar.socialpocketa.models.Mention;
 import com.ammar.socialpocketa.models.Post;
 import com.ammar.socialpocketa.models.Register;
 
@@ -54,7 +55,10 @@ public interface APIService {
 //    Call<Comment> getComments();
 
 
-
+    //the Mentions call
+    // defined the Call type as a List and the List type as Post.
+    @GET("api/posts/mentions")
+    Call<List<Mention>> getMentions();
 
 }
 

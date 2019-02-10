@@ -73,4 +73,9 @@ public class SharedPrefManager {
         editor.apply();
         return true;
     }
+
+    public static String getKeyToken(){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+         return sharedPreferences.getString(KEY_TOKEN, "0");
+    }
 }
