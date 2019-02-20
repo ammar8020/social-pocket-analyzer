@@ -145,7 +145,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 break;
 
             case R.id.navigation_search:
-                fragment = new SearchFragment();
+//                fragment = new SearchFragment();
+                fragment = new HashtagFragment();
                 break;
 
             case R.id.navigation_notifications:

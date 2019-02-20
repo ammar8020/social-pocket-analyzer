@@ -1,6 +1,7 @@
 package com.ammar.socialpocketa.api;
 
 import com.ammar.socialpocketa.models.Comment;
+import com.ammar.socialpocketa.models.Hashtag;
 import com.ammar.socialpocketa.models.Login;
 import com.ammar.socialpocketa.models.Mention;
 import com.ammar.socialpocketa.models.Post;
@@ -59,6 +60,12 @@ public interface APIService {
     // defined the Call type as a List and the List type as Post.
     @GET("api/posts/mentions")
     Call<List<Mention>> getMentions();
+
+
+    //the Hashtags call
+    // defined the Call type as a List and the List type as Post.
+    @GET("api/posts/hashtags/{keyword}")
+    Call<List<Hashtag>> getHashtagTweets(@Path("keyword") String keyword);
 
 }
 
