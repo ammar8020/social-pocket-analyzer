@@ -140,7 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
                     //starting profile activity
                     finish();
                     SharedPrefManager.getInstance(getApplicationContext()).userRegister(response.body().getId(), response.body().getName(), response.body().getEmail());
-                    startActivity(new Intent(getApplicationContext(), NavigationDrawerActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
                 }
 

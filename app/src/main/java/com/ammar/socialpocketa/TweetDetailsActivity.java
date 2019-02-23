@@ -1,21 +1,12 @@
 package com.ammar.socialpocketa;
 
-import android.app.Application;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +22,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostDetailsActivity extends AppCompatActivity {
+public class TweetDetailsActivity extends AppCompatActivity {
 
-    private static final String TAG = "PostDetailsActivity";
+    private static final String TAG = "TweetDetailsActivity";
 
 
     RecyclerView recyclerView;
@@ -64,7 +55,7 @@ public class PostDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_details);
+        setContentView(R.layout.activity_tweet_details);
         Log.d(TAG, "onCreate: started. " + TAG);
 
         recyclerView = findViewById(R.id.rvComments);
@@ -80,7 +71,7 @@ public class PostDetailsActivity extends AppCompatActivity {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.activity_post_details , container, false);
+        View rootView = inflater.inflate(R.layout.activity_tweet_details , container, false);
 
         Log.d(TAG, "onCreate: started.");
 
@@ -171,7 +162,7 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         Log.d(TAG, "initRecyclerView: init recyclerview.");
         RecyclerView recyclerView = findViewById(R.id.rvComments);
-        CommentAdapter adapter = new CommentAdapter(this, mNames, mImages, mTimes, mComments);
+        ReplyAdapter adapter = new ReplyAdapter(this, mNames, mImages, mTimes, mComments);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }*/
@@ -212,7 +203,7 @@ public class PostDetailsActivity extends AppCompatActivity {
 
                 //looping through all the texts and inserting the text inside the string array
                 for (int i = 0; i < replyList.size(); i++) {
-                    Toast.makeText(PostDetailsActivity.this, "data is " + response.body().getReplies().get(i).getText(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(TweetDetailsActivity.this, "data is " + response.body().getReplies().get(i).getText(), Toast.LENGTH_LONG).show();
                 }
 
 
@@ -224,7 +215,7 @@ public class PostDetailsActivity extends AppCompatActivity {
 
                 //looping through all the texts and inserting the text inside the string array
                 for (int i = 0; i < replyList.size(); i++) {
-                    //Toast.makeText(PostDetailsActivity.this, "data is " + response.body().getReplies().get(i).getText(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(TweetDetailsActivity.this, "data is " + response.body().getReplies().get(i).getText(), Toast.LENGTH_SHORT).show();
                     texts[i] = replyList.get(i).getText();
                     names[i] = replyList.get(i).getScreenName();
 
@@ -248,11 +239,11 @@ public class PostDetailsActivity extends AppCompatActivity {
                 //listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, heroes));
 
                 //displaying the string array into recycler view
-                //PostAdapter adapter = new PostAdapter(getContext(), mRTweets);
+                //HomeAdapter adapter = new HomeAdapter(getContext(), mRTweets);
 
 
                 //recyclerView.setLayoutManager(manager);
-                CommentAdapter adapter = new CommentAdapter(getApplicationContext(), mNames, mImages, mTimes ,mComments);
+                ReplyAdapter adapter = new ReplyAdapter(getApplicationContext(), mNames, mImages, mTimes ,mComments);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 

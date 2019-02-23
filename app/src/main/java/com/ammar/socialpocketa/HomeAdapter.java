@@ -18,9 +18,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
-    private static final String TAG = "PostAdapter";
+    private static final String TAG = "HomeAdapter";
 
     private List<String> m_Ids = new ArrayList<>();
 
@@ -40,12 +40,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
 
 
-    /*public PostAdapter(Context mContext, ArrayList<String> mTweets) {
+    /*public HomeAdapter(Context mContext, ArrayList<String> mTweets) {
         this.mTweets = mTweets;
         this.mContext = mContext;
     }*/
 
-    public PostAdapter(Context context, List<String> ids, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> tweets ) {
+    public HomeAdapter(Context context, List<String> ids, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> tweets ) {
         mNames = names;
         mImages = images;
         mContext = context;
@@ -56,7 +56,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_post, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tweet, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -81,7 +81,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
                 Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(mContext, PostDetailsActivity.class);
+                Intent intent = new Intent(mContext, TweetDetailsActivity.class);
                 intent.putExtra("image", mImages.get(position));
                 intent.putExtra("name", mNames.get(position));
                 intent.putExtra("_id", m_Ids.get(position));

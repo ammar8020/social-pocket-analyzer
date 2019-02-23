@@ -1,7 +1,6 @@
 package com.ammar.socialpocketa;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -19,9 +17,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MentionAdapter extends RecyclerView.Adapter<MentionAdapter.ViewHolder>{
+public class MentionsAdapter extends RecyclerView.Adapter<MentionsAdapter.ViewHolder>{
 
-    private static final String TAG = "MentionAdapter";
+    private static final String TAG = "MentionsAdapter";
 
     private List<String> m_Ids = new ArrayList<>();
 
@@ -42,12 +40,12 @@ public class MentionAdapter extends RecyclerView.Adapter<MentionAdapter.ViewHold
 
 
 
-    /*public PostAdapter(Context mContext, ArrayList<String> mTweets) {
+    /*public HomeAdapter(Context mContext, ArrayList<String> mTweets) {
         this.mTweets = mTweets;
         this.mContext = mContext;
     }*/
 
-    public MentionAdapter(Context context, List<String> ids, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> tweets, List<String> sentiments ) {
+    public MentionsAdapter(Context context, List<String> ids, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> tweets, List<String> sentiments ) {
         mNames = names;
         mImages = images;
         mContext = context;
@@ -59,7 +57,7 @@ public class MentionAdapter extends RecyclerView.Adapter<MentionAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_post, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tweet, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -119,7 +117,7 @@ public class MentionAdapter extends RecyclerView.Adapter<MentionAdapter.ViewHold
 //
 //                Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
 //
-//                Intent intent = new Intent(mContext, PostDetailsActivity.class);
+//                Intent intent = new Intent(mContext, TweetDetailsActivity.class);
 //                intent.putExtra("image", mImages.get(position));
 //                intent.putExtra("name", mNames.get(position));
 //                intent.putExtra("_id", m_Ids.get(position));

@@ -19,8 +19,6 @@ import com.ammar.socialpocketa.api.APIUrl;
 import com.ammar.socialpocketa.helper.SharedPrefManager;
 import com.ammar.socialpocketa.models.Login;
 
-import java.util.regex.Pattern;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,13 +45,13 @@ public class LoginActivity extends AppCompatActivity {
         /*if (authToken != null) {
             if (SharedPrefManager.getInstance(this).isLoggedIn()) {
                 finish();
-                startActivity(new Intent(this, NavigationDrawerActivity.class));
+                startActivity(new Intent(this, MainActivity.class));
             }
         }*/
 
         if (SharedPrefManager.getInstance(mContext).isLoggedIn()){
 //            finish();
-            startActivity(new Intent(this, NavigationDrawerActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
 
@@ -81,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                     txtPassword.setError("Password is required!");
                 } else {
                     Snackbar.make(view, "No validation errors, continue login", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    /*Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    /*Intent intent = new Intent(getApplicationContext(), HomeFragment.class);
                     startActivity(intent);*/
                     userSignIn();
                 }
@@ -135,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                     setAuthToken(tempAuthToken);
 
 
-                    startActivity(new Intent(getApplicationContext(), NavigationDrawerActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
 
                 //else if(resMsg.equals("Bad Request")) {

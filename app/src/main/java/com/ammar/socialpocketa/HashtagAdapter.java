@@ -1,7 +1,6 @@
 package com.ammar.socialpocketa;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -42,7 +40,7 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
 
 
 
-    /*public PostAdapter(Context mContext, ArrayList<String> mTweets) {
+    /*public HomeAdapter(Context mContext, ArrayList<String> mTweets) {
         this.mTweets = mTweets;
         this.mContext = mContext;
     }*/
@@ -59,7 +57,7 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_post, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tweet, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -119,7 +117,7 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
 //
 //                Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
 //
-//                Intent intent = new Intent(mContext, PostDetailsActivity.class);
+//                Intent intent = new Intent(mContext, TweetDetailsActivity.class);
 //                intent.putExtra("image", mImages.get(position));
 //                intent.putExtra("name", mNames.get(position));
 //                intent.putExtra("_id", m_Ids.get(position));

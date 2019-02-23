@@ -49,7 +49,6 @@ public class Post {
         this.id1 = id1;
     }
 
-
     public String getIdStr() {
         return idStr;
     }

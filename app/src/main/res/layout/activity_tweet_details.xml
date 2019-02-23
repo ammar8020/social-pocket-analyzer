@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostDetailsActivity">
+    tools:context=".TweetDetailsActivity">
 
 
-    <include layout="@layout/layout_post"/>
+    <include layout="@layout/layout_tweet"/>
 
 
     <android.support.v7.widget.RecyclerView

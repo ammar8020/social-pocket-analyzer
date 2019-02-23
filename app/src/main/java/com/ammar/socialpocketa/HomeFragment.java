@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.ammar.socialpocketa.models.Mention;
+import com.ammar.socialpocketa.models.Post;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,14 +23,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MentionsFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
-    private static final String TAG = "MentionsFragment";
+    private static final String TAG = "HomeFragment";
 
     RecyclerView recyclerView;
 
     //private HomeAdapter adapter;
-    private static List<Mention> postList;
+    private static List<Post> postList;
 
     //vars
     private static int noOfTweets = 0;
@@ -47,7 +47,7 @@ public class MentionsFragment extends Fragment {
 
     //private ArrayList<String> mRTweets = new ArrayList<>();
     private List<String> mTweets = new ArrayList<>();
-    private List<String> mSentiments = new ArrayList<>();
+
 
     //private ArrayList<String> s = new ArrayList<>();
 
@@ -64,11 +64,11 @@ public class MentionsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_mentions, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         Log.d(TAG, "onCreate: started.");
 
-        recyclerView = rootView.findViewById(R.id.rvMentions);
+        recyclerView = rootView.findViewById(R.id.rvPosts);
 
         apiResponse();
 
@@ -137,16 +137,16 @@ public class MentionsFragment extends Fragment {
 
         //now making the call object
         //Here using the api method that we created inside the api interface
-        Call<List<Mention>> call = RetrofitClient
+        Call<List<Post>> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getMentions();
+                .getPosts();
 
 
-        call.enqueue(new Callback<List<Mention>>() {
+        call.enqueue(new Callback<List<Post>>() {
 
             @Override
-            public void onResponse(Call<List<Mention>> call, Response<List<Mention>> response) {
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 
 
                 //In this point we got our Post list
@@ -156,52 +156,48 @@ public class MentionsFragment extends Fragment {
                     noOfTweets = postList.size();
 
 
-                    //Creating a String array for the ListView
-                    String[] _ids = new String[postList.size()];
-                    String[] texts = new String[postList.size()];
-                    String[] sentiments = new String[postList.size()];
-                    //String[] names = new String[postList.size()];
+                //Creating a String array for the ListView
+                String[] _ids = new String[postList.size()];
+                String[] texts = new String[postList.size()];
+                //String[] names = new String[postList.size()];
 
-                    //looping through all the texts and inserting the text inside the string array
-                    for (int i = 0; i < postList.size(); i++) {
+                //looping through all the texts and inserting the text inside the string array
+                for (int i = 0; i < postList.size(); i++) {
 
-                        _ids[i] = postList.get(i).getId();
-                        texts[i] = postList.get(i).getText();
-                        sentiments[i] = postList.get(i).getSentimentAnalysis();
+                    _ids[i] = postList.get(i).getId();
+                    texts[i] = postList.get(i).getText();
 
-                        Log.d(TAG, "onResponse: Sentiment = " + sentiments[i]);
-                        //names[i] = postList.get(i).getUser();
+                    //names[i] = postList.get(i).getUser();
 
-                        //mRTweets.get(i).concat(texts[i]);
+                    //mRTweets.get(i).concat(texts[i]);
 
 
 
-                        //List<Integer> newList = new ArrayList<Post>(texts);
-                    }
+                    //List<Integer> newList = new ArrayList<Post>(texts);
+                }
 
-                    m_Ids = Arrays.asList(_ids);
-                    mTweets = Arrays.asList(texts);
-                    mSentiments = Arrays.asList(sentiments);
+                m_Ids = Arrays.asList(_ids);
+                mTweets = Arrays.asList(texts);
 
-                    for (int i = 0; i < noOfTweets; i++ ){
-                        mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-                        mNames.add("Havasu Falls");
-                        mTimes.add("2 days ago");
-                    }
+                for (int i = 0; i < noOfTweets; i++ ){
+                    mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+                    mNames.add("Havasu Falls");
+                    mTimes.add("2 days ago");
+                }
 
-                    //mNames = Arrays.asList(names);
+                //mNames = Arrays.asList(names);
 
-                    //displaying the string array into listview
-                    //listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, heroes));
+                //displaying the string array into listview
+                //listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, heroes));
 
-                    //displaying the string array into recycler view
-                    //HomeAdapter adapter = new HomeAdapter(getContext(), mRTweets);
+                //displaying the string array into recycler view
+                //HomeAdapter adapter = new HomeAdapter(getContext(), mRTweets);
 
 
-                    //recyclerView.setLayoutManager(manager);
-                    MentionsAdapter adapter = new MentionsAdapter(getContext(), m_Ids, mNames, mImages, mTimes ,mTweets, mSentiments);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                //recyclerView.setLayoutManager(manager);
+                HomeAdapter adapter = new HomeAdapter(getContext(), m_Ids, mNames, mImages, mTimes ,mTweets);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
 
@@ -232,14 +228,14 @@ public class MentionsFragment extends Fragment {
                     Toast.makeText(getContext(), "Invalid email or password", Toast.LENGTH_LONG).show();
                 }*/
 
-                    //Toast.makeText(getContext(), response.body().getText(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), response.body().getText(), Toast.LENGTH_LONG).show();
 
 
 //                postList = response.body().getText();
                 /*adapter = new HomeAdapter(get, postList);
                 recyclerView.setAdapter(adapter);*/
 
-                    //HomeAdapter adapter = new HomeAdapter(getContext(), mNames, mImages, mTimes, mTweets);
+                //HomeAdapter adapter = new HomeAdapter(getContext(), mNames, mImages, mTimes, mTweets);
 
                 /*HomeAdapter adapter = new HomeAdapter(getContext(), postList);
                 recyclerView.setAdapter(adapter);
@@ -256,7 +252,7 @@ public class MentionsFragment extends Fragment {
 
 
             @Override
-            public void onFailure(Call<List<Mention>> call, Throwable t) {
+            public void onFailure(Call<List<Post>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
@@ -264,11 +260,11 @@ public class MentionsFragment extends Fragment {
     }
 
 
-    public static List<Mention> getPostList() {
+    public static List<Post> getPostList() {
         return postList;
     }
 
-    public static void setPostList(List<Mention> postList) {
-        MentionsFragment.postList = postList;
+    public static void setPostList(List<Post> postList) {
+        HomeFragment.postList = postList;
     }
 }

@@ -36,7 +36,7 @@ public class HashtagFragment extends Fragment {
     Button btnSearch;
     RecyclerView recyclerView;
 
-    //private PostAdapter adapter;
+    //private HomeAdapter adapter;
     private static List<Hashtag> postList;
 
     //vars
@@ -62,7 +62,7 @@ public class HashtagFragment extends Fragment {
     /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_home);
         Log.d(TAG, "onCreate: started.");
 
         initImageBitmaps();
@@ -146,7 +146,7 @@ public class HashtagFragment extends Fragment {
 
     /*private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview.");
-        PostAdapter adapter = new PostAdapter(getContext(), mNames, mImages, mTimes, mTweets);
+        HomeAdapter adapter = new HomeAdapter(getContext(), mNames, mImages, mTimes, mTweets);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }*/
@@ -223,7 +223,7 @@ public class HashtagFragment extends Fragment {
                     //listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, heroes));
 
                     //displaying the string array into recycler view
-                    //PostAdapter adapter = new PostAdapter(getContext(), mRTweets);
+                    //HomeAdapter adapter = new HomeAdapter(getContext(), mRTweets);
 
 
                     //recyclerView.setLayoutManager(manager);
@@ -264,12 +264,12 @@ public class HashtagFragment extends Fragment {
 
 
 //                postList = response.body().getText();
-                /*adapter = new PostAdapter(get, postList);
+                /*adapter = new HomeAdapter(get, postList);
                 recyclerView.setAdapter(adapter);*/
 
-                    //PostAdapter adapter = new PostAdapter(getContext(), mNames, mImages, mTimes, mTweets);
+                    //HomeAdapter adapter = new HomeAdapter(getContext(), mNames, mImages, mTimes, mTweets);
 
-                /*PostAdapter adapter = new PostAdapter(getContext(), postList);
+                /*HomeAdapter adapter = new HomeAdapter(getContext(), postList);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));*/
 

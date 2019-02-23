@@ -18,9 +18,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>{
+public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
 
-    private static final String TAG = "PostAdapter";
+    private static final String TAG = "HomeAdapter";
 
     //private ArrayList<String> mNames = new ArrayList<>();
     private List<String> mNames = new ArrayList<>();
@@ -33,7 +33,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     private Context mContext;
 
-    public CommentAdapter(Context context, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> comments ) {
+    public ReplyAdapter(Context context, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> comments ) {
 
         mNames = names;
         mImages = images;
@@ -45,7 +45,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_comment, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_reply, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -70,7 +70,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
                 Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(mContext, PostDetailsActivity.class);
+                Intent intent = new Intent(mContext, TweetDetailsActivity.class);
                 intent.putExtra("image", mImages.get(position));
                 intent.putExtra("name", mNames.get(position));
                 mContext.startActivity(intent);
