@@ -26,12 +26,18 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
     //private ArrayList<String> mNames = new ArrayList<>();
     private List<String> mNames = new ArrayList<>();
 
-    private ArrayList<String> mImages = new ArrayList<>();
-    private ArrayList<String> mTimes = new ArrayList<>();
-
     //private ArrayList<String> mTweets = new ArrayList<>();
     private List<String> mTweets = new ArrayList<>();
     private List<String> mSentiments = new ArrayList<>();
+
+    private List<Boolean> mRetweeted;
+    private List<Long> mCreatedAt;
+    private List<String> mProfileImageUrl;
+    private List<Integer> mRetweetCount;
+    private List<Integer> mFavoriteCount;
+    private List<Boolean> mFavorited;
+
+
 
 
     private Context mContext;
@@ -45,14 +51,23 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
         this.mContext = mContext;
     }*/
 
-    public HashtagAdapter(Context context, List<String> ids, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> tweets, List<String> sentiments ) {
+    public HashtagAdapter(Context context, List<String> ids, List<String> names, List<String> tweets,
+                          List<String> sentiments, List<Boolean> retweeted, List<Long> createdAt,
+                          List<String> profileImageUrl, List<Integer> retweetCount,
+                          List<Integer> favoriteCount, List<Boolean> favorited ) {
+
         mNames = names;
-        mImages = images;
         mContext = context;
-        mTimes = times;
         mTweets = tweets;
         m_Ids = ids;
         mSentiments = sentiments;
+        mRetweeted = retweeted ;
+        mCreatedAt = createdAt;
+        mProfileImageUrl = profileImageUrl;
+        mRetweetCount = retweetCount;
+        mFavoriteCount = favoriteCount;
+        mFavorited = favorited;
+
     }
 
     @Override
@@ -68,12 +83,16 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImages.get(position))
+                .load(mProfileImageUrl.get(position))
                 .into(holder.image);
 
         holder.name.setText(mNames.get(position));
-        holder.tvTime.setText(mTimes.get(position));
+        holder.tvTime.setText(mCreatedAt.get(position).toString());
         holder.tweet.setText(mTweets.get(position));
+
+        holder.tvfavoriteCount.setText(mFavoriteCount.get(position).toString());
+        holder.tvRetweetCount.setText(String.format("%s", mRetweetCount.get(position)));
+
         Log.d(TAG, "onBindViewHolder: Sentiment is: " + mSentiments.get(position));
 
         switch (mSentiments.get(position)) {
@@ -141,6 +160,10 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
         ImageView sentiment;
         LinearLayout parentLayout;
 
+        TextView tvfavoriteCount;
+        TextView tvRetweetCount;
+
+
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.imgView_proPic);
@@ -148,6 +171,9 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
             tvTime = itemView.findViewById(R.id.tv_time);
             tweet = itemView.findViewById(R.id.tv_tweet);
             sentiment = itemView.findViewById(R.id.sentiment);
+
+            tvfavoriteCount = itemView.findViewById(R.id.tv_like);
+            tvRetweetCount = itemView.findViewById(R.id.tv_comment);
 
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }

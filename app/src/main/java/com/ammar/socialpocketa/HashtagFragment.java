@@ -41,21 +41,25 @@ public class HashtagFragment extends Fragment {
 
     //vars
     String keyword = "";
-    private static int noOfTweets = 0;
+//    private static int noOfTweets = 0;
 
     private List<String> m_Ids = new ArrayList<>();
 
     //private ArrayList<String> mNames = new ArrayList<>();
     private List<String> mNames = new ArrayList<>();
 
-    private ArrayList<String> mImages = new ArrayList<>();
-
-    private ArrayList<String> mTimes = new ArrayList<>();
     //private ArrayList<String> mTweets = new ArrayList<>();
 
     //private ArrayList<String> mRTweets = new ArrayList<>();
     private List<String> mTweets = new ArrayList<>();
     private List<String> mSentiments = new ArrayList<>();
+
+    private List<Boolean> mRetweeteds = new ArrayList<>();
+    private List<Long> mCreatedAt = new ArrayList<>();
+    private List<String> mProfileImageUrls = new ArrayList<>();
+    private List<Integer> mRetweetCounts = new ArrayList<>();
+    private List<Integer> mFavoriteCounts = new ArrayList<>();
+    private List<Boolean> mFavoriteds = new ArrayList<>();
 
     //private ArrayList<String> s = new ArrayList<>();
 
@@ -78,7 +82,6 @@ public class HashtagFragment extends Fragment {
 
         etKeyword = rootView.findViewById(R.id.et_keyword);
 
-
         recyclerView = rootView.findViewById(R.id.rvHashtag);
 
         btnSearch = rootView.findViewById(R.id.btn_search);
@@ -89,7 +92,6 @@ public class HashtagFragment extends Fragment {
                 apiResponse();
             }
         });
-
 
 //        initImageBitmaps();
 
@@ -174,6 +176,15 @@ public class HashtagFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Hashtag>> call, Response<List<Hashtag>> response) {
 
+                Log.d(TAG, "onResponse: Inside onResponse");
+
+                if (response.code() == 400) {
+                    try {
+                        Log.e("Error code 400", response.errorBody().string());
+                    } catch (Exception e) {
+                        Log.e(TAG, "Exception thrown by Error code 400");
+                    }
+                }
 
                 //In this point we got our Post list
                 postList = response.body();
@@ -181,7 +192,7 @@ public class HashtagFragment extends Fragment {
                 Log.d(TAG, "onResponse: Post list: " + postList);
 
                 try {
-                    noOfTweets = postList.size();
+//                    noOfTweets = postList.size();
 
 
                     //Creating a String array for the ListView
@@ -190,12 +201,54 @@ public class HashtagFragment extends Fragment {
                     String[] sentiments = new String[postList.size()];
                     //String[] names = new String[postList.size()];
 
+//                    String[] names = new String[postList.size()];
+//                    Boolean[] retweeteds = new Boolean[postList.size()];
+//                    Long[] createdAt = new Long[postList.size()];
+//                    String[] profileImageUrls = new String[postList.size()];
+//                    Integer[] retweetCounts = new Integer[postList.size()];
+//                    Integer[] favoriteCounts = new Integer[postList.size()];
+//                    Boolean[] favoriteds = new Boolean[postList.size()];
+
+//                    List<String> names = new ArrayList<>();
+//                    List<Boolean> retweeteds = new ArrayList<>();
+//                    List<Long> createdAt = new ArrayList<>();
+//                    List<String> profileImageUrls = new ArrayList<>();
+//                    List<Integer> retweetCounts = new ArrayList<>();
+//                    List<Integer> favoriteCounts = new ArrayList<>();
+//                    List<Boolean> favoriteds = new ArrayList<>();
+
+
                     //looping through all the texts and inserting the text inside the string array
                     for (int i = 0; i < postList.size(); i++) {
 
                         _ids[i] = postList.get(i).getId();
                         texts[i] = postList.get(i).getText();
                         sentiments[i] = postList.get(i).getSentimentAnalysis();
+
+//                        names.add(postList.get(i).getName());
+//                        retweeteds.add(postList.get(i).getRetweeted());
+//                        createdAt.add(postList.get(i).getCreatedAt());
+//                        profileImageUrls.add(postList.get(i).getProfileImageUrl());
+//                        retweetCounts.add(postList.get(i).getRetweetCount());
+//                        favoriteCounts.add(postList.get(i).getFavoriteCount());
+//                        favoriteds.add(postList.get(i).getFavorited());
+
+                        mNames.add(postList.get(i).getName());
+                        mRetweeteds.add(postList.get(i).getRetweeted());
+                        mCreatedAt.add(postList.get(i).getCreatedAt());
+                        mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
+                        mRetweetCounts.add(postList.get(i).getRetweetCount());
+                        mFavoriteCounts.add(postList.get(i).getFavoriteCount());
+                        mFavoriteds.add(postList.get(i).getFavorited());
+
+//                        names[i] = postList.get(i).getName();
+//                        retweeteds[i] = postList.get(i).getRetweeted();
+//                        createdAt[i] = postList.get(i).getCreatedAt();
+//                        profileImageUrls[i] = postList.get(i).getProfileImageUrl();
+//                        retweetCounts[i] = postList.get(i).getRetweetCount();
+//                        favoriteCounts[i] = postList.get(i).getFavoriteCount();
+//                        favoriteds[i] = postList.get(i).getFavorited();
+
 
                         Log.d(TAG, "onResponse: Sentiment = " + sentiments[i]);
                         //names[i] = postList.get(i).getUser();
@@ -210,12 +263,21 @@ public class HashtagFragment extends Fragment {
                     m_Ids = Arrays.asList(_ids);
                     mTweets = Arrays.asList(texts);
                     mSentiments = Arrays.asList(sentiments);
+//                    mNames = Arrays.asList(names);
+//                    mCreatedAt = Arrays.asList(createdAt);
+//                    mFavoriteCounts = Arrays.asList(favoriteCounts);
+//                    mFavoriteds = Arrays.asList(favoriteds);
+//                    mProfileImageUrls = Arrays.asList(profileImageUrls);
+//                    mRetweetCounts = Arrays.asList(retweetCounts);
+//                    mRetweeteds = Arrays.asList(retweeteds);
 
-                    for (int i = 0; i < noOfTweets; i++ ){
-                        mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-                        mNames.add("Havasu Falls");
-                        mTimes.add("2 days ago");
-                    }
+
+//                    for (int i = 0; i < noOfTweets; i++ ){
+//                        mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+//                        mNames.add("Havasu Falls");
+//                        mTimes.add("2 days ago");
+//                    }
+
 
                     //mNames = Arrays.asList(names);
 
@@ -227,7 +289,9 @@ public class HashtagFragment extends Fragment {
 
 
                     //recyclerView.setLayoutManager(manager);
-                    HashtagAdapter adapter = new HashtagAdapter(getContext(), m_Ids, mNames, mImages, mTimes ,mTweets, mSentiments);
+                    HashtagAdapter adapter = new HashtagAdapter(getContext(), m_Ids, mNames,
+                            mTweets, mSentiments, mRetweeteds, mCreatedAt, mProfileImageUrls, mRetweetCounts,
+                            mFavoriteCounts, mFavoriteds);
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -275,8 +339,9 @@ public class HashtagFragment extends Fragment {
 
 
                 } catch (NullPointerException e) {
-                    Log.e(TAG, "onResponse: NullPointerException " + e.getMessage() );
-                    noOfTweets = 0;
+                    Log.e(TAG, "onResponse: " +
+                            " " + e.getMessage() );
+//                    noOfTweets = 0;
                 }
 
 
@@ -292,11 +357,13 @@ public class HashtagFragment extends Fragment {
     }
 
 
-    public static List<Hashtag> getPostList() {
-        return postList;
-    }
+//    public static List<Hashtag> getPostList() {
+//        return postList;
+//    }
+//
+//    public static void setPostList(List<Hashtag> postList) {
+//        HashtagFragment.postList = postList;
+//    }
 
-    public static void setPostList(List<Hashtag> postList) {
-        HashtagFragment.postList = postList;
-    }
+
 }
