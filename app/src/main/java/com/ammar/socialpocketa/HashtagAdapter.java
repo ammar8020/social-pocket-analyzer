@@ -21,14 +21,14 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
 
     private static final String TAG = "HashtagAdapter";
 
-    private List<String> m_Ids = new ArrayList<>();
+    private List<String> m_Ids;
 
     //private ArrayList<String> mNames = new ArrayList<>();
-    private List<String> mNames = new ArrayList<>();
+    private List<String> mNames;
 
     //private ArrayList<String> mTweets = new ArrayList<>();
-    private List<String> mTweets = new ArrayList<>();
-    private List<String> mSentiments = new ArrayList<>();
+    private List<String> mTweets;
+    private List<String> mSentiments;
 
     private List<Boolean> mRetweeted;
     private List<Long> mCreatedAt;
@@ -91,7 +91,8 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
         holder.tweet.setText(mTweets.get(position));
 
         holder.tvfavoriteCount.setText(mFavoriteCount.get(position).toString());
-        holder.tvRetweetCount.setText(String.format("%s", mRetweetCount.get(position)));
+//        holder.tvRetweetCount.setText(String.format("%s", mRetweetCount.get(position)));
+        holder.tvRetweetCount.setText(mRetweetCount.get(position).toString());
 
         Log.d(TAG, "onBindViewHolder: Sentiment is: " + mSentiments.get(position));
 

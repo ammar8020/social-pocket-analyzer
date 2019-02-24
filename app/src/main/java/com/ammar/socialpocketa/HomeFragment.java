@@ -40,14 +40,22 @@ public class HomeFragment extends Fragment {
     //private ArrayList<String> mNames = new ArrayList<>();
     private List<String> mNames = new ArrayList<>();
 
-    private ArrayList<String> mImages = new ArrayList<>();
-
-    private ArrayList<String> mTimes = new ArrayList<>();
-    //private ArrayList<String> mTweets = new ArrayList<>();
+//    private ArrayList<String> mImages = new ArrayList<>();
+//
+//    private ArrayList<String> mTimes = new ArrayList<>();
+//    //private ArrayList<String> mTweets = new ArrayList<>();
 
     //private ArrayList<String> mRTweets = new ArrayList<>();
     private List<String> mTweets = new ArrayList<>();
 
+    private List<String> mSentiments = new ArrayList<>();
+
+    private List<Boolean> mRetweeteds = new ArrayList<>();
+    private List<String> mCreatedAt = new ArrayList<>();
+    private List<String> mProfileImageUrls = new ArrayList<>();
+    private List<String> mRetweetCounts = new ArrayList<>();
+    private List<String> mFavoriteCounts = new ArrayList<>();
+    private List<Boolean> mFavoriteds = new ArrayList<>();
 
     //private ArrayList<String> s = new ArrayList<>();
 
@@ -72,7 +80,7 @@ public class HomeFragment extends Fragment {
 
         apiResponse();
 
-        initImageBitmaps();
+//        initImageBitmaps();
 
         return rootView;
     }
@@ -167,6 +175,18 @@ public class HomeFragment extends Fragment {
                     _ids[i] = postList.get(i).getId();
                     texts[i] = postList.get(i).getText();
 
+
+                    mNames.add(postList.get(i).getName());
+                    mRetweeteds.add(postList.get(i).getRetweeted());
+                    mCreatedAt.add(postList.get(i).getCreatedAt());
+                    mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
+                    mRetweetCounts.add(postList.get(i).getRetweetCount());
+                    mFavoriteCounts.add(postList.get(i).getFavoriteCount());
+                    mFavoriteds.add(postList.get(i).getFavorited());
+
+
+//                    Log.d(TAG, "onResponse: Sentiment = " + sentiments[i]);
+
                     //names[i] = postList.get(i).getUser();
 
                     //mRTweets.get(i).concat(texts[i]);
@@ -180,9 +200,11 @@ public class HomeFragment extends Fragment {
                 mTweets = Arrays.asList(texts);
 
                 for (int i = 0; i < noOfTweets; i++ ){
-                    mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-                    mNames.add("Havasu Falls");
-                    mTimes.add("2 days ago");
+//                    mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+//                    mNames.add("Havasu Falls");
+//                    mTimes.add("2 days ago");
+                    mSentiments.add("");
+
                 }
 
                 //mNames = Arrays.asList(names);
@@ -195,7 +217,9 @@ public class HomeFragment extends Fragment {
 
 
                 //recyclerView.setLayoutManager(manager);
-                HomeAdapter adapter = new HomeAdapter(getContext(), m_Ids, mNames, mImages, mTimes ,mTweets);
+                HomeAdapter adapter = new HomeAdapter(getContext(), m_Ids, mNames,
+                        mTweets, mSentiments, mRetweeteds, mCreatedAt, mProfileImageUrls,
+                        mRetweetCounts, mFavoriteCounts, mFavoriteds);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -260,11 +284,13 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public static List<Post> getPostList() {
-        return postList;
-    }
+//    public static List<Post> getPostList() {
+//        return postList;
+//    }
+//
+//    public static void setPostList(List<Post> postList) {
+//        HomeFragment.postList = postList;
+//    }
 
-    public static void setPostList(List<Post> postList) {
-        HomeFragment.postList = postList;
-    }
+
 }
