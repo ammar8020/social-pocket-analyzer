@@ -186,10 +186,10 @@ public class HashtagFragment extends Fragment {
                     }
                 }
 
-                //In this point we got our Post list
+                //In this point we got our Home list
                 postList = response.body();
 
-                Log.d(TAG, "onResponse: Post list: " + postList);
+                Log.d(TAG, "onResponse: Home list: " + postList);
 
                 try {
 //                    noOfTweets = postList.size();
@@ -257,7 +257,7 @@ public class HashtagFragment extends Fragment {
 
 
 
-                        //List<Integer> newList = new ArrayList<Post>(texts);
+                        //List<Integer> newList = new ArrayList<Home>(texts);
                     }
 
                     m_Ids = Arrays.asList(_ids);
@@ -316,7 +316,7 @@ public class HashtagFragment extends Fragment {
                 }*/
 
                 /*if(response.code() == 201){
-                    Post post = new Post();
+                    Home post = new Home();
                     post = response.body();
                     Toast.makeText(getContext(), post.getText(), Toast.LENGTH_LONG).show();
 

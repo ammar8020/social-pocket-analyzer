@@ -21,22 +21,29 @@ public class MentionsAdapter extends RecyclerView.Adapter<MentionsAdapter.ViewHo
 
     private static final String TAG = "MentionsAdapter";
 
-    private List<String> m_Ids = new ArrayList<>();
+    private List<String> m_Ids;
 
     //private ArrayList<String> mNames = new ArrayList<>();
-    private List<String> mNames = new ArrayList<>();
-
-    private ArrayList<String> mImages = new ArrayList<>();
-    private ArrayList<String> mTimes = new ArrayList<>();
+    private List<String> mNames;
+//
+//    private ArrayList<String> mImages;
+//    private ArrayList<String> mTimes;
 
     //private ArrayList<String> mTweets = new ArrayList<>();
-    private List<String> mTweets = new ArrayList<>();
-    private List<String> mSentiments = new ArrayList<>();
+    private List<String> mTweets;
+    private List<String> mSentiments;
+
+    private List<Boolean> mRetweeted;
+    private List<String> mCreatedAt;
+    private List<String> mProfileImageUrl;
+    private List<String> mRetweetCount;
+    private List<String> mFavoriteCount;
+    private List<Boolean> mFavorited;
 
 
     private Context mContext;
 
-    /*private List<Post> postList;
+    /*private List<Home> postList;
 
 
 
@@ -45,14 +52,21 @@ public class MentionsAdapter extends RecyclerView.Adapter<MentionsAdapter.ViewHo
         this.mContext = mContext;
     }*/
 
-    public MentionsAdapter(Context context, List<String> ids, List<String> names, ArrayList<String> images, ArrayList<String> times, List<String> tweets, List<String> sentiments ) {
+    public MentionsAdapter(Context context, List<String> ids, List<String> names, List<String> tweets,
+                           List<String> sentiments, List<Boolean> retweeted, List<String> createdAt,
+                           List<String> profileImageUrl, List<String> retweetCount,
+                           List<String> favoriteCount, List<Boolean> favorited ) {
         mNames = names;
-        mImages = images;
         mContext = context;
-        mTimes = times;
         mTweets = tweets;
         m_Ids = ids;
         mSentiments = sentiments;
+        mRetweeted = retweeted ;
+        mCreatedAt = createdAt;
+        mProfileImageUrl = profileImageUrl;
+        mRetweetCount = retweetCount;
+        mFavoriteCount = favoriteCount;
+        mFavorited = favorited;
     }
 
     @Override
@@ -68,12 +82,17 @@ public class MentionsAdapter extends RecyclerView.Adapter<MentionsAdapter.ViewHo
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImages.get(position))
+                .load(mProfileImageUrl.get(position))
                 .into(holder.image);
 
         holder.name.setText(mNames.get(position));
-        holder.tvTime.setText(mTimes.get(position));
+        holder.tvTime.setText(mCreatedAt.get(position));
         holder.tweet.setText(mTweets.get(position));
+
+        holder.tvfavoriteCount.setText(mFavoriteCount.get(position));
+//        holder.tvRetweetCount.setText(String.format("%s", mRetweetCount.get(position)));
+        holder.tvRetweetCount.setText(mRetweetCount.get(position));
+
         Log.d(TAG, "onBindViewHolder: Sentiment is: " + mSentiments.get(position));
 
         switch (mSentiments.get(position)) {
@@ -141,6 +160,9 @@ public class MentionsAdapter extends RecyclerView.Adapter<MentionsAdapter.ViewHo
         ImageView sentiment;
         LinearLayout parentLayout;
 
+        TextView tvfavoriteCount;
+        TextView tvRetweetCount;
+
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.imgView_proPic);
@@ -148,6 +170,9 @@ public class MentionsAdapter extends RecyclerView.Adapter<MentionsAdapter.ViewHo
             tvTime = itemView.findViewById(R.id.tv_time);
             tweet = itemView.findViewById(R.id.tv_tweet);
             sentiment = itemView.findViewById(R.id.sentiment);
+
+            tvfavoriteCount = itemView.findViewById(R.id.tv_like);
+            tvRetweetCount = itemView.findViewById(R.id.tv_comment);
 
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }

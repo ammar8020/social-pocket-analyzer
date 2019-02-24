@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.ammar.socialpocketa.models.Post;
+import com.ammar.socialpocketa.models.Home;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
 
     //private HomeAdapter adapter;
-    private static List<Post> postList;
+    private static List<Home> postList;
 
     //vars
     private static int noOfTweets = 0;
@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
 //    private ArrayList<String> mImages = new ArrayList<>();
 //
 //    private ArrayList<String> mTimes = new ArrayList<>();
-//    //private ArrayList<String> mTweets = new ArrayList<>();
+//    private ArrayList<String> mTweets = new ArrayList<>();
 
     //private ArrayList<String> mRTweets = new ArrayList<>();
     private List<String> mTweets = new ArrayList<>();
@@ -145,19 +145,19 @@ public class HomeFragment extends Fragment {
 
         //now making the call object
         //Here using the api method that we created inside the api interface
-        Call<List<Post>> call = RetrofitClient
+        Call<List<Home>> call = RetrofitClient
                 .getInstance()
                 .getApi()
                 .getPosts();
 
 
-        call.enqueue(new Callback<List<Post>>() {
+        call.enqueue(new Callback<List<Home>>() {
 
             @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+            public void onResponse(Call<List<Home>> call, Response<List<Home>> response) {
 
 
-                //In this point we got our Post list
+                //In this point we got our Home list
                 postList = response.body();
 
                 try {
@@ -193,7 +193,7 @@ public class HomeFragment extends Fragment {
 
 
 
-                    //List<Integer> newList = new ArrayList<Post>(texts);
+                    //List<Integer> newList = new ArrayList<Home>(texts);
                 }
 
                 m_Ids = Arrays.asList(_ids);
@@ -244,7 +244,7 @@ public class HomeFragment extends Fragment {
                 }*/
 
                 /*if(response.code() == 201){
-                    Post post = new Post();
+                    Home post = new Home();
                     post = response.body();
                     Toast.makeText(getContext(), post.getText(), Toast.LENGTH_LONG).show();
 
@@ -276,7 +276,7 @@ public class HomeFragment extends Fragment {
 
 
             @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
+            public void onFailure(Call<List<Home>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
@@ -284,11 +284,11 @@ public class HomeFragment extends Fragment {
     }
 
 
-//    public static List<Post> getPostList() {
+//    public static List<Home> getPostList() {
 //        return postList;
 //    }
 //
-//    public static void setPostList(List<Post> postList) {
+//    public static void setPostList(List<Home> postList) {
 //        HomeFragment.postList = postList;
 //    }
 

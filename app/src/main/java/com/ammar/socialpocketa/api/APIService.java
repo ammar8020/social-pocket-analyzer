@@ -4,14 +4,12 @@ import com.ammar.socialpocketa.models.Comment;
 import com.ammar.socialpocketa.models.Hashtag;
 import com.ammar.socialpocketa.models.Login;
 import com.ammar.socialpocketa.models.Mention;
-import com.ammar.socialpocketa.models.Post;
+import com.ammar.socialpocketa.models.Home;
 import com.ammar.socialpocketa.models.Register;
 
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -42,9 +40,9 @@ public interface APIService {
 
 
     //the post call
-    // defined the Call type as a List and the List type as Post.
+    // defined the Call type as a List and the List type as Home.
     @GET("api/posts")
-    Call<List<Post>> getPosts();
+    Call<List<Home>> getPosts();
 
 
     //the comment call
@@ -57,13 +55,13 @@ public interface APIService {
 
 
     //the Mentions call
-    // defined the Call type as a List and the List type as Post.
+    // defined the Call type as a List and the List type as Home.
     @GET("api/posts/mentions")
     Call<List<Mention>> getMentions();
 
 
     //the Hashtags call
-    // defined the Call type as a List and the List type as Post.
+    // defined the Call type as a List and the List type as Home.
     @GET("api/posts/hashtags/{keyword}")
     Call<List<Hashtag>> getHashtagTweets(@Path("keyword") String keyword);
 

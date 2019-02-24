@@ -33,21 +33,29 @@ public class MentionsFragment extends Fragment {
     private static List<Mention> postList;
 
     //vars
-    private static int noOfTweets = 0;
+//    private static int noOfTweets = 0;
 
     private List<String> m_Ids = new ArrayList<>();
 
     //private ArrayList<String> mNames = new ArrayList<>();
     private List<String> mNames = new ArrayList<>();
 
-    private ArrayList<String> mImages = new ArrayList<>();
-
-    private ArrayList<String> mTimes = new ArrayList<>();
+//    private ArrayList<String> mImages = new ArrayList<>();
+//
+//    private ArrayList<String> mTimes = new ArrayList<>();
     //private ArrayList<String> mTweets = new ArrayList<>();
 
     //private ArrayList<String> mRTweets = new ArrayList<>();
     private List<String> mTweets = new ArrayList<>();
     private List<String> mSentiments = new ArrayList<>();
+
+    private List<Boolean> mRetweeteds = new ArrayList<>();
+    private List<String> mCreatedAt = new ArrayList<>();
+    private List<String> mProfileImageUrls = new ArrayList<>();
+    private List<String> mRetweetCounts = new ArrayList<>();
+    private List<String> mFavoriteCounts = new ArrayList<>();
+    private List<Boolean> mFavoriteds = new ArrayList<>();
+
 
     //private ArrayList<String> s = new ArrayList<>();
 
@@ -72,7 +80,7 @@ public class MentionsFragment extends Fragment {
 
         apiResponse();
 
-        initImageBitmaps();
+//        initImageBitmaps();
 
         return rootView;
     }
@@ -149,11 +157,11 @@ public class MentionsFragment extends Fragment {
             public void onResponse(Call<List<Mention>> call, Response<List<Mention>> response) {
 
 
-                //In this point we got our Post list
+                //In this point we got our Home list
                 postList = response.body();
 
                 try {
-                    noOfTweets = postList.size();
+//                    noOfTweets = postList.size();
 
 
                     //Creating a String array for the ListView
@@ -169,6 +177,15 @@ public class MentionsFragment extends Fragment {
                         texts[i] = postList.get(i).getText();
                         sentiments[i] = postList.get(i).getSentimentAnalysis();
 
+                        mNames.add(postList.get(i).getName());
+                        mRetweeteds.add(postList.get(i).getRetweeted());
+                        mCreatedAt.add(postList.get(i).getCreatedAt());
+                        mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
+                        mRetweetCounts.add(postList.get(i).getRetweetCount());
+                        mFavoriteCounts.add(postList.get(i).getFavoriteCount());
+                        mFavoriteds.add(postList.get(i).getFavorited());
+
+
                         Log.d(TAG, "onResponse: Sentiment = " + sentiments[i]);
                         //names[i] = postList.get(i).getUser();
 
@@ -176,18 +193,18 @@ public class MentionsFragment extends Fragment {
 
 
 
-                        //List<Integer> newList = new ArrayList<Post>(texts);
+                        //List<Integer> newList = new ArrayList<Home>(texts);
                     }
 
                     m_Ids = Arrays.asList(_ids);
                     mTweets = Arrays.asList(texts);
                     mSentiments = Arrays.asList(sentiments);
 
-                    for (int i = 0; i < noOfTweets; i++ ){
-                        mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-                        mNames.add("Havasu Falls");
-                        mTimes.add("2 days ago");
-                    }
+//                    for (int i = 0; i < noOfTweets; i++ ){
+//                        mImages.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+//                        mNames.add("Havasu Falls");
+//                        mTimes.add("2 days ago");
+//                    }
 
                     //mNames = Arrays.asList(names);
 
@@ -199,7 +216,9 @@ public class MentionsFragment extends Fragment {
 
 
                     //recyclerView.setLayoutManager(manager);
-                    MentionsAdapter adapter = new MentionsAdapter(getContext(), m_Ids, mNames, mImages, mTimes ,mTweets, mSentiments);
+                    MentionsAdapter adapter = new MentionsAdapter(getContext(), m_Ids, mNames,
+                            mTweets, mSentiments, mRetweeteds, mCreatedAt, mProfileImageUrls,
+                            mRetweetCounts, mFavoriteCounts, mFavoriteds);
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -224,7 +243,7 @@ public class MentionsFragment extends Fragment {
                 }*/
 
                 /*if(response.code() == 201){
-                    Post post = new Post();
+                    Home post = new Home();
                     post = response.body();
                     Toast.makeText(getContext(), post.getText(), Toast.LENGTH_LONG).show();
 
@@ -248,7 +267,7 @@ public class MentionsFragment extends Fragment {
 
                 } catch (NullPointerException e) {
                     Log.e(TAG, "onResponse: NullPointerException " + e.getMessage() );
-                    noOfTweets = 0;
+//                    noOfTweets = 0;
                 }
 
 
@@ -264,11 +283,11 @@ public class MentionsFragment extends Fragment {
     }
 
 
-    public static List<Mention> getPostList() {
-        return postList;
-    }
-
-    public static void setPostList(List<Mention> postList) {
-        MentionsFragment.postList = postList;
-    }
+//    public static List<Mention> getPostList() {
+//        return postList;
+//    }
+//
+//    public static void setPostList(List<Mention> postList) {
+//        MentionsFragment.postList = postList;
+//    }
 }

@@ -192,7 +192,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 //                Comment replyList1 = response.body();
 //                Log.d(TAG, "onResponse: from bhai \n\n " + replyList1 + "\n\n");
 
-                //In this point we got our Post list
+                //In this point we got our Home list
                 Log.d(TAG, "onResponse: from bhai3 \n\n " + response.body().getReplies() + "\n\n");
 
                 List<Reply> replyList = response.body().getReplies();
@@ -223,7 +223,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
 
 
-                    //List<Integer> newList = new ArrayList<Post>(texts);
+                    //List<Integer> newList = new ArrayList<Home>(texts);
                 }
 
                 mComments = Arrays.asList(texts);

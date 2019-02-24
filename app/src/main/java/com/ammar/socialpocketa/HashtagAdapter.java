@@ -42,7 +42,7 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
 
     private Context mContext;
 
-    /*private List<Post> postList;
+    /*private List<Home> postList;
 
 
 

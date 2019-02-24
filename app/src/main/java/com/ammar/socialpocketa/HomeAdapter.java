@@ -23,17 +23,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
     private static final String TAG = "HomeAdapter";
 
-    private List<String> m_Ids = new ArrayList<>();
+    private List<String> m_Ids;
 
     //private ArrayList<String> mNames = new ArrayList<>();
-    private List<String> mNames = new ArrayList<>();
+    private List<String> mNames;
 
 //    private ArrayList<String> mImages = new ArrayList<>();
 //    private ArrayList<String> mTimes = new ArrayList<>();
 
     //private ArrayList<String> mTweets = new ArrayList<>();
-    private List<String> mTweets = new ArrayList<>();
-    private List<String> mSentiments = new ArrayList<>();
+    private List<String> mTweets;
+    private List<String> mSentiments;
 
     private List<Boolean> mRetweeted;
     private List<String> mCreatedAt;
@@ -44,7 +44,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
     private Context mContext;
 
-    /*private List<Post> postList;
+    /*private List<Home> postList;
 
 
 

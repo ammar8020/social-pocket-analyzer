@@ -3,7 +3,7 @@ package com.ammar.socialpocketa.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Post {
+public class Home {
 
     @SerializedName("_id")
     @Expose
