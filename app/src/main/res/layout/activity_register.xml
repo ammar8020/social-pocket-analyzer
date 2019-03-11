@@ -12,9 +12,9 @@
     android:background="@drawable/teabackground">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@drawable/spalogo2"
         android:layout_gravity="center_horizontal"/>
 
     <!--name-->
@@ -90,5 +90,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Already a member? Login"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@color/white"/>
 </LinearLayout>

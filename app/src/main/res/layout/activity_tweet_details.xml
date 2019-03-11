@@ -10,6 +10,11 @@
 
     <include layout="@layout/layout_tweet"/>
 
+    <ProgressBar
+        android:id="@+id/pb_reply"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

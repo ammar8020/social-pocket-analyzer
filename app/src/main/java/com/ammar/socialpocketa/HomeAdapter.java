@@ -118,6 +118,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
             default:
                 holder.sentiment.setImageResource(R.drawable.neutral);
+
+                holder.sentiment.setVisibility(View.INVISIBLE);
+
                 break;
 
         }

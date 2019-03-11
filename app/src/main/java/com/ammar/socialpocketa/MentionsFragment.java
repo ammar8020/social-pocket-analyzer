@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ammar.socialpocketa.models.Mention;
@@ -28,6 +29,7 @@ public class MentionsFragment extends Fragment {
     private static final String TAG = "MentionsFragment";
 
     RecyclerView recyclerView;
+    ProgressBar pbMention;
 
     //private HomeAdapter adapter;
     private static List<Mention> postList;
@@ -77,6 +79,8 @@ public class MentionsFragment extends Fragment {
         Log.d(TAG, "onCreate: started.");
 
         recyclerView = rootView.findViewById(R.id.rvMentions);
+        pbMention = rootView.findViewById(R.id.pb_mention);
+        pbMention.setVisibility(View.VISIBLE);
 
         apiResponse();
 
@@ -214,6 +218,7 @@ public class MentionsFragment extends Fragment {
                     //displaying the string array into recycler view
                     //HomeAdapter adapter = new HomeAdapter(getContext(), mRTweets);
 
+                    pbMention.setVisibility(View.GONE);
 
                     //recyclerView.setLayoutManager(manager);
                     MentionsAdapter adapter = new MentionsAdapter(getContext(), m_Ids, mNames,

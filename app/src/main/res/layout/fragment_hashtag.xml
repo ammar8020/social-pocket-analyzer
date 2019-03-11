@@ -41,11 +41,18 @@
 
             <Button
                 android:id="@+id/btn_search"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Search" />
+                android:text="Search"
+                android:padding="12dp"
+                android:background="@color/green"/>
 
+            <ProgressBar
+                android:id="@+id/pb_hashtag"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

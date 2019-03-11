@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +30,10 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
 
     RecyclerView recyclerView;
+    ProgressBar pbReply;
 
 
-    //private static List<Reply> replyList;
+    private static List<Reply> replyList;
 
 
     //vars
@@ -39,17 +42,39 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
     String _id = "";
 
+//    //private ArrayList<String> mNames = new ArrayList<>();
+//    private List<String> mNames = new ArrayList<>();
+//
+//    private ArrayList<String> mImages = new ArrayList<>();
+//
+//    private ArrayList<String> mTimes = new ArrayList<>();
+//    //private ArrayList<String> mComments = new ArrayList<>();
+//
+//    private List<String> mComments = new ArrayList<>();
+//
+//    private ArrayList<Reply> data;
+
+    private List<String> m_Ids = new ArrayList<>();
+
     //private ArrayList<String> mNames = new ArrayList<>();
     private List<String> mNames = new ArrayList<>();
 
-    private ArrayList<String> mImages = new ArrayList<>();
+//    private ArrayList<String> mImages = new ArrayList<>();
+//
+//    private ArrayList<String> mTimes = new ArrayList<>();
+    //private ArrayList<String> mTweets = new ArrayList<>();
 
-    private ArrayList<String> mTimes = new ArrayList<>();
-    //private ArrayList<String> mComments = new ArrayList<>();
+    //private ArrayList<String> mRTweets = new ArrayList<>();
+    private List<String> mTweets = new ArrayList<>();
+    private List<String> mSentiments = new ArrayList<>();
 
-    private List<String> mComments = new ArrayList<>();
+    private List<Boolean> mRetweeteds = new ArrayList<>();
+    private List<String> mCreatedAt = new ArrayList<>();
+    private List<String> mProfileImageUrls = new ArrayList<>();
+    private List<String> mRetweetCounts = new ArrayList<>();
+    private List<String> mFavoriteCounts = new ArrayList<>();
+    private List<Boolean> mFavoriteds = new ArrayList<>();
 
-    private ArrayList<Reply> data;
 
     @Nullable
     @Override
@@ -59,6 +84,8 @@ public class TweetDetailsActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: started. " + TAG);
 
         recyclerView = findViewById(R.id.rvComments);
+        pbReply = findViewById(R.id.pb_reply);
+        pbReply.setVisibility(View.VISIBLE);
 
         getIncomingIntent();
         initComments();
@@ -202,9 +229,9 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
 
                 //looping through all the texts and inserting the text inside the string array
-                for (int i = 0; i < replyList.size(); i++) {
-                    Toast.makeText(TweetDetailsActivity.this, "data is " + response.body().getReplies().get(i).getText(), Toast.LENGTH_LONG).show();
-                }
+//                for (int i = 0; i < replyList.size(); i++) {
+//                    Toast.makeText(TweetDetailsActivity.this, "data is " + response.body().getReplies().get(i).getText(), Toast.LENGTH_LONG).show();
+//                }
 
 
                 Log.d(TAG, "onResponse: from bhai2 " + replyList);
@@ -212,12 +239,27 @@ public class TweetDetailsActivity extends AppCompatActivity {
                 //Creating a String array for the ListView
                 String[] texts = new String[replyList.size()];
                 String[] names = new String[replyList.size()];
+                String[] sentiments = new String[replyList.size()];
 
-                //looping through all the texts and inserting the text inside the string array
+                    //looping through all the texts and inserting the text inside the string array
                 for (int i = 0; i < replyList.size(); i++) {
                     //Toast.makeText(TweetDetailsActivity.this, "data is " + response.body().getReplies().get(i).getText(), Toast.LENGTH_SHORT).show();
                     texts[i] = replyList.get(i).getText();
                     names[i] = replyList.get(i).getScreenName();
+
+                    sentiments[i] = replyList.get(i).getSentimentAnalysis();
+
+                    mNames.add(replyList.get(i).getName());
+                    mRetweeteds.add(replyList.get(i).getRetweeted());
+                    mCreatedAt.add(replyList.get(i).getCreatedAt());
+                    mProfileImageUrls.add(replyList.get(i).getProfileImageUrl());
+                    mRetweetCounts.add(replyList.get(i).getRetweetCount());
+                    mFavoriteCounts.add(replyList.get(i).getFavoriteCount());
+                    mFavoriteds.add(replyList.get(i).getFavorited());
+
+
+                    Log.d(TAG, "onResponse: Sentiment = " + sentiments[i]);
+
 
                     //mRTweets.get(i).concat(texts[i]);
 
@@ -226,14 +268,15 @@ public class TweetDetailsActivity extends AppCompatActivity {
                     //List<Integer> newList = new ArrayList<Home>(texts);
                 }
 
-                mComments = Arrays.asList(texts);
-
+//                mComments = Arrays.asList(texts);
+                mTweets = Arrays.asList(texts);
                 mNames = Arrays.asList(names);
+                mSentiments = Arrays.asList(sentiments);
 
-                for(int i = 0; i < noOfReplies; i++) {
-                    mImages.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-                    mTimes.add("2 days ago");
-                }
+//                    for(int i = 0; i < noOfReplies; i++) {
+//                    mImages.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+//                    mTimes.add("2 days ago");
+//                }
 
                 //displaying the string array into listview
                 //listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, heroes));
@@ -242,8 +285,13 @@ public class TweetDetailsActivity extends AppCompatActivity {
                 //HomeAdapter adapter = new HomeAdapter(getContext(), mRTweets);
 
 
-                //recyclerView.setLayoutManager(manager);
-                ReplyAdapter adapter = new ReplyAdapter(getApplicationContext(), mNames, mImages, mTimes ,mComments);
+                pbReply.setVisibility(View.GONE);
+
+
+                    //recyclerView.setLayoutManager(manager);
+                ReplyAdapter adapter = new ReplyAdapter(getApplicationContext(), mNames,
+                        mTweets, mSentiments, mRetweeteds, mCreatedAt, mProfileImageUrls,
+                        mRetweetCounts, mFavoriteCounts, mFavoriteds );
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 

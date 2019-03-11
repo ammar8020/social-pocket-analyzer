@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ammar.socialpocketa.models.Home;
@@ -28,6 +29,7 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
 
     RecyclerView recyclerView;
+    ProgressBar pbHome;
 
     //private HomeAdapter adapter;
     private static List<Home> postList;
@@ -77,6 +79,8 @@ public class HomeFragment extends Fragment {
         Log.d(TAG, "onCreate: started.");
 
         recyclerView = rootView.findViewById(R.id.rvPosts);
+        pbHome = rootView.findViewById(R.id.pb_home);
+        pbHome.setVisibility(View.VISIBLE);
 
         apiResponse();
 
@@ -215,6 +219,7 @@ public class HomeFragment extends Fragment {
                 //displaying the string array into recycler view
                 //HomeAdapter adapter = new HomeAdapter(getContext(), mRTweets);
 
+                pbHome.setVisibility(View.GONE);
 
                 //recyclerView.setLayoutManager(manager);
                 HomeAdapter adapter = new HomeAdapter(getContext(), m_Ids, mNames,

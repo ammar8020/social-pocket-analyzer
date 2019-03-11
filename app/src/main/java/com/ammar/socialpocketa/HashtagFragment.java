@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ammar.socialpocketa.R;
@@ -34,6 +35,7 @@ public class HashtagFragment extends Fragment {
 
     EditText etKeyword;
     Button btnSearch;
+    ProgressBar pbHashtag;
     RecyclerView recyclerView;
 
     //private HomeAdapter adapter;
@@ -81,6 +83,8 @@ public class HashtagFragment extends Fragment {
         Log.d(TAG, "onCreate: started.");
 
         etKeyword = rootView.findViewById(R.id.et_keyword);
+        pbHashtag = rootView.findViewById(R.id.pb_hashtag);
+        pbHashtag.setVisibility(View.GONE);
 
         recyclerView = rootView.findViewById(R.id.rvHashtag);
 
@@ -89,9 +93,12 @@ public class HashtagFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Search Button clicked");
+
+                pbHashtag.setVisibility(View.VISIBLE);
                 apiResponse();
             }
         });
+        
 
 //        initImageBitmaps();
 
@@ -287,6 +294,7 @@ public class HashtagFragment extends Fragment {
                     //displaying the string array into recycler view
                     //HomeAdapter adapter = new HomeAdapter(getContext(), mRTweets);
 
+                    pbHashtag.setVisibility(View.GONE);
 
                     //recyclerView.setLayoutManager(manager);
                     HashtagAdapter adapter = new HashtagAdapter(getContext(), m_Ids, mNames,

@@ -14,6 +14,9 @@ public class Reply {
     @SerializedName("id_str")
     @Expose
     private String idStr;
+    @SerializedName("user")
+    @Expose
+    private String user;
     @SerializedName("Screen_Name")
     @Expose
     private String screenName;
@@ -26,6 +29,27 @@ public class Reply {
     @SerializedName("in_reply_to_status_id")
     @Expose
     private String inReplyToStatusId;
+    @SerializedName("SentimentAnalysis")
+    @Expose
+    private String sentimentAnalysis;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("retweeted")
+    @Expose
+    private Boolean retweeted;
+    @SerializedName("profile_image_url")
+    @Expose
+    private String profileImageUrl;
+    @SerializedName("retweet_count")
+    @Expose
+    private String retweetCount;
+    @SerializedName("favorite_count")
+    @Expose
+    private String favoriteCount;
+    @SerializedName("favorited")
+    @Expose
+    private Boolean favorited;
     @SerializedName("__v")
     @Expose
     private Integer v;
@@ -52,6 +76,14 @@ public class Reply {
 
     public void setIdStr(String idStr) {
         this.idStr = idStr;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getScreenName() {
@@ -84,6 +116,62 @@ public class Reply {
 
     public void setInReplyToStatusId(String inReplyToStatusId) {
         this.inReplyToStatusId = inReplyToStatusId;
+    }
+
+    public String getSentimentAnalysis() {
+        return sentimentAnalysis;
+    }
+
+    public void setSentimentAnalysis(String sentimentAnalysis) {
+        this.sentimentAnalysis = sentimentAnalysis;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Boolean getRetweeted() {
+        return retweeted;
+    }
+
+    public void setRetweeted(Boolean retweeted) {
+        this.retweeted = retweeted;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    public String getRetweetCount() {
+        return retweetCount;
+    }
+
+    public void setRetweetCount(String retweetCount) {
+        this.retweetCount = retweetCount;
+    }
+
+    public String getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    public void setFavoriteCount(String favoriteCount) {
+        this.favoriteCount = favoriteCount;
+    }
+
+    public Boolean getFavorited() {
+        return favorited;
+    }
+
+    public void setFavorited(Boolean favorited) {
+        this.favorited = favorited;
     }
 
     public Integer getV() {
