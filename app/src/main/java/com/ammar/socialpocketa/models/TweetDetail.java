@@ -2,11 +2,11 @@ package com.ammar.socialpocketa.models;
 
 import java.util.List;
 
-import com.ammar.socialpocketa.models.Replies.Reply;
+import com.ammar.socialpocketa.models.reply.Reply;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Comment {
+public class TweetDetail {
 
     @SerializedName("id")
     @Expose

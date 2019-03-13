@@ -1,11 +1,13 @@
 package com.ammar.socialpocketa.api;
 
-import com.ammar.socialpocketa.models.Comment;
+import com.ammar.socialpocketa.models.TrendDetail;
+import com.ammar.socialpocketa.models.TweetDetail;
 import com.ammar.socialpocketa.models.Hashtag;
 import com.ammar.socialpocketa.models.Login;
 import com.ammar.socialpocketa.models.Mention;
 import com.ammar.socialpocketa.models.Home;
 import com.ammar.socialpocketa.models.Register;
+import com.ammar.socialpocketa.models.trendDetail.Trend;
 
 import java.util.List;
 
@@ -46,24 +48,29 @@ public interface APIService {
 
 
     //the comment call
-    // defined the Call type as a List and the List type as Comment.
+    // defined the Call type as a List and the List type as TweetDetail.
 
     @GET("api/posts/detail/{postId}")
-    Call<Comment> getComments(@Path("postId") String postId);
+    Call<TweetDetail> getComments(@Path("postId") String postId);
 //    @GET("api/posts/detail/5b951359d498032e88f99844")
-//    Call<Comment> getComments();
+//    Call<TweetDetail> getComments();
 
 
     //the Mentions call
-    // defined the Call type as a List and the List type as Home.
+    // defined the Call type as a List and the List type as Mention.
     @GET("api/posts/mentions")
     Call<List<Mention>> getMentions();
 
 
     //the Hashtags call
-    // defined the Call type as a List and the List type as Home.
+    // defined the Call type as a List and the List type as Hashtag.
     @GET("api/posts/hashtags/{keyword}")
     Call<List<Hashtag>> getHashtagTweets(@Path("keyword") String keyword);
 
-}
 
+    //the Trends call
+    // defined the Call type as a List and the List type as Trend.
+    @GET("api/visualization/trends")
+    Call<List<TrendDetail>> getTrends();
+
+}

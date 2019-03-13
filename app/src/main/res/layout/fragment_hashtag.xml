@@ -60,7 +60,16 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvHashtag"
+        android:id="@+id/rv_hashtag"
+        android:layout_width="match_parent"
+        android:layout_height="355dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/scrollView"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_trend"
         android:layout_width="match_parent"
         android:layout_height="355dp"
         android:layout_alignParentBottom="true"

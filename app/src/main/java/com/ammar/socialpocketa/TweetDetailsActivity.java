@@ -12,8 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ammar.socialpocketa.models.Comment;
-import com.ammar.socialpocketa.models.Replies.Reply;
+import com.ammar.socialpocketa.models.TweetDetail;
+import com.ammar.socialpocketa.models.reply.Reply;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -203,7 +203,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
         //now making the call object
         //Here using the api method that we created inside the api interface
-        Call<Comment> call = RetrofitClient
+        Call<TweetDetail> call = RetrofitClient
                 .getInstance()
                 .getApi()
                 .getComments(_id);
@@ -211,16 +211,16 @@ public class TweetDetailsActivity extends AppCompatActivity {
 //                .getComments();
 
 
-            call.enqueue(new Callback<Comment>() {
+            call.enqueue(new Callback<TweetDetail>() {
 
             @Override
-            public void onResponse(Call<Comment> call, Response<Comment> response) {
+            public void onResponse(Call<TweetDetail> call, Response<TweetDetail> response) {
 
-//                Comment replyList1 = response.body();
-//                Log.d(TAG, "onResponse: from bhai \n\n " + replyList1 + "\n\n");
+//                TweetDetail replyList1 = response.body();
+//                Log.d(TAG, "onResponse: from \n\n " + replyList1 + "\n\n");
 
                 //In this point we got our Home list
-                Log.d(TAG, "onResponse: from bhai3 \n\n " + response.body().getReplies() + "\n\n");
+                Log.d(TAG, "onResponse: from 3 \n\n " + response.body().getReplies() + "\n\n");
 
                 List<Reply> replyList = response.body().getReplies();
 
@@ -308,7 +308,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
 
             @Override
-            public void onFailure(Call<Comment> call, Throwable t) {
+            public void onFailure(Call<TweetDetail> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

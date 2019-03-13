@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa.models.Replies;
+package com.ammar.socialpocketa.models.reply;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

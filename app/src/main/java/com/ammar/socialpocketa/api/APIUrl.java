@@ -30,6 +30,6 @@ public class APIUrl {
 //    String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
 
 
-    public static final String BASE_URL = "http://192.168.43.135:4000/";
+    public static final String BASE_URL = "http://192.168.1.9:4000/";
 
 }
