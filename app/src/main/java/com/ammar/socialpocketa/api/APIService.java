@@ -1,5 +1,7 @@
 package com.ammar.socialpocketa.api;
 
+import com.ammar.socialpocketa.models.LatestReply;
+import com.ammar.socialpocketa.models.Profile;
 import com.ammar.socialpocketa.models.TrendDetail;
 import com.ammar.socialpocketa.models.TweetDetail;
 import com.ammar.socialpocketa.models.Hashtag;
@@ -72,5 +74,17 @@ public interface APIService {
     // defined the Call type as a List and the List type as Trend.
     @GET("api/visualization/trends")
     Call<List<TrendDetail>> getTrends();
+
+    //the Profile call
+    // defined the Call type as a List and the List type as Profile.
+    @GET("api/visualization/userinfo")
+    Call<Profile> getProfile();
+
+
+    //the LatestReply call
+    // defined the Call type as a List and the List type as LatestReply.
+    @GET("api/visualization/latestMentions")
+    Call<List<LatestReply>> getLatestReply();
+
 
 }

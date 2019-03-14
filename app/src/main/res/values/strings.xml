@@ -41,6 +41,11 @@
     <!-- fragment_notifications.xml -->
     <string name="bottom_nav_notifications">Notifications</string>
 
+
+    <!-- fragment_profile22.xml -->
+    <string name="twitterUsername">\@Ammary07</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

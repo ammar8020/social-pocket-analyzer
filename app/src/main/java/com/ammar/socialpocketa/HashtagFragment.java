@@ -479,7 +479,7 @@ public class HashtagFragment extends Fragment {
 
                         _ids[i] = postList.get(i).getId();
                         texts[i] = postList.get(i).getText();
-                        sentiments[i] = postList.get(i).getSentimentAnalysis();
+                        sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
 
 //                        names.add(postList.get(i).getName());
 //                        retweeteds.add(postList.get(i).getRetweeted());

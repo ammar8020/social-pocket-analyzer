@@ -41,9 +41,15 @@ public class Hashtag {
     @SerializedName("favorited")
     @Expose
     private Boolean favorited;
-    @SerializedName("SentimentAnalysis")
+    @SerializedName("sentimentAnalysisLogreg")
     @Expose
-    private String sentimentAnalysis;
+    private String sentimentAnalysisLogreg;
+    @SerializedName("sentimentAnalysisNaiveBayes")
+    @Expose
+    private String sentimentAnalysisNaiveBayes;
+    @SerializedName("sentimentAnalysisRnn")
+    @Expose
+    private String sentimentAnalysisRnn;
 
     public String getId() {
         return id;
@@ -141,12 +147,28 @@ public class Hashtag {
         this.favorited = favorited;
     }
 
-    public String getSentimentAnalysis() {
-        return sentimentAnalysis;
+    public String getSentimentAnalysisLogreg() {
+        return sentimentAnalysisLogreg;
     }
 
-    public void setSentimentAnalysis(String sentimentAnalysis) {
-        this.sentimentAnalysis = sentimentAnalysis;
+    public void setSentimentAnalysisLogreg(String sentimentAnalysisLogreg) {
+        this.sentimentAnalysisLogreg = sentimentAnalysisLogreg;
+    }
+
+    public String getSentimentAnalysisNaiveBayes() {
+        return sentimentAnalysisNaiveBayes;
+    }
+
+    public void setSentimentAnalysisNaiveBayes(String sentimentAnalysisNaiveBayes) {
+        this.sentimentAnalysisNaiveBayes = sentimentAnalysisNaiveBayes;
+    }
+
+    public String getSentimentAnalysisRnn() {
+        return sentimentAnalysisRnn;
+    }
+
+    public void setSentimentAnalysisRnn(String sentimentAnalysisRnn) {
+        this.sentimentAnalysisRnn = sentimentAnalysisRnn;
     }
 
 }
