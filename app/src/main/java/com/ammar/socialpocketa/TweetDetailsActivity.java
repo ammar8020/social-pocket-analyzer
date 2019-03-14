@@ -88,7 +88,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
         pbReply.setVisibility(View.VISIBLE);
 
         getIncomingIntent();
-        initComments();
+//        initComments();
 
         apiResponse();
     }

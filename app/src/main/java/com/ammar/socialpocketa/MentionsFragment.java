@@ -161,10 +161,13 @@ public class MentionsFragment extends Fragment {
             public void onResponse(Call<List<Mention>> call, Response<List<Mention>> response) {
 
 
-                //In this point we got our Home list
-                postList = response.body();
+
 
                 try {
+
+                    //In this point we got our Mentions list
+                    postList = response.body();
+
 //                    noOfTweets = postList.size();
 
 

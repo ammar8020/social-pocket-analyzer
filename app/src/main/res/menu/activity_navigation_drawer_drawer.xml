@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Profile" />
         <item
-            android:id="@+id/nav_lists"
+            android:id="@+id/nav_latest_replies"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Blog" />
+            android:title="Latest Replies" />
         <item
             android:id="@+id/nav_engage"
             android:icon="@drawable/ic_menu_slideshow"

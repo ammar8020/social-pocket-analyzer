@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
     private static final String TAG = "HomeAdapter";
+
+//    RelativeLayout rlEngage;
 
     private List<String> m_Ids;
 
@@ -80,7 +83,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
         Glide.with(mContext)
@@ -127,7 +130,24 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
 
 
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+//        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View view) {
+////                Log.d(TAG, "onClick: clicked on: " + mNames.get(position));
+////
+////                Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
+////
+////                Intent intent = new Intent(mContext, TweetDetailsActivity.class);
+////                intent.putExtra("image", mProfileImageUrl.get(position));
+////                intent.putExtra("name", mNames.get(position));
+////                intent.putExtra("_id", m_Ids.get(position));
+////                mContext.startActivity(intent);
+////            }
+////        });
+
+
+
+        holder.tweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mNames.get(position));
@@ -141,6 +161,23 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
                 mContext.startActivity(intent);
             }
         });
+
+
+
+        holder.rlEngage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: Engage Clicked ");
+
+                Log.d(TAG, "onClick: Senti is" + mSentiments.get(position));
+                Log.d(TAG, "onClick: Senti is" + mNames.get(position));
+                Log.d(TAG, "onClick: Senti is" + mTweets.get(position));
+
+            }
+        });
+
+
+
     }
 
     @Override
@@ -162,6 +199,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         TextView tvRetweetCount;
 
 
+        RelativeLayout rlEngage;
+
+
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.imgView_proPic);
@@ -175,6 +215,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
             tvRetweetCount = itemView.findViewById(R.id.tv_comment);
 
             parentLayout = itemView.findViewById(R.id.parent_layout);
+
+            rlEngage = itemView.findViewById(R.id.rl_engage);
+
         }
     }
 }

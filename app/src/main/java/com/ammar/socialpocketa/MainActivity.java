@@ -122,8 +122,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_profile:
                 fragment = new ProfileFragment();
                 break;
-            case R.id.nav_lists:
-                fragment = new ListsFragment();
+            case R.id.nav_latest_replies:
+                fragment = new LatestRepliesFragment();
                 break;
 
             case R.id.nav_logout:

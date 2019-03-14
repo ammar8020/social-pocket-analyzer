@@ -8,9 +8,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ammar.socialpocketa.models.Home;
@@ -30,6 +33,8 @@ public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;
     ProgressBar pbHome;
+//    TextView tvEngage;
+//    RelativeLayout rlEngage;
 
     //private HomeAdapter adapter;
     private static List<Home> postList;
@@ -80,11 +85,30 @@ public class HomeFragment extends Fragment {
 
         recyclerView = rootView.findViewById(R.id.rvPosts);
         pbHome = rootView.findViewById(R.id.pb_home);
+//        tvEngage = rootView.findViewById(R.id.tv_engage);
+//        rlEngage = rootView.findViewById(R.id.rl_engage);
+
         pbHome.setVisibility(View.VISIBLE);
 
         apiResponse();
 
 //        initImageBitmaps();
+
+
+//        tvEngage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+
+//        rlEngage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getActivity(), "Engage Clicked", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
 
         return rootView;
     }
@@ -228,6 +252,13 @@ public class HomeFragment extends Fragment {
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
+//                rlEngage.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Toast.makeText(getActivity(), "Engage Clicked", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 
 
                 /*recyclerView = findViewById(R.id.recycler_view);
