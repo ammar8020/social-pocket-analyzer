@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ammar.socialpocketa.helper.DatabaseHelper;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
     private static final String TAG = "HomeAdapter";
+
+    DatabaseHelper mDatabaseHelper;
 
 //    RelativeLayout rlEngage;
 
@@ -79,6 +82,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tweet, parent, false);
         ViewHolder holder = new ViewHolder(view);
+
+        mDatabaseHelper = new DatabaseHelper(mContext);
+
         return holder;
     }
 
@@ -169,9 +175,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Engage Clicked ");
 
-                Log.d(TAG, "onClick: Senti is" + mSentiments.get(position));
-                Log.d(TAG, "onClick: Senti is" + mNames.get(position));
-                Log.d(TAG, "onClick: Senti is" + mTweets.get(position));
+                Log.d(TAG, "onClick: ID is " + m_Ids.get(position));
+                Log.d(TAG, "onClick: Name is " + mNames.get(position));
+                Log.d(TAG, "onClick: Tweet  is " + mTweets.get(position));
+
+                AddData(mTweets.get(position));
+
 
             }
         });
@@ -179,6 +188,20 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
 
     }
+
+
+
+    public void AddData(String newEntry) {
+        boolean insertData = mDatabaseHelper.addData(newEntry);
+
+        if (insertData) {
+            Toast.makeText(mContext, "Data Successfully Inserted!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mContext, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
     @Override
     public int getItemCount() {

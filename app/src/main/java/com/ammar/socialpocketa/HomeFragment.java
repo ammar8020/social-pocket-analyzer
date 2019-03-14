@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     ProgressBar pbHome;
 //    TextView tvEngage;
-//    RelativeLayout rlEngage;
+    RelativeLayout rlEngage;
 
     //private HomeAdapter adapter;
     private static List<Home> postList;
@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.rvPosts);
         pbHome = rootView.findViewById(R.id.pb_home);
 //        tvEngage = rootView.findViewById(R.id.tv_engage);
-//        rlEngage = rootView.findViewById(R.id.rl_engage);
+        rlEngage = rootView.findViewById(R.id.rl_engage);
 
         pbHome.setVisibility(View.VISIBLE);
 
@@ -252,13 +252,6 @@ public class HomeFragment extends Fragment {
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
-//                rlEngage.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Toast.makeText(getActivity(), "Engage Clicked", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
 
 
                 /*recyclerView = findViewById(R.id.recycler_view);

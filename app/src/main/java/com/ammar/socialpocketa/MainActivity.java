@@ -126,6 +126,10 @@ public class MainActivity extends AppCompatActivity
                 fragment = new LatestRepliesFragment();
                 break;
 
+            case R.id.nav_engage:
+                fragment = new EngageFragment();
+                break;
+
             case R.id.nav_logout:
                 SharedPrefManager sharedPrefManager = new SharedPrefManager(getApplicationContext());
                 sharedPrefManager.logout();
@@ -133,6 +137,7 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                break;
 
 
             case R.id.navigation_home:
