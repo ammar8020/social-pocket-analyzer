@@ -1,13 +1,9 @@
-package com.ammar.socialpocketa.Utils;
+package com.ammar.socialpocketa.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class DbImageUtil {
 

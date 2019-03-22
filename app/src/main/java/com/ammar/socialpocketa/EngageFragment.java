@@ -2,6 +2,7 @@ package com.ammar.socialpocketa;
 
 
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.ammar.socialpocketa.utils.DbImageUtil;
 import com.ammar.socialpocketa.data.DatabaseHelper;
 
 import java.util.ArrayList;
@@ -89,20 +91,49 @@ public class EngageFragment extends Fragment {
         // get the data and append to a list
         Cursor data = mDatabaseHelper.getData();
         List<String> listData = new ArrayList<>();
+
+
+
+        List<Bitmap> imageData = new ArrayList<>();
+
+        Bitmap bitmapImage;
+
+        int i = 0;
+
+
+
+
         while(data.moveToNext()){
             // get the value from the database in column 1
             // then add it to the ArrayList
             listData.add(data.getString(1));
+
+
+            byte[] image = data.getBlob(2);
+
+            bitmapImage = DbImageUtil.getImage(image);
+
+            imageData.add(bitmapImage);
+
+            Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
+
+            i++;
+
+
+
+
         }
 
+        EngageAdapter engageAdapter = new EngageAdapter(listData);
 
-        for (int i = 0; i < 2; i++) {
+
+        for (int j = 0; j < listData.size(); j++) {
             m_Ids.add("id1");
             mNames.add("id1");
             mSentiments.add("id1");
             mRetweeteds.add(true);
             mCreatedAt.add("id1");
-            mProfileImageUrls.add("id1");
+//            mProfileImageUrls.add("id1");
             mRetweetCounts.add("id1");
             mFavoriteCounts.add("id1");
             mFavoriteds.add(true);
@@ -110,11 +141,28 @@ public class EngageFragment extends Fragment {
 
         pbEngage.setVisibility(View.GONE);
 
-        HomeAdapter adapter = new HomeAdapter(getContext(), m_Ids, mNames,
-                listData, mSentiments, mRetweeteds, mCreatedAt, mProfileImageUrls,
+//        HomeAdapter adapter = new HomeAdapter(getContext(), m_Ids, mNames,
+//                listData, mSentiments, mRetweeteds, mCreatedAt, mProfileImageUrls,
+//                mRetweetCounts, mFavoriteCounts, mFavoriteds);
+//        rvEngage.setAdapter(adapter);
+//        rvEngage.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+
+//        MentionsAdapter adapter = new MentionsAdapter(getContext(), m_Ids, mNames,
+//                listData, mSentiments, mRetweeteds, mCreatedAt, mProfileImageUrls,
+//                mRetweetCounts, mFavoriteCounts, mFavoriteds);
+
+
+                EngageAdapter adapter = new EngageAdapter(getContext(), m_Ids, mNames,
+                listData, mSentiments, mRetweeteds, mCreatedAt, imageData,
                 mRetweetCounts, mFavoriteCounts, mFavoriteds);
+
+
         rvEngage.setAdapter(adapter);
         rvEngage.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
 
 
 
