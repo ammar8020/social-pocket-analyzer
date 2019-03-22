@@ -1,11 +1,10 @@
 package com.ammar.socialpocketa;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.ammar.socialpocketa.api.APIService;
 import com.ammar.socialpocketa.api.APIUrl;
-import com.ammar.socialpocketa.helper.SharedPrefManager;
+import com.ammar.socialpocketa.data.SharedPrefManager;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -18,6 +17,8 @@ import okhttp3.Response;
 
 public class RetrofitClient {
 
+    private static final String TAG = "RetrofitClient";
+
     //private static final String BASE_URL = "http://192.168.10.5:5000/";
     private static RetrofitClient mInstance;
     private Retrofit retrofit;
@@ -26,10 +27,37 @@ public class RetrofitClient {
 
 //    public String authToken = LoginActivity.getAuthToken();
 
-    public String authToken = SharedPrefManager.getKeyToken();
+//    public String authToken = SharedPrefManager.getKeyToken();
 
 
-    private RetrofitClient() {
+
+    private static String authToken = "";
+
+    private static String tempToken = "";
+
+    public static void getToken(String token) {
+
+        tempToken = token;
+
+//        if (LoginActivity.getAuthToken() != null) {
+//            authToken = LoginActivity.getAuthToken();
+
+//        if (SharedPrefManager.getKeyToken() != null) {
+//            authToken = SharedPrefManager.getKeyToken();
+
+//        } else {
+            authToken = tempToken;
+//        }
+
+    }
+
+
+
+
+    public RetrofitClient() {
+
+        Log.d(TAG, "RetrofitClient: AuthToken is: " + authToken);
+
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(

@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.ammar.socialpocketa.helper.DatabaseHelper;
+import com.ammar.socialpocketa.data.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;

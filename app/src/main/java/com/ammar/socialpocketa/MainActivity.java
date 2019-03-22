@@ -1,5 +1,7 @@
 package com.ammar.socialpocketa;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -12,18 +14,43 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.ammar.socialpocketa.helper.SharedPrefManager;
+import com.ammar.socialpocketa.data.SharedPrefManager;
+import com.ammar.socialpocketa.sync.SensorService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
+
+//    Intent mServiceIntent;
+//    private SensorService mSensorService;
+//
+//    Context ctx;
+//
+//
+//    public Context getCtx() {
+//        return ctx;
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        ctx = this;
+
         setContentView(R.layout.activity_main);
+
+
+//        mSensorService = new SensorService(getCtx());
+//        mServiceIntent = new Intent(getCtx(), mSensorService.getClass());
+//        if (!isMyServiceRunning(mSensorService.getClass())) {
+//            startService(mServiceIntent);
+//        }
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -66,7 +93,19 @@ public class MainActivity extends AppCompatActivity
         navigation.setOnNavigationItemSelectedListener(MainActivity.this);
 
 
+
+//        mSensorService = new SensorService(getCtx());
+//        mServiceIntent = new Intent(getCtx(), mSensorService.getClass());
+//        if (!isMyServiceRunning(mSensorService.getClass())) {
+//            startService(mServiceIntent);
+//        }
+
+
     }
+
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -183,6 +222,29 @@ public class MainActivity extends AppCompatActivity
         }
         return false;
     }*/
+
+
+
+//    private boolean isMyServiceRunning(Class<?> serviceClass) {
+//        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+//        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+//            if (serviceClass.getName().equals(service.service.getClassName())) {
+//                Log.i ("isMyServiceRunning?", true+"");
+//                return true;
+//            }
+//        }
+//        Log.i ("isMyServiceRunning?", false+"");
+//        return false;
+//    }
+//
+//
+//    @Override
+//    protected void onDestroy() {
+//        stopService(mServiceIntent);
+//        Log.i("MAINACT", "onDestroy!");
+//        super.onDestroy();
+//
+//    }
 
 
 

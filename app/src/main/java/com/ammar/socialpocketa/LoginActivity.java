@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.ammar.socialpocketa.api.APIService;
 import com.ammar.socialpocketa.api.APIUrl;
-import com.ammar.socialpocketa.helper.SharedPrefManager;
+import com.ammar.socialpocketa.data.SharedPrefManager;
 import com.ammar.socialpocketa.models.Login;
 
 import retrofit2.Call;
@@ -123,6 +123,8 @@ public class LoginActivity extends AppCompatActivity {
                     //Toast.makeText(getApplicationContext(), response.body().getToken(), Toast.LENGTH_LONG).show();
 
                     String tempAuthToken = response.body().getToken();
+
+                    RetrofitClient.getToken(tempAuthToken);
 
                     if (tempAuthToken == null) {
                         finish();

@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa.helper;
+package com.ammar.socialpocketa.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -78,4 +78,18 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
          return sharedPreferences.getString(KEY_TOKEN, "0");
     }
+
+
+
+
+
+    public String getKeyToken2(){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+//        return sharedPreferences.getString(KEY_TOKEN, "0");
+        return sharedPreferences.getString(KEY_TOKEN, "0");
+//        return "12345";
+    }
+
+
+
 }

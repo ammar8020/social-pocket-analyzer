@@ -13,10 +13,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ammar.socialpocketa.helper.DatabaseHelper;
+import com.ammar.socialpocketa.data.DatabaseHelper;
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -179,7 +178,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
                 Log.d(TAG, "onClick: Name is " + mNames.get(position));
                 Log.d(TAG, "onClick: Tweet  is " + mTweets.get(position));
 
-                AddData(mTweets.get(position));
+//                AddData(mTweets.get(position));
 
 
             }
@@ -191,15 +190,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
 
 
-    public void AddData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addData(newEntry);
-
-        if (insertData) {
-            Toast.makeText(mContext, "Data Successfully Inserted!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(mContext, "Something went wrong", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    public void AddData(String newEntry) {
+//        boolean insertData = mDatabaseHelper.addData(newEntry);
+//
+//        if (insertData) {
+//            Toast.makeText(mContext, "Data Successfully Inserted!", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(mContext, "Something went wrong", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 
 

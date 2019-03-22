@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa.helper;
+package com.ammar.socialpocketa.data;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,6 +14,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "people_table";
     private static final String COL1 = "ID";
     private static final String COL2 = "name";
+    private static final String COL3 = "image";
+
+//    private static final String COL3 = "text";
+    private static final String COL4 = "mSentiments";
+    private static final String COL5 = "mRetweeted";
+    private static final String COL6 = "mCreatedAt";
+//    private static final String COL7 = "mProfileImageUrl";
+    private static final String COL8 = "mRetweetCount";
+
 
     public DatabaseHelper(Context context) {
         super(context, TABLE_NAME, null, 1);
@@ -22,7 +31,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-              COL2 + " TEXT)";
+              COL2 + " TEXT, " +
+                COL3 + " BLOB)";
         db.execSQL(createTable);
     }
 
@@ -32,12 +42,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addData(String item) {
+    public boolean addData(String item, byte[] image) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2, item);
+        contentValues.put(COL3, image);
 
-        Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + item + " and " + image + " to " + TABLE_NAME);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 

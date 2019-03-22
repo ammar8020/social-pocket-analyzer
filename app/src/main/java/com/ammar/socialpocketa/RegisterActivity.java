@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.ammar.socialpocketa.api.APIService;
 import com.ammar.socialpocketa.api.APIUrl;
-import com.ammar.socialpocketa.helper.SharedPrefManager;
+import com.ammar.socialpocketa.data.SharedPrefManager;
 import com.ammar.socialpocketa.models.Register;
 
 import retrofit2.Call;

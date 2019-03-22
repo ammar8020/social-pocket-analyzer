@@ -1,5 +1,8 @@
 package com.ammar.socialpocketa;
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ammar.socialpocketa.models.Home;
+import com.ammar.socialpocketa.sync.SensorService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +34,19 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
+
+
+    Intent mServiceIntent;
+    private SensorService mSensorService;
+
+    Context ctx;
+
+
+    public Context getCtx() {
+        return ctx;
+    }
+
+
 
     RecyclerView recyclerView;
     ProgressBar pbHome;
@@ -83,6 +100,23 @@ public class HomeFragment extends Fragment {
 
         Log.d(TAG, "onCreate: started.");
 
+
+
+//        ctx = this;
+
+
+        ctx = getActivity();
+
+//        ctx = getContext();
+
+
+        mSensorService = new SensorService(getCtx());
+        mServiceIntent = new Intent(getCtx(), mSensorService.getClass());
+        if (!isMyServiceRunning(mSensorService.getClass())) {
+            getActivity().startService(mServiceIntent);
+        }
+
+
         recyclerView = rootView.findViewById(R.id.rvPosts);
         pbHome = rootView.findViewById(R.id.pb_home);
 //        tvEngage = rootView.findViewById(R.id.tv_engage);
@@ -112,6 +146,36 @@ public class HomeFragment extends Fragment {
 
         return rootView;
     }
+
+
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                Log.i ("isMyServiceRunning?", true+"");
+                return true;
+            }
+        }
+        Log.i ("isMyServiceRunning?", false+"");
+        return false;
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        getActivity().stopService(mServiceIntent);
+        Log.i("MAINACT", "onDestroy!");
+        super.onDestroy();
+
+    }
+
+
 
     private void initImageBitmaps(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");

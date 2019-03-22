@@ -182,7 +182,7 @@ public class MentionsFragment extends Fragment {
 
                         _ids[i] = postList.get(i).getId();
                         texts[i] = postList.get(i).getText();
-                        sentiments[i] = postList.get(i).getSentimentAnalysis();
+                        sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
 
                         mNames.add(postList.get(i).getName());
                         mRetweeteds.add(postList.get(i).getRetweeted());
