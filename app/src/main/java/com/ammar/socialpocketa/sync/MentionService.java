@@ -23,6 +23,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -114,6 +116,8 @@ public class MentionService extends Service {
 //        }
 
         return START_STICKY;
+
+//        return START_NOT_STICKY;
     }
 
 
@@ -157,6 +161,16 @@ public class MentionService extends Service {
             public void run() {
                 Log.i("in timer", "in timer ++++  "+ (counter++));
 
+
+
+//                if (!isInternetAvailable()) {
+//
+//
+//                    stopSelf();
+//
+//                }
+
+
                 mDatabaseHelper = new DatabaseHelper(getApplicationContext());
 
                 apiResponse();
@@ -184,6 +198,38 @@ public class MentionService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+
+
+
+
+    public void stopServiceOnLogout() {
+
+//        stoptimertask();
+
+        stopSelf();
+
+    }
+
+
+
+//    public boolean isInternetAvailable() {
+//        try {
+//            final InetAddress address = InetAddress.getByName("www.google.com");
+//            return !address.equals("");
+//
+//        } catch (UnknownHostException e) {
+//            // Log error
+//
+//            Log.e(TAG, "isInternetAvailable: Error Occured while checking for Internet Connection.");
+//
+//        }
+//        return false;
+//    }
+
+
+
+
 
 
 

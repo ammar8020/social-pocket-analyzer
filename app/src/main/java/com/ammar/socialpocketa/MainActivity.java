@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ammar.socialpocketa.data.SharedPrefManager;
+import com.ammar.socialpocketa.sync.MentionService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
@@ -168,6 +169,13 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_logout:
                 SharedPrefManager sharedPrefManager = new SharedPrefManager(getApplicationContext());
                 sharedPrefManager.logout();
+
+
+//
+//                MentionService mentionService = new MentionService();
+//                mentionService.stopServiceOnLogout();
+
+
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

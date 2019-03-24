@@ -523,6 +523,38 @@ public class MentionsFragment extends Fragment {
         getActivity().getMenuInflater().inflate(R.menu.menu, menu);
 
 
+
+        switch (sentimentFilter) {
+
+            case "Appreciated":
+                menu.getItem(0).setChecked(true);
+                break;
+
+            case "Abusive":
+                menu.getItem(1).setChecked(true);
+                break;
+
+            case "Suggestion":
+                menu.getItem(2).setChecked(true);
+                break;
+
+            case "Serious Concern":
+                menu.getItem(3).setChecked(true);
+                break;
+
+            case "Disappointed":
+                menu.getItem(4).setChecked(true);
+                break;
+
+
+            default:
+                menu.getItem(5).setChecked(true);
+                break;
+
+        }
+
+
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 

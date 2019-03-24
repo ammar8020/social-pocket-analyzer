@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -38,30 +41,34 @@ public class HashtagFragment extends Fragment {
     RecyclerView recyclerView;
     RecyclerView rvTrends;
 
-    //private HomeAdapter adapter;
-    private static List<Hashtag> postList;
+//    //private HomeAdapter adapter;
+//    private static List<Hashtag> postList;
+//
+//    //vars
+//    String keyword = "";
+////    private static int noOfTweets = 0;
+//
+//    private List<String> m_Ids = new ArrayList<>();
+//
+//    //private ArrayList<String> mNames = new ArrayList<>();
+//    private List<String> mNames = new ArrayList<>();
+//
+//    //private ArrayList<String> mTweets = new ArrayList<>();
+//
+//    //private ArrayList<String> mRTweets = new ArrayList<>();
+//    private List<String> mTweets = new ArrayList<>();
+//    private List<String> mSentiments = new ArrayList<>();
+//
+//    private List<Boolean> mRetweeteds = new ArrayList<>();
+//    private List<Long> mCreatedAt = new ArrayList<>();
+//    private List<String> mProfileImageUrls = new ArrayList<>();
+//    private List<Integer> mRetweetCounts = new ArrayList<>();
+//    private List<Integer> mFavoriteCounts = new ArrayList<>();
+//    private List<Boolean> mFavoriteds = new ArrayList<>();
 
-    //vars
-    String keyword = "";
-//    private static int noOfTweets = 0;
 
-    private List<String> m_Ids = new ArrayList<>();
+    public static String sentimentFilter = "";
 
-    //private ArrayList<String> mNames = new ArrayList<>();
-    private List<String> mNames = new ArrayList<>();
-
-    //private ArrayList<String> mTweets = new ArrayList<>();
-
-    //private ArrayList<String> mRTweets = new ArrayList<>();
-    private List<String> mTweets = new ArrayList<>();
-    private List<String> mSentiments = new ArrayList<>();
-
-    private List<Boolean> mRetweeteds = new ArrayList<>();
-    private List<Long> mCreatedAt = new ArrayList<>();
-    private List<String> mProfileImageUrls = new ArrayList<>();
-    private List<Integer> mRetweetCounts = new ArrayList<>();
-    private List<Integer> mFavoriteCounts = new ArrayList<>();
-    private List<Boolean> mFavoriteds = new ArrayList<>();
 
 
     List<Trend> trendList = new ArrayList<>();
@@ -78,6 +85,20 @@ public class HashtagFragment extends Fragment {
 
         initImageBitmaps();
     }*/
+
+
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+
+    }
+
+
+
 
     @Nullable
     @Override
@@ -410,9 +431,18 @@ public class HashtagFragment extends Fragment {
 
     public void apiResponse() {
 
+
+        //vars
+        String keyword = "";
+
+
+
+
+
 //        rvTrends.setVisibility(View.INVISIBLE);
         rvTrends.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
+//        recyclerView.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
         pbHashtag.setVisibility(View.VISIBLE);
 
         keyword = etKeyword.getText().toString();
@@ -442,19 +472,56 @@ public class HashtagFragment extends Fragment {
                     }
                 }
 
-                //In this point we got our Home list
-                postList = response.body();
-
-                Log.d(TAG, "onResponse: Home list: " + postList);
 
                 try {
+
+
+                    //private HomeAdapter adapter;
+                    List<Hashtag> postList;
+
+
+//    private static int noOfTweets = 0;
+
+                    List<String> m_Ids = new ArrayList<>();
+
+                    //private ArrayList<String> mNames = new ArrayList<>();
+                    List<String> mNames = new ArrayList<>();
+
+                    //private ArrayList<String> mTweets = new ArrayList<>();
+
+                    //private ArrayList<String> mRTweets = new ArrayList<>();
+                    List<String> mTweets = new ArrayList<>();
+                    List<String> mSentiments = new ArrayList<>();
+
+                    List<Boolean> mRetweeteds = new ArrayList<>();
+                    List<Long> mCreatedAt = new ArrayList<>();
+                    List<String> mProfileImageUrls = new ArrayList<>();
+                    List<Integer> mRetweetCounts = new ArrayList<>();
+                    List<Integer> mFavoriteCounts = new ArrayList<>();
+                    List<Boolean> mFavoriteds = new ArrayList<>();
+
+
+
+                    String appreciative = "Appreciated";
+                    String abusive = "Abusive";
+                    String suggestive = "Suggestion";
+                    String seriousConcern = "Serious Concern";
+                    String disappointed = "Disappointed";
+
+
+                    //In this point we got our Home list
+                    postList = response.body();
+
+                    Log.d(TAG, "onResponse: Home list: " + postList);
+
+
 //                    noOfTweets = postList.size();
 
 
                     //Creating a String array for the ListView
-                    String[] _ids = new String[postList.size()];
-                    String[] texts = new String[postList.size()];
-                    String[] sentiments = new String[postList.size()];
+//                    String[] _ids = new String[postList.size()];
+//                    String[] texts = new String[postList.size()];
+//                    String[] sentiments = new String[postList.size()];
                     //String[] names = new String[postList.size()];
 
 //                    String[] names = new String[postList.size()];
@@ -477,9 +544,9 @@ public class HashtagFragment extends Fragment {
                     //looping through all the texts and inserting the text inside the string array
                     for (int i = 0; i < postList.size(); i++) {
 
-                        _ids[i] = postList.get(i).getId();
-                        texts[i] = postList.get(i).getText();
-                        sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
+//                        _ids[i] = postList.get(i).getId();
+//                        texts[i] = postList.get(i).getText();
+//                        sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
 
 //                        names.add(postList.get(i).getName());
 //                        retweeteds.add(postList.get(i).getRetweeted());
@@ -489,13 +556,207 @@ public class HashtagFragment extends Fragment {
 //                        favoriteCounts.add(postList.get(i).getFavoriteCount());
 //                        favoriteds.add(postList.get(i).getFavorited());
 
-                        mNames.add(postList.get(i).getName());
-                        mRetweeteds.add(postList.get(i).getRetweeted());
-                        mCreatedAt.add(postList.get(i).getCreatedAt());
-                        mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
-                        mRetweetCounts.add(postList.get(i).getRetweetCount());
-                        mFavoriteCounts.add(postList.get(i).getFavoriteCount());
-                        mFavoriteds.add(postList.get(i).getFavorited());
+
+//                        m_Ids.add(postList.get(i).getId());
+//                        mTweets.add(postList.get(i).getText());
+//                        mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+//
+//                        mNames.add(postList.get(i).getName());
+//                        mRetweeteds.add(postList.get(i).getRetweeted());
+//                        mCreatedAt.add(postList.get(i).getCreatedAt());
+//                        mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
+//                        mRetweetCounts.add(postList.get(i).getRetweetCount());
+//                        mFavoriteCounts.add(postList.get(i).getFavoriteCount());
+//                        mFavoriteds.add(postList.get(i).getFavorited());
+
+
+                        if (sentimentFilter.equals(appreciative)) {
+
+                            if (appreciative.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+
+//                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
+
+
+//                        if (postList.get(i).getSentimentAnalysisLogreg().equals("Appreciated")) {
+
+
+//                                _ids[i] = postList.get(i).getId();
+//                                texts[i] = postList.get(i).getText();
+//                                sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
+
+
+                                m_Ids.add(postList.get(i).getId());
+                                mTweets.add(postList.get(i).getText());
+                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+//
+                                mNames.add(postList.get(i).getName());
+                                mRetweeteds.add(postList.get(i).getRetweeted());
+                                mCreatedAt.add(postList.get(i).getCreatedAt());
+                                mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
+                                mRetweetCounts.add(postList.get(i).getRetweetCount());
+                                mFavoriteCounts.add(postList.get(i).getFavoriteCount());
+                                mFavoriteds.add(postList.get(i).getFavorited());
+
+
+//
+//
+                            }
+
+
+                        } else if (sentimentFilter.equals(abusive)) {
+
+                            if (abusive.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+
+//                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
+
+
+//                        if (postList.get(i).getSentimentAnalysisLogreg().equals("Appreciated")) {
+
+
+//                                _ids[i] = postList.get(i).getId();
+//                                texts[i] = postList.get(i).getText();
+//                                sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
+
+
+                                m_Ids.add(postList.get(i).getId());
+                                mTweets.add(postList.get(i).getText());
+                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+//
+                                mNames.add(postList.get(i).getName());
+                                mRetweeteds.add(postList.get(i).getRetweeted());
+                                mCreatedAt.add(postList.get(i).getCreatedAt());
+                                mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
+                                mRetweetCounts.add(postList.get(i).getRetweetCount());
+                                mFavoriteCounts.add(postList.get(i).getFavoriteCount());
+                                mFavoriteds.add(postList.get(i).getFavorited());
+//
+//
+                            }
+                        } else if (sentimentFilter.equals(suggestive)) {
+
+                            if (suggestive.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+
+//                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
+
+
+//                        if (postList.get(i).getSentimentAnalysisLogreg().equals("Appreciated")) {
+
+
+//                                _ids[i] = postList.get(i).getId();
+//                                texts[i] = postList.get(i).getText();
+//                                sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
+
+
+                                m_Ids.add(postList.get(i).getId());
+                                mTweets.add(postList.get(i).getText());
+                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+//
+                                mNames.add(postList.get(i).getName());
+                                mRetweeteds.add(postList.get(i).getRetweeted());
+                                mCreatedAt.add(postList.get(i).getCreatedAt());
+                                mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
+                                mRetweetCounts.add(postList.get(i).getRetweetCount());
+                                mFavoriteCounts.add(postList.get(i).getFavoriteCount());
+                                mFavoriteds.add(postList.get(i).getFavorited());
+//
+//
+                            }
+                        } else if (sentimentFilter.equals(seriousConcern)) {
+
+                            if (seriousConcern.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+
+//                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
+
+
+//                        if (postList.get(i).getSentimentAnalysisLogreg().equals("Appreciated")) {
+
+
+//                                _ids[i] = postList.get(i).getId();
+//                                texts[i] = postList.get(i).getText();
+//                                sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
+
+
+                                m_Ids.add(postList.get(i).getId());
+                                mTweets.add(postList.get(i).getText());
+                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+//
+                                mNames.add(postList.get(i).getName());
+                                mRetweeteds.add(postList.get(i).getRetweeted());
+                                mCreatedAt.add(postList.get(i).getCreatedAt());
+                                mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
+                                mRetweetCounts.add(postList.get(i).getRetweetCount());
+                                mFavoriteCounts.add(postList.get(i).getFavoriteCount());
+                                mFavoriteds.add(postList.get(i).getFavorited());
+//
+//
+                            }
+                        } else if (sentimentFilter.equals(disappointed)) {
+
+                            if (disappointed.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+
+//                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
+
+
+//                        if (postList.get(i).getSentimentAnalysisLogreg().equals("Appreciated")) {
+
+
+//                                _ids[i] = postList.get(i).getId();
+//                                texts[i] = postList.get(i).getText();
+//                                sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
+
+
+                                m_Ids.add(postList.get(i).getId());
+                                mTweets.add(postList.get(i).getText());
+                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+//
+                                mNames.add(postList.get(i).getName());
+                                mRetweeteds.add(postList.get(i).getRetweeted());
+                                mCreatedAt.add(postList.get(i).getCreatedAt());
+                                mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
+                                mRetweetCounts.add(postList.get(i).getRetweetCount());
+                                mFavoriteCounts.add(postList.get(i).getFavoriteCount());
+                                mFavoriteds.add(postList.get(i).getFavorited());
+//
+//
+                            }
+                        } else {
+
+//                            _ids[i] = postList.get(i).getId();
+//                            texts[i] = postList.get(i).getText();
+//                            sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
+
+                            m_Ids.add(postList.get(i).getId());
+                            mTweets.add(postList.get(i).getText());
+                            mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+
+                            mNames.add(postList.get(i).getName());
+                            mRetweeteds.add(postList.get(i).getRetweeted());
+                            mCreatedAt.add(postList.get(i).getCreatedAt());
+                            mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
+                            mRetweetCounts.add(postList.get(i).getRetweetCount());
+                            mFavoriteCounts.add(postList.get(i).getFavoriteCount());
+                            mFavoriteds.add(postList.get(i).getFavorited());
+
+
+//                            Log.d(TAG, "onResponse: Sentiment = " + postList.get(i).getSentimentAnalysisLogreg());
+                            //names[i] = postList.get(i).getUser();
+
+                            //mRTweets.get(i).concat(texts[i]);
+
+
+                            //List<Integer> newList = new ArrayList<Home>(texts);
+
+//                        }
+
+                        }
+
+
+
+
+
+
+
+
 
 //                        names[i] = postList.get(i).getName();
 //                        retweeteds[i] = postList.get(i).getRetweeted();
@@ -506,7 +767,7 @@ public class HashtagFragment extends Fragment {
 //                        favoriteds[i] = postList.get(i).getFavorited();
 
 
-                        Log.d(TAG, "onResponse: Sentiment = " + sentiments[i]);
+                        Log.d(TAG, "onResponse: Sentiment = " + postList.get(i).getText());
                         //names[i] = postList.get(i).getUser();
 
                         //mRTweets.get(i).concat(texts[i]);
@@ -515,10 +776,10 @@ public class HashtagFragment extends Fragment {
 
                         //List<Integer> newList = new ArrayList<Home>(texts);
                     }
-
-                    m_Ids = Arrays.asList(_ids);
-                    mTweets = Arrays.asList(texts);
-                    mSentiments = Arrays.asList(sentiments);
+//
+//                    m_Ids = Arrays.asList(_ids);
+//                    mTweets = Arrays.asList(texts);
+//                    mSentiments = Arrays.asList(sentiments);
 //                    mNames = Arrays.asList(names);
 //                    mCreatedAt = Arrays.asList(createdAt);
 //                    mFavoriteCounts = Arrays.asList(favoriteCounts);
@@ -544,6 +805,9 @@ public class HashtagFragment extends Fragment {
                     //HomeAdapter adapter = new HomeAdapter(getContext(), mRTweets);
 
                     pbHashtag.setVisibility(View.GONE);
+
+                    recyclerView.setVisibility(View.VISIBLE);
+
 
                     //recyclerView.setLayoutManager(manager);
                     HashtagAdapter adapter = new HashtagAdapter(getContext(), m_Ids, mNames,
@@ -621,6 +885,220 @@ public class HashtagFragment extends Fragment {
 //    public static void setPostList(List<Hashtag> postList) {
 //        HashtagFragment.postList = postList;
 //    }
+
+
+
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        getActivity().getMenuInflater().inflate(R.menu.menu, menu);
+
+
+        switch (sentimentFilter) {
+
+            case "Appreciated":
+                menu.getItem(0).setChecked(true);
+                break;
+
+            case "Abusive":
+                menu.getItem(1).setChecked(true);
+                break;
+
+            case "Suggestion":
+                menu.getItem(2).setChecked(true);
+                break;
+
+            case "Serious Concern":
+                menu.getItem(3).setChecked(true);
+                break;
+
+            case "Disappointed":
+                menu.getItem(4).setChecked(true);
+                break;
+
+
+            default:
+                menu.getItem(5).setChecked(true);
+                break;
+
+        }
+
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getActivity().getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+//        return true;
+//    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+
+        if (id == R.id.action_appreciative) {
+
+            Log.d(TAG, "onOptionsItemSelected: Appreciative Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "Appreciated";
+
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+
+            apiResponse();
+
+
+            // Reload current fragment
+//            Fragment frg = null;
+//            frg = getActivity().getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
+//            final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//            ft.detach(frg);
+//            ft.attach(frg);
+//
+
+
+//            Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+
+
+//            Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.post_container);
+//
+//            if (currentFragment instanceof MentionsFragment) {
+//
+//                FragmentTransaction fragTransaction =   (getActivity()).getSupportFragmentManager().beginTransaction();
+//                fragTransaction.detach(currentFragment);
+//                fragTransaction.attach(currentFragment);
+//                fragTransaction.commit();
+//
+//            }
+
+
+
+//            FragmentTransaction ft = getFragmentManager().beginTransaction();
+//            ft.detach(this).attach(this).commit();
+
+
+        } else if (id == R.id.action_abusive) {
+
+            Log.d(TAG, "onOptionsItemSelected: Abusive Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "Abusive";
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+            apiResponse();
+
+
+
+        } else if (id == R.id.action_suggestive) {
+
+            Log.d(TAG, "onOptionsItemSelected: Suggestive Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "Suggestion";
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+            apiResponse();
+
+
+
+        } else if (id == R.id.action_serious_concern) {
+
+            Log.d(TAG, "onOptionsItemSelected: Serious Concern Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "Serious Concern";
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+            apiResponse();
+
+
+
+        } else if (id == R.id.action_disappointed) {
+
+            Log.d(TAG, "onOptionsItemSelected: disappointed Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "Disappointed";
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+            apiResponse();
+
+
+
+        } else {
+
+            Log.d(TAG, "onOptionsItemSelected: DisplayAll Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "DisplayAll";
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+            apiResponse();
+
+
+
+        }
+
+
+
+
+
+
+
+        return super.onOptionsItemSelected(item);
+
+    }
+
+
+
+
+
+
 
 
 }

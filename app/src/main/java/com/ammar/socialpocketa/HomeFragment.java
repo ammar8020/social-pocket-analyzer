@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.ammar.socialpocketa.models.Home;
 import com.ammar.socialpocketa.sync.MentionService;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -110,9 +112,20 @@ public class HomeFragment extends Fragment {
 
         mMentionService = new MentionService(getCtx());
         mServiceIntent = new Intent(getCtx(), mMentionService.getClass());
+
+
         if (!isMyServiceRunning(mMentionService.getClass())) {
             getActivity().startService(mServiceIntent);
         }
+
+
+//        if (isInternetAvailable()) {
+//
+//            if (!isMyServiceRunning(mMentionService.getClass())) {
+//                getActivity().startService(mServiceIntent);
+//            }
+//
+//        }
 
 
         recyclerView = rootView.findViewById(R.id.rvPosts);
@@ -143,6 +156,23 @@ public class HomeFragment extends Fragment {
 
 
         return rootView;
+    }
+
+
+
+
+    public boolean isInternetAvailable() {
+        try {
+            final InetAddress address = InetAddress.getByName("www.google.com");
+            return !address.equals("");
+
+        } catch (UnknownHostException e) {
+            // Log error
+
+            Log.e(TAG, "isInternetAvailable: Error Occured while checking for Internet Connection.");
+
+        }
+        return false;
     }
 
 

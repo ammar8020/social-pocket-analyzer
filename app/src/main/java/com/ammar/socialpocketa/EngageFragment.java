@@ -4,11 +4,15 @@ package com.ammar.socialpocketa;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -35,38 +39,56 @@ public class EngageFragment extends Fragment {
     ProgressBar pbEngage;
 
 
-    private List<String> m_Ids = new ArrayList<>();
-
-    //private ArrayList<String> mNames = new ArrayList<>();
-    private List<String> mNames = new ArrayList<>();
-
-//    private ArrayList<String> mImages = new ArrayList<>();
+//    private List<String> m_Ids = new ArrayList<>();
 //
-//    private ArrayList<String> mTimes = new ArrayList<>();
-//    private ArrayList<String> mTweets = new ArrayList<>();
+//    //private ArrayList<String> mNames = new ArrayList<>();
+//    private List<String> mNames = new ArrayList<>();
+//
+////    private ArrayList<String> mImages = new ArrayList<>();
+////
+////    private ArrayList<String> mTimes = new ArrayList<>();
+////    private ArrayList<String> mTweets = new ArrayList<>();
+//
+//    //private ArrayList<String> mRTweets = new ArrayList<>();
+//    private List<String> mTweets = new ArrayList<>();
+//
+////    private List<String> mSentiments = new ArrayList<>();
+//
+//    private List<Boolean> mRetweeteds = new ArrayList<>();
+//    private List<String> mCreatedAt = new ArrayList<>();
+//    private List<String> mProfileImageUrls = new ArrayList<>();
+//    private List<String> mRetweetCounts = new ArrayList<>();
+//    private List<String> mFavoriteCounts = new ArrayList<>();
+//    private List<Boolean> mFavoriteds = new ArrayList<>();
+//
+//    private List<String> mIdStr = new ArrayList<>();
+//    private List<String> mSentimentAnalysisLogReg = new ArrayList<>();
+//    private List<String> mSentimentAnalysisNaiveBayes = new ArrayList<>();
+//    private List<String> mSentimentAnalysisRnn = new ArrayList<>();
+//    private List<String> mScreenName = new ArrayList<>();
 
-    //private ArrayList<String> mRTweets = new ArrayList<>();
-    private List<String> mTweets = new ArrayList<>();
 
-//    private List<String> mSentiments = new ArrayList<>();
 
-    private List<Boolean> mRetweeteds = new ArrayList<>();
-    private List<String> mCreatedAt = new ArrayList<>();
-    private List<String> mProfileImageUrls = new ArrayList<>();
-    private List<String> mRetweetCounts = new ArrayList<>();
-    private List<String> mFavoriteCounts = new ArrayList<>();
-    private List<Boolean> mFavoriteds = new ArrayList<>();
+    public static String sentimentFilter = "";
 
-    private List<String> mIdStr = new ArrayList<>();
-    private List<String> mSentimentAnalysisLogReg = new ArrayList<>();
-    private List<String> mSentimentAnalysisNaiveBayes = new ArrayList<>();
-    private List<String> mSentimentAnalysisRnn = new ArrayList<>();
-    private List<String> mScreenName = new ArrayList<>();
 
 
     public EngageFragment() {
         // Required empty public constructor
     }
+
+
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+
+    }
+
+
 
 
     @Override
@@ -93,6 +115,48 @@ public class EngageFragment extends Fragment {
     private void populateListView() {
         Log.d(TAG, "populateListView: Displaying data in the ListView");
 
+
+
+        pbEngage.setVisibility(View.VISIBLE);
+
+        rvEngage.setVisibility(View.INVISIBLE);
+
+
+
+        List<String> m_Ids = new ArrayList<>();
+
+        //private ArrayList<String> mNames = new ArrayList<>();
+        List<String> mNames = new ArrayList<>();
+
+//    private ArrayList<String> mImages = new ArrayList<>();
+//
+//    private ArrayList<String> mTimes = new ArrayList<>();
+//    private ArrayList<String> mTweets = new ArrayList<>();
+
+        //private ArrayList<String> mRTweets = new ArrayList<>();
+        List<String> mTweets = new ArrayList<>();
+
+//    private List<String> mSentiments = new ArrayList<>();
+
+        List<Boolean> mRetweeteds = new ArrayList<>();
+        List<String> mCreatedAt = new ArrayList<>();
+        List<String> mProfileImageUrls = new ArrayList<>();
+        List<String> mRetweetCounts = new ArrayList<>();
+        List<String> mFavoriteCounts = new ArrayList<>();
+        List<Boolean> mFavoriteds = new ArrayList<>();
+
+        List<String> mIdStr = new ArrayList<>();
+        List<String> mSentimentAnalysisLogReg = new ArrayList<>();
+        List<String> mSentimentAnalysisNaiveBayes = new ArrayList<>();
+        List<String> mSentimentAnalysisRnn = new ArrayList<>();
+        List<String> mScreenName = new ArrayList<>();
+
+
+
+
+
+
+
         // get the data and append to a list
         Cursor data = mDatabaseHelper.getData();
         List<String> listData = new ArrayList<>();
@@ -103,7 +167,15 @@ public class EngageFragment extends Fragment {
 
         Bitmap bitmapImage;
 
-        int i = 0;
+//        int i = 0;
+
+
+
+        String appreciative = "Appreciated";
+        String abusive = "Abusive";
+        String suggestive = "Suggestion";
+        String seriousConcern = "Serious Concern";
+        String disappointed = "Disappointed";
 
 
 
@@ -111,43 +183,263 @@ public class EngageFragment extends Fragment {
         while(data.moveToNext()){
             // get the value from the database in column 1
             // then add it to the ArrayList
-            listData.add(data.getString(1));
+//            listData.add(data.getString(1));
+//
+//
+//            byte[] image = data.getBlob(2);
+//
+//            bitmapImage = DbImageUtil.getImage(image);
+//
+//            imageData.add(bitmapImage);
+//
+//            Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
+//
+//
+//
+//            m_Ids.add(data.getString(3));
+//            mIdStr.add(data.getString(4));
+//            mNames.add(data.getString(5));
+//            mScreenName.add(data.getString(6));
+//            mCreatedAt.add(data.getString(7));
+//            mRetweetCounts.add(data.getString(8));
+//            mFavoriteCounts.add(data.getString(9));
+//            mSentimentAnalysisLogReg.add(data.getString(10));
+//            mSentimentAnalysisNaiveBayes.add(data.getString(11));
+//            mSentimentAnalysisRnn.add(data.getString(12));
+//
+//            mRetweeteds.add(true);
+//            mFavoriteds.add(true);
 
 
-            byte[] image = data.getBlob(2);
+            if(sentimentFilter.equals(appreciative)) {
 
-            bitmapImage = DbImageUtil.getImage(image);
-
-            imageData.add(bitmapImage);
-
-            Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
+                if(appreciative.equals( data.getString(10) ) ) {
 
 
-
-            m_Ids.add(data.getString(3));
-            mIdStr.add(data.getString(4));
-            mNames.add(data.getString(5));
-            mScreenName.add(data.getString(6));
-            mCreatedAt.add(data.getString(7));
-            mRetweetCounts.add(data.getString(8));
-            mFavoriteCounts.add(data.getString(9));
-            mSentimentAnalysisLogReg.add(data.getString(10));
-            mSentimentAnalysisNaiveBayes.add(data.getString(11));
-            mSentimentAnalysisRnn.add(data.getString(12));
-
-            mRetweeteds.add(true);
-            mFavoriteds.add(true);
+//                     get the value from the database in column 1
+//                     then add it to the ArrayList
+                    listData.add(data.getString(1));
 
 
+                    byte[] image = data.getBlob(2);
 
-            i++;
+                    bitmapImage = DbImageUtil.getImage(image);
+
+                    imageData.add(bitmapImage);
+
+//                    Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
+
+
+                    m_Ids.add(data.getString(3));
+                    mIdStr.add(data.getString(4));
+                    mNames.add(data.getString(5));
+                    mScreenName.add(data.getString(6));
+                    mCreatedAt.add(data.getString(7));
+                    mRetweetCounts.add(data.getString(8));
+                    mFavoriteCounts.add(data.getString(9));
+                    mSentimentAnalysisLogReg.add(data.getString(10));
+                    mSentimentAnalysisNaiveBayes.add(data.getString(11));
+                    mSentimentAnalysisRnn.add(data.getString(12));
+
+                    mRetweeteds.add(true);
+                    mFavoriteds.add(true);
+
+                }
+
+                } else if(sentimentFilter.equals(abusive)) {
+
+                    if(abusive.equals( data.getString(10) ) ) {
+
+
+//                     get the value from the database in column 1
+//                     then add it to the ArrayList
+                        listData.add(data.getString(1));
+
+
+                        byte[] image = data.getBlob(2);
+
+                        bitmapImage = DbImageUtil.getImage(image);
+
+                        imageData.add(bitmapImage);
+
+//                        Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
+
+
+                        m_Ids.add(data.getString(3));
+                        mIdStr.add(data.getString(4));
+                        mNames.add(data.getString(5));
+                        mScreenName.add(data.getString(6));
+                        mCreatedAt.add(data.getString(7));
+                        mRetweetCounts.add(data.getString(8));
+                        mFavoriteCounts.add(data.getString(9));
+                        mSentimentAnalysisLogReg.add(data.getString(10));
+                        mSentimentAnalysisNaiveBayes.add(data.getString(11));
+                        mSentimentAnalysisRnn.add(data.getString(12));
+
+                        mRetweeteds.add(true);
+                        mFavoriteds.add(true);
+
+                    }
+
+                    } else if(sentimentFilter.equals(suggestive)) {
+
+                        if(suggestive.equals( data.getString(10) ) ) {
+
+
+//                     get the value from the database in column 1
+//                     then add it to the ArrayList
+                            listData.add(data.getString(1));
+
+
+                            byte[] image = data.getBlob(2);
+
+                            bitmapImage = DbImageUtil.getImage(image);
+
+                            imageData.add(bitmapImage);
+
+//                            Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
+
+
+                            m_Ids.add(data.getString(3));
+                            mIdStr.add(data.getString(4));
+                            mNames.add(data.getString(5));
+                            mScreenName.add(data.getString(6));
+                            mCreatedAt.add(data.getString(7));
+                            mRetweetCounts.add(data.getString(8));
+                            mFavoriteCounts.add(data.getString(9));
+                            mSentimentAnalysisLogReg.add(data.getString(10));
+                            mSentimentAnalysisNaiveBayes.add(data.getString(11));
+                            mSentimentAnalysisRnn.add(data.getString(12));
+
+                            mRetweeteds.add(true);
+                            mFavoriteds.add(true);
+                        }
+
+
+                        } else if(sentimentFilter.equals(seriousConcern)) {
+
+                            if(seriousConcern.equals( data.getString(10) ) ) {
+
+
+//                     get the value from the database in column 1
+//                     then add it to the ArrayList
+                                listData.add(data.getString(1));
+
+
+                                byte[] image = data.getBlob(2);
+
+                                bitmapImage = DbImageUtil.getImage(image);
+
+                                imageData.add(bitmapImage);
+
+//                                Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
+
+
+                                m_Ids.add(data.getString(3));
+                                mIdStr.add(data.getString(4));
+                                mNames.add(data.getString(5));
+                                mScreenName.add(data.getString(6));
+                                mCreatedAt.add(data.getString(7));
+                                mRetweetCounts.add(data.getString(8));
+                                mFavoriteCounts.add(data.getString(9));
+                                mSentimentAnalysisLogReg.add(data.getString(10));
+                                mSentimentAnalysisNaiveBayes.add(data.getString(11));
+                                mSentimentAnalysisRnn.add(data.getString(12));
+
+                                mRetweeteds.add(true);
+                                mFavoriteds.add(true);
+
+                            }
+
+
+                            } else if(sentimentFilter.equals(disappointed)) {
+
+                                if(disappointed.equals( data.getString(10) ) ) {
+
+
+//                     get the value from the database in column 1
+//                     then add it to the ArrayList
+                                    listData.add(data.getString(1));
+
+
+                                    byte[] image = data.getBlob(2);
+
+                                    bitmapImage = DbImageUtil.getImage(image);
+
+                                    imageData.add(bitmapImage);
+
+//                                    Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
+
+
+                                    m_Ids.add(data.getString(3));
+                                    mIdStr.add(data.getString(4));
+                                    mNames.add(data.getString(5));
+                                    mScreenName.add(data.getString(6));
+                                    mCreatedAt.add(data.getString(7));
+                                    mRetweetCounts.add(data.getString(8));
+                                    mFavoriteCounts.add(data.getString(9));
+                                    mSentimentAnalysisLogReg.add(data.getString(10));
+                                    mSentimentAnalysisNaiveBayes.add(data.getString(11));
+                                    mSentimentAnalysisRnn.add(data.getString(12));
+
+                                    mRetweeteds.add(true);
+                                    mFavoriteds.add(true);
+
+                                }
+
+                            } else {
+
+
+
+//                                    get the value from the database in column 1
+//                     then add it to the ArrayList
+                                    listData.add(data.getString(1));
+
+
+                                    byte[] image = data.getBlob(2);
+
+                                    bitmapImage = DbImageUtil.getImage(image);
+
+                                    imageData.add(bitmapImage);
+
+//                                    Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
+
+
+
+                                    m_Ids.add(data.getString(3));
+                                    mIdStr.add(data.getString(4));
+                                    mNames.add(data.getString(5));
+                                    mScreenName.add(data.getString(6));
+                                    mCreatedAt.add(data.getString(7));
+                                    mRetweetCounts.add(data.getString(8));
+                                    mFavoriteCounts.add(data.getString(9));
+                                    mSentimentAnalysisLogReg.add(data.getString(10));
+                                    mSentimentAnalysisNaiveBayes.add(data.getString(11));
+                                    mSentimentAnalysisRnn.add(data.getString(12));
+
+                                    mRetweeteds.add(true);
+                                    mFavoriteds.add(true);
+
+
+
+                                }
+
+
+
+
+
+
+
+
+
+//            i++;
 
 
 
 
         }
 
-        EngageAdapter engageAdapter = new EngageAdapter(listData);
+//        EngageAdapter engageAdapter = new EngageAdapter(listData);
 
 
 //        for (int j = 0; j < listData.size(); j++) {
@@ -163,6 +455,7 @@ public class EngageFragment extends Fragment {
 //        }
 
         pbEngage.setVisibility(View.GONE);
+        rvEngage.setVisibility(View.VISIBLE);
 
 //        HomeAdapter adapter = new HomeAdapter(getContext(), m_Ids, mNames,
 //                listData, mSentiments, mRetweeteds, mCreatedAt, mProfileImageUrls,
@@ -220,6 +513,222 @@ public class EngageFragment extends Fragment {
 //        });
 
     }
+
+
+
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+
+        getActivity().getMenuInflater().inflate(R.menu.menu, menu);
+
+
+
+        switch (sentimentFilter) {
+
+            case "Appreciated":
+                menu.getItem(0).setChecked(true);
+                break;
+
+            case "Abusive":
+                menu.getItem(1).setChecked(true);
+                break;
+
+            case "Suggestion":
+                menu.getItem(2).setChecked(true);
+                break;
+
+            case "Serious Concern":
+                menu.getItem(3).setChecked(true);
+                break;
+
+            case "Disappointed":
+                menu.getItem(4).setChecked(true);
+                break;
+
+
+            default:
+                menu.getItem(5).setChecked(true);
+                break;
+
+        }
+
+
+
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getActivity().getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+//        return true;
+//    }
+
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+
+        if (id == R.id.action_appreciative) {
+
+            Log.d(TAG, "onOptionsItemSelected: Appreciative Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "Appreciated";
+
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+
+            populateListView();
+
+
+            // Reload current fragment
+//            Fragment frg = null;
+//            frg = getActivity().getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
+//            final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//            ft.detach(frg);
+//            ft.attach(frg);
+//
+
+
+//            Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+
+
+//            Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.post_container);
+//
+//            if (currentFragment instanceof MentionsFragment) {
+//
+//                FragmentTransaction fragTransaction =   (getActivity()).getSupportFragmentManager().beginTransaction();
+//                fragTransaction.detach(currentFragment);
+//                fragTransaction.attach(currentFragment);
+//                fragTransaction.commit();
+//
+//            }
+
+
+
+//            FragmentTransaction ft = getFragmentManager().beginTransaction();
+//            ft.detach(this).attach(this).commit();
+
+
+        } else if (id == R.id.action_abusive) {
+
+            Log.d(TAG, "onOptionsItemSelected: Abusive Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "Abusive";
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+            populateListView();
+
+
+
+        } else if (id == R.id.action_suggestive) {
+
+            Log.d(TAG, "onOptionsItemSelected: Suggestive Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "Suggestion";
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+            populateListView();
+
+
+
+        } else if (id == R.id.action_serious_concern) {
+
+            Log.d(TAG, "onOptionsItemSelected: Serious Concern Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "Serious Concern";
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+            populateListView();
+
+
+
+        } else if (id == R.id.action_disappointed) {
+
+            Log.d(TAG, "onOptionsItemSelected: disappointed Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "Disappointed";
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+            populateListView();
+
+
+
+        } else {
+
+            Log.d(TAG, "onOptionsItemSelected: DisplayAll Filter clicked");
+
+//            CheckBox box = v.findViewById(R.id.addressCheckBox); //get your checkbox
+//            box.setChecked(!box.isChecked()); //toggle checkbox-state
+
+            item.setChecked(!item.isChecked()); //toggle checkbox-state
+
+            sentimentFilter = "DisplayAll";
+
+//            recyclerView.setVisibility(View.INVISIBLE);
+
+            populateListView();
+
+
+
+        }
+
+
+
+
+
+
+
+        return super.onOptionsItemSelected(item);
+
+    }
+
+
 
 
 
