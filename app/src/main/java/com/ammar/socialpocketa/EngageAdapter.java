@@ -30,7 +30,7 @@ public class EngageAdapter extends RecyclerView.Adapter<EngageAdapter.ViewHolder
 
     //private ArrayList<String> mTweets = new ArrayList<>();
     private List<String> mTweets;
-    private List<String> mSentiments;
+    private List<String> mSentimentAnalysisLogReg;
 
     private List<Boolean> mRetweeted;
     private List<String> mCreatedAt;
@@ -38,7 +38,6 @@ public class EngageAdapter extends RecyclerView.Adapter<EngageAdapter.ViewHolder
     private List<String> mRetweetCount;
     private List<String> mFavoriteCount;
     private List<Boolean> mFavorited;
-
 
     private Context mContext;
 
@@ -71,16 +70,15 @@ public class EngageAdapter extends RecyclerView.Adapter<EngageAdapter.ViewHolder
 
 
 
-
     public EngageAdapter(Context context, List<String> ids, List<String> names, List<String> tweets,
-                           List<String> sentiments, List<Boolean> retweeted, List<String> createdAt,
+                           List<String> sentimentLogReg, List<Boolean> retweeted, List<String> createdAt,
                            List<Bitmap> profileImageBitmap, List<String> retweetCount,
                            List<String> favoriteCount, List<Boolean> favorited ) {
         mNames = names;
         mContext = context;
         mTweets = tweets;
         m_Ids = ids;
-        mSentiments = sentiments;
+        mSentimentAnalysisLogReg = sentimentLogReg;
         mRetweeted = retweeted ;
         mCreatedAt = createdAt;
         mProfileImageBitmap = profileImageBitmap;
@@ -137,9 +135,9 @@ public class EngageAdapter extends RecyclerView.Adapter<EngageAdapter.ViewHolder
 //        holder.tvRetweetCount.setText(String.format("%s", mRetweetCount.get(position)));
         holder.tvRetweetCount.setText(mRetweetCount.get(position));
 
-        Log.d(TAG, "onBindViewHolder: Sentiment is: " + mSentiments.get(position));
+        Log.d(TAG, "onBindViewHolder: Sentiment is: " + mSentimentAnalysisLogReg.get(position));
 
-        switch (mSentiments.get(position)) {
+        switch (mSentimentAnalysisLogReg.get(position)) {
 
             case "Appreciated":
                 holder.sentiment.setImageResource(R.drawable.appreciative);

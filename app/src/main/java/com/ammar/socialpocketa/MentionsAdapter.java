@@ -95,29 +95,44 @@ public class MentionsAdapter extends RecyclerView.Adapter<MentionsAdapter.ViewHo
 
         Log.d(TAG, "onBindViewHolder: Sentiment is: " + mSentiments.get(position));
 
-        switch (mSentiments.get(position)) {
 
-            case "Appreciated":
-                holder.sentiment.setImageResource(R.drawable.appreciative);
-                break;
-            case "Suggestion":
-                holder.sentiment.setImageResource(R.drawable.suggestive);
-                break;
-            case "Abusive":
-                holder.sentiment.setImageResource(R.drawable.abusive);
-                break;
-            case "Disappointed":
-                holder.sentiment.setImageResource(R.drawable.disappointed);
-                break;
-            case "Serious Concern":
-                holder.sentiment.setImageResource(R.drawable.serious_concern);
-                break;
+//        if (MentionsFragment.getSentimentFilter().equals("Appreciated")) {
+//
+//
+//            switch (mSentiments.get(position)) {
+//
+//                case "Appreciated":
+//                    holder.sentiment.setImageResource(R.drawable.appreciative);
+//                    break;
+//            }
+//
+//        }
+//        else{
 
-            default:
-                holder.sentiment.setImageResource(R.drawable.neutral);
-                break;
+                switch (mSentiments.get(position)) {
 
-        }
+                    case "Appreciated":
+                        holder.sentiment.setImageResource(R.drawable.appreciative);
+                        break;
+                    case "Suggestion":
+                        holder.sentiment.setImageResource(R.drawable.suggestive);
+                        break;
+                    case "Abusive":
+                        holder.sentiment.setImageResource(R.drawable.abusive);
+                        break;
+                    case "Disappointed":
+                        holder.sentiment.setImageResource(R.drawable.disappointed);
+                        break;
+                    case "Serious Concern":
+                        holder.sentiment.setImageResource(R.drawable.serious_concern);
+                        break;
+
+                    default:
+                        holder.sentiment.setImageResource(R.drawable.neutral);
+                        break;
+
+                }
+//            }
 
 //        if(mSentiments.get(position).equals("Appreciated")) {
 //            holder.sentiment.setImageResource(R.drawable.appreciative);

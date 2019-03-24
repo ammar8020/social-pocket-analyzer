@@ -11,16 +11,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ammar.socialpocketa.models.Home;
-import com.ammar.socialpocketa.sync.SensorService;
+import com.ammar.socialpocketa.sync.MentionService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +35,7 @@ public class HomeFragment extends Fragment {
 
 
     Intent mServiceIntent;
-    private SensorService mSensorService;
+    private MentionService mMentionService;
 
     Context ctx;
 
@@ -110,9 +108,9 @@ public class HomeFragment extends Fragment {
 //        ctx = getContext();
 
 
-        mSensorService = new SensorService(getCtx());
-        mServiceIntent = new Intent(getCtx(), mSensorService.getClass());
-        if (!isMyServiceRunning(mSensorService.getClass())) {
+        mMentionService = new MentionService(getCtx());
+        mServiceIntent = new Intent(getCtx(), mMentionService.getClass());
+        if (!isMyServiceRunning(mMentionService.getClass())) {
             getActivity().startService(mServiceIntent);
         }
 

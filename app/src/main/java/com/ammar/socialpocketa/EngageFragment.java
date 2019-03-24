@@ -48,7 +48,7 @@ public class EngageFragment extends Fragment {
     //private ArrayList<String> mRTweets = new ArrayList<>();
     private List<String> mTweets = new ArrayList<>();
 
-    private List<String> mSentiments = new ArrayList<>();
+//    private List<String> mSentiments = new ArrayList<>();
 
     private List<Boolean> mRetweeteds = new ArrayList<>();
     private List<String> mCreatedAt = new ArrayList<>();
@@ -57,6 +57,11 @@ public class EngageFragment extends Fragment {
     private List<String> mFavoriteCounts = new ArrayList<>();
     private List<Boolean> mFavoriteds = new ArrayList<>();
 
+    private List<String> mIdStr = new ArrayList<>();
+    private List<String> mSentimentAnalysisLogReg = new ArrayList<>();
+    private List<String> mSentimentAnalysisNaiveBayes = new ArrayList<>();
+    private List<String> mSentimentAnalysisRnn = new ArrayList<>();
+    private List<String> mScreenName = new ArrayList<>();
 
 
     public EngageFragment() {
@@ -117,6 +122,24 @@ public class EngageFragment extends Fragment {
 
             Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
 
+
+
+            m_Ids.add(data.getString(3));
+            mIdStr.add(data.getString(4));
+            mNames.add(data.getString(5));
+            mScreenName.add(data.getString(6));
+            mCreatedAt.add(data.getString(7));
+            mRetweetCounts.add(data.getString(8));
+            mFavoriteCounts.add(data.getString(9));
+            mSentimentAnalysisLogReg.add(data.getString(10));
+            mSentimentAnalysisNaiveBayes.add(data.getString(11));
+            mSentimentAnalysisRnn.add(data.getString(12));
+
+            mRetweeteds.add(true);
+            mFavoriteds.add(true);
+
+
+
             i++;
 
 
@@ -127,17 +150,17 @@ public class EngageFragment extends Fragment {
         EngageAdapter engageAdapter = new EngageAdapter(listData);
 
 
-        for (int j = 0; j < listData.size(); j++) {
-            m_Ids.add("id1");
-            mNames.add("id1");
-            mSentiments.add("id1");
-            mRetweeteds.add(true);
-            mCreatedAt.add("id1");
-//            mProfileImageUrls.add("id1");
-            mRetweetCounts.add("id1");
-            mFavoriteCounts.add("id1");
-            mFavoriteds.add(true);
-        }
+//        for (int j = 0; j < listData.size(); j++) {
+//            m_Ids.add("id1");
+//            mNames.add("id1");
+//            mSentiments.add("id1");
+//            mRetweeteds.add(true);
+//            mCreatedAt.add("id1");
+////            mProfileImageUrls.add("id1");
+//            mRetweetCounts.add("id1");
+//            mFavoriteCounts.add("id1");
+//            mFavoriteds.add(true);
+//        }
 
         pbEngage.setVisibility(View.GONE);
 
@@ -155,7 +178,7 @@ public class EngageFragment extends Fragment {
 
 
                 EngageAdapter adapter = new EngageAdapter(getContext(), m_Ids, mNames,
-                listData, mSentiments, mRetweeteds, mCreatedAt, imageData,
+                listData, mSentimentAnalysisLogReg, mRetweeteds, mCreatedAt, imageData,
                 mRetweetCounts, mFavoriteCounts, mFavoriteds);
 
 

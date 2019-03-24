@@ -52,14 +52,14 @@
 
         <!-- defining the service class here -->
         <service
-            android:name=".sync.SensorService"
+            android:name=".sync.MentionService"
             android:enabled="true">
 
         </service>
 
 
         <receiver
-            android:name=".sync.SensorRestarterBroadcastReceiver"
+            android:name=".sync.MentionRestarterBroadcastReceiver"
             android:enabled="true"
             android:exported="true"
             android:label="RestartServiceWhenStopped">

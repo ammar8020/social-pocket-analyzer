@@ -25,6 +25,9 @@
     <string name="action_appreciative">Appreciative</string>
     <string name="action_abusive">Abusive</string>
     <string name="action_suggestive">Suggestive</string>
+    <string name="action_serious_concern">Serious Concern</string>
+    <string name="action_disappointed">Disappointed</string>
+    <string name="action_display_all">Display All</string>
 
 
     <!-- Bottom Navigation -->

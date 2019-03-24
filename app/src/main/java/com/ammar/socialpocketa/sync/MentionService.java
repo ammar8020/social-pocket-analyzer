@@ -33,9 +33,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SensorService extends Service {
+public class MentionService extends Service {
 
-    private static final String TAG = "SensorService";
+    private static final String TAG = "MentionService";
 
 
     //private HomeAdapter adapter;
@@ -85,7 +85,7 @@ public class SensorService extends Service {
     DatabaseHelper mDatabaseHelper;
 
 
-    public SensorService(Context applicationContext) {
+    public MentionService(Context applicationContext) {
         super();
         Log.i("HERE", "here I am!");
 
@@ -95,7 +95,7 @@ public class SensorService extends Service {
 
     }
 
-    public SensorService() {
+    public MentionService() {
     }
 
     @Override
@@ -122,7 +122,7 @@ public class SensorService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.i("EXIT", "ondestroy!");
-        Intent broadcastIntent = new Intent(this, SensorRestarterBroadcastReceiver.class);
+        Intent broadcastIntent = new Intent(this, MentionRestarterBroadcastReceiver.class);
 
 //        String token = SharedPrefManager.getKeyToken();
         broadcastIntent.putExtra("authToken", token);
@@ -395,8 +395,16 @@ public class SensorService extends Service {
                             Log.d(TAG, "onResourceReady: byteImage: " + byteImage);
 
 
+                            Mention getPostList = postList.get(i);
 
-                            AddData(postList.get(i).getText(), byteImage);
+
+                            AddData(postList.get(i).getText(), byteImage, getPostList.getId(),
+                                    getPostList.getIdStr(), getPostList.getName(),
+                                    getPostList.getScreenName(), getPostList.getCreatedAt(),
+                                    getPostList.getRetweetCount(),
+                                    getPostList.getFavoriteCount(), getPostList.getSentimentAnalysisLogreg(),
+                                    getPostList.getSentimentAnalysisNaiveBayes(), getPostList.getSentimentAnalysisRnn()
+                                    );
 
 
                             int notificationId;
@@ -429,7 +437,7 @@ public class SensorService extends Service {
 
                             NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                                     .setLargeIcon(tempBitmapCircular)
-                                    .setSmallIcon(R.drawable.ic_mentions_small_notifications_512)
+                                    .setSmallIcon(R.drawable.icon_mentions)
                                     .setContentTitle(postList.get(i).getName() + textTitle)
                                     .setContentText(postList.get(i).getText())
                                     .setPriority(NotificationCompat.PRIORITY_MAX)
@@ -630,8 +638,16 @@ public class SensorService extends Service {
 
 
 
-    public void AddData(String newEntry, byte[] byteImage) {
-        boolean insertData = mDatabaseHelper.addData(newEntry, byteImage);
+    public void AddData(String newEntry, byte[] byteImage, String _ID, String IDStr, String Name,
+                        String ScreenName, String CreatedAt,
+                        String RetweetCount, String FavoriteCount, String SentimentAnalysisLogreg,
+                        String SentimentAnalysisNaiveBayes, String SentimentAnalysisRnn) {
+
+
+        boolean insertData = mDatabaseHelper.addData(newEntry, byteImage, _ID, IDStr, Name,
+                 ScreenName, CreatedAt,
+                RetweetCount, FavoriteCount, SentimentAnalysisLogreg,
+                SentimentAnalysisNaiveBayes, SentimentAnalysisRnn);
 
         Log.d(TAG, "AddData: Adding byte Image to DB: " + byteImage);
 
@@ -652,6 +668,9 @@ public class SensorService extends Service {
 
         List<Bitmap> imageData = new ArrayList<>();
 
+        List<String> listSentimentLogReg = new ArrayList<>();
+
+
         Bitmap bitmapImage;
 
         int i = 0;
@@ -666,6 +685,9 @@ public class SensorService extends Service {
             byte[] image = data.getBlob(2);
 
 
+            listSentimentLogReg.add(data.getString(10));
+
+
             Log.d(TAG, "displayDataFromDb: byteImage in DB: " + image);
 
             bitmapImage = DbImageUtil.getImage(image);
@@ -675,6 +697,9 @@ public class SensorService extends Service {
             Log.d(TAG, "displayDataFromDb: Tweet Text is: " + listData.get(i) );
 
             Log.d(TAG, "displayDataFromDb: Image Data: " + imageData.get(i));
+
+            Log.d(TAG, "displayDataFromDb: SentimentLogReg: " + listSentimentLogReg.get(i));
+
 
             i++;
 

@@ -9,7 +9,7 @@ import com.ammar.socialpocketa.RetrofitClient;
 import com.ammar.socialpocketa.data.SharedPrefManager;
 
 
-public class SensorRestarterBroadcastReceiver extends BroadcastReceiver {
+public class MentionRestarterBroadcastReceiver extends BroadcastReceiver {
 
     private static final String TAG = "SensorRestarterBR";
 
@@ -17,7 +17,7 @@ public class SensorRestarterBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(SensorRestarterBroadcastReceiver.class.getSimpleName(), "Service Stops! Oooooooooooooppppssssss!!!!");
+        Log.i(MentionRestarterBroadcastReceiver.class.getSimpleName(), "Service Stops! Oooooooooooooppppssssss!!!!");
 
 //        SharedPreferences sharedPreferences = context.getSharedPreferences("usersharedpref", Context.MODE_PRIVATE);
 
@@ -42,7 +42,7 @@ public class SensorRestarterBroadcastReceiver extends BroadcastReceiver {
 
         Log.d(TAG, "onReceive: authToken4 at BR: " + authToken4);
 
-        context.startService(new Intent(context, SensorService.class));
+        context.startService(new Intent(context, MentionService.class));
     }
 
 

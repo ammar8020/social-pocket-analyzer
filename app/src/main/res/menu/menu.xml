@@ -1,25 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_appreciative"
-        android:orderInCategory="1"
-        android:title="@string/action_appreciative"
-        android:checkable="true"
-        app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_abusive"
-        android:orderInCategory="2"
-        android:title="@string/action_abusive"
-        android:checkable="true"
-        app:showAsAction="never" />
+    <group android:id="@+id/group"
+        android:checkableBehavior="single">
 
-    <item
-        android:id="@+id/action_suggestive"
-        android:orderInCategory="3"
-        android:title="@string/action_suggestive"
-        android:checkable="true"
-        app:showAsAction="never" />
+        <item
+            android:id="@+id/action_appreciative"
+            android:orderInCategory="1"
+            android:title="@string/action_appreciative"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/action_abusive"
+            android:orderInCategory="2"
+            android:title="@string/action_abusive"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/action_suggestive"
+            android:orderInCategory="3"
+            android:title="@string/action_suggestive"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/action_serious_concern"
+            android:orderInCategory="4"
+            android:title="@string/action_serious_concern"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/action_disappointed"
+            android:orderInCategory="5"
+            android:title="@string/action_disappointed"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/action_display_all"
+            android:orderInCategory="6"
+            android:title="@string/action_display_all"
+            app:showAsAction="never" />
+
+
+    </group>
 
 </menu>
