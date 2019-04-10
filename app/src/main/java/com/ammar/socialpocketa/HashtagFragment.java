@@ -1,5 +1,7 @@
 package com.ammar.socialpocketa;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -69,6 +71,10 @@ public class HashtagFragment extends Fragment {
 
     public static String sentimentFilter = "";
 
+
+    private static final String SHARED_PREF_NAME = "settings";
+
+    private static final String KEY_SELECTED_ALGO = "keySelectedAlgo";
 
 
     List<Trend> trendList = new ArrayList<>();
@@ -509,6 +515,18 @@ public class HashtagFragment extends Fragment {
                     String disappointed = "Disappointed";
 
 
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+                    String logReg = "LogReg";
+                    String rnn = "RNN";
+                    String naiveBayes = "NaiveBayes";
+
+                    String currentSelectedAlgo = sharedPreferences.getString(KEY_SELECTED_ALGO, "LogReg");
+
+                    String tempSelectedAlgo = "";
+
+
+
                     //In this point we got our Home list
                     postList = response.body();
 
@@ -544,6 +562,23 @@ public class HashtagFragment extends Fragment {
                     //looping through all the texts and inserting the text inside the string array
                     for (int i = 0; i < postList.size(); i++) {
 
+
+                        if (currentSelectedAlgo.equals(logReg)) {
+
+                            tempSelectedAlgo = postList.get(i).getSentimentAnalysisLogreg();
+
+                        } else if (currentSelectedAlgo.equals(rnn)) {
+
+                            tempSelectedAlgo = postList.get(i).getSentimentAnalysisRnn();
+
+                        } else {
+
+                            tempSelectedAlgo = postList.get(i).getSentimentAnalysisNaiveBayes();
+
+                        }
+
+
+
 //                        _ids[i] = postList.get(i).getId();
 //                        texts[i] = postList.get(i).getText();
 //                        sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
@@ -570,9 +605,12 @@ public class HashtagFragment extends Fragment {
 //                        mFavoriteds.add(postList.get(i).getFavorited());
 
 
+
+
+
                         if (sentimentFilter.equals(appreciative)) {
 
-                            if (appreciative.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+                            if (appreciative.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -587,7 +625,7 @@ public class HashtagFragment extends Fragment {
 
                                 m_Ids.add(postList.get(i).getId());
                                 mTweets.add(postList.get(i).getText());
-                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                                mSentiments.add(tempSelectedAlgo);
 //
                                 mNames.add(postList.get(i).getName());
                                 mRetweeteds.add(postList.get(i).getRetweeted());
@@ -605,7 +643,7 @@ public class HashtagFragment extends Fragment {
 
                         } else if (sentimentFilter.equals(abusive)) {
 
-                            if (abusive.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+                            if (abusive.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -620,7 +658,7 @@ public class HashtagFragment extends Fragment {
 
                                 m_Ids.add(postList.get(i).getId());
                                 mTweets.add(postList.get(i).getText());
-                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                                mSentiments.add(tempSelectedAlgo);
 //
                                 mNames.add(postList.get(i).getName());
                                 mRetweeteds.add(postList.get(i).getRetweeted());
@@ -634,7 +672,7 @@ public class HashtagFragment extends Fragment {
                             }
                         } else if (sentimentFilter.equals(suggestive)) {
 
-                            if (suggestive.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+                            if (suggestive.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -649,7 +687,7 @@ public class HashtagFragment extends Fragment {
 
                                 m_Ids.add(postList.get(i).getId());
                                 mTweets.add(postList.get(i).getText());
-                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                                mSentiments.add(tempSelectedAlgo);
 //
                                 mNames.add(postList.get(i).getName());
                                 mRetweeteds.add(postList.get(i).getRetweeted());
@@ -663,7 +701,7 @@ public class HashtagFragment extends Fragment {
                             }
                         } else if (sentimentFilter.equals(seriousConcern)) {
 
-                            if (seriousConcern.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+                            if (seriousConcern.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -678,7 +716,7 @@ public class HashtagFragment extends Fragment {
 
                                 m_Ids.add(postList.get(i).getId());
                                 mTweets.add(postList.get(i).getText());
-                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                                mSentiments.add(tempSelectedAlgo);
 //
                                 mNames.add(postList.get(i).getName());
                                 mRetweeteds.add(postList.get(i).getRetweeted());
@@ -692,7 +730,7 @@ public class HashtagFragment extends Fragment {
                             }
                         } else if (sentimentFilter.equals(disappointed)) {
 
-                            if (disappointed.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+                            if (disappointed.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -707,7 +745,7 @@ public class HashtagFragment extends Fragment {
 
                                 m_Ids.add(postList.get(i).getId());
                                 mTweets.add(postList.get(i).getText());
-                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                                mSentiments.add(tempSelectedAlgo);
 //
                                 mNames.add(postList.get(i).getName());
                                 mRetweeteds.add(postList.get(i).getRetweeted());
@@ -727,7 +765,7 @@ public class HashtagFragment extends Fragment {
 
                             m_Ids.add(postList.get(i).getId());
                             mTweets.add(postList.get(i).getText());
-                            mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                            mSentiments.add(tempSelectedAlgo);
 
                             mNames.add(postList.get(i).getName());
                             mRetweeteds.add(postList.get(i).getRetweeted());
@@ -749,9 +787,6 @@ public class HashtagFragment extends Fragment {
 //                        }
 
                         }
-
-
-
 
 
 

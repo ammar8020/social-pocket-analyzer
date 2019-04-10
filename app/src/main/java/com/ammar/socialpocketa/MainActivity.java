@@ -166,6 +166,12 @@ public class MainActivity extends AppCompatActivity
                 fragment = new EngageFragment();
                 break;
 
+
+            case R.id.nav_settings:
+                fragment = new SettingFragment();
+                break;
+
+
             case R.id.nav_logout:
                 SharedPrefManager sharedPrefManager = new SharedPrefManager(getApplicationContext());
                 sharedPrefManager.logout();

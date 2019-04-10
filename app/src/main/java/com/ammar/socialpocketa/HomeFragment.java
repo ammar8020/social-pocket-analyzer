@@ -115,7 +115,7 @@ public class HomeFragment extends Fragment {
 
 
         if (!isMyServiceRunning(mMentionService.getClass())) {
-            getActivity().startService(mServiceIntent);
+//            getActivity().startService(mServiceIntent);
         }
 
 
@@ -161,19 +161,19 @@ public class HomeFragment extends Fragment {
 
 
 
-    public boolean isInternetAvailable() {
-        try {
-            final InetAddress address = InetAddress.getByName("www.google.com");
-            return !address.equals("");
-
-        } catch (UnknownHostException e) {
-            // Log error
-
-            Log.e(TAG, "isInternetAvailable: Error Occured while checking for Internet Connection.");
-
-        }
-        return false;
-    }
+//    public boolean isInternetAvailable() {
+//        try {
+//            final InetAddress address = InetAddress.getByName("www.google.com");
+//            return !address.equals("");
+//
+//        } catch (UnknownHostException e) {
+//            // Log error
+//
+//            Log.e(TAG, "isInternetAvailable: Error Occured while checking for Internet Connection.");
+//
+//        }
+//        return false;
+//    }
 
 
 

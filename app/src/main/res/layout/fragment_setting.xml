@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="100dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select an Algorithm of your Choice"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:paddingBottom="30dp"
+        />
+
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radio_log_reg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_reg" />
+
+        <RadioButton
+            android:id="@+id/radio_rnn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rnn" />
+
+        <RadioButton
+            android:id="@+id/radio_naive_bayes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/naive_bayes" />
+    </RadioGroup>
+
+
+</LinearLayout>

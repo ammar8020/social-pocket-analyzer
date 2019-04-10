@@ -1,5 +1,7 @@
 package com.ammar.socialpocketa;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -82,6 +84,9 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
     public static String sentimentFilter = "";
 
+    private static final String SHARED_PREF_NAME = "settings";
+
+    private static final String KEY_SELECTED_ALGO = "keySelectedAlgo";
 
 
     @Nullable
@@ -283,9 +288,20 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
 
 
-                    Log.d(TAG, "onResponse: from bhai2 " + replyList);
+                    Log.d(TAG, "onResponse: from b " + replyList);
 
-                //Creating a String array for the ListView
+                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+                    String logReg = "LogReg";
+                    String rnn = "RNN";
+                    String naiveBayes = "NaiveBayes";
+
+                    String currentSelectedAlgo = sharedPreferences.getString(KEY_SELECTED_ALGO, "LogReg");
+
+                    String tempSelectedAlgo = "";
+
+
+                    //Creating a String array for the ListView
 //                String[] texts = new String[replyList.size()];
 //                String[] names = new String[replyList.size()];
 //                String[] sentiments = new String[replyList.size()];
@@ -316,11 +332,28 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
 
 
+                    if (currentSelectedAlgo.equals(logReg)) {
+
+                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysis();
+//                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysisLogreg();
+
+                    } else if (currentSelectedAlgo.equals(rnn)) {
+
+                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysis();
+//                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysisRnn();
+
+                    } else {
+
+                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysis();
+//                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysisNaiveBayes();
+
+                    }
+
 
 
                     if(sentimentFilter.equals(appreciative)) {
 
-                        if(appreciative.equals( replyList.get(i).getSentimentAnalysis() ) ) {
+                        if(appreciative.equals( tempSelectedAlgo ) ) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -336,7 +369,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                             m_Ids.add(replyList.get(i).getId());
                             mTweets.add(replyList.get(i).getText());
-                            mSentiments.add(replyList.get(i).getSentimentAnalysis());
+                            mSentiments.add(tempSelectedAlgo);
 //
                             mNames.add(replyList.get(i).getName());
                             mRetweeteds.add(replyList.get(i).getRetweeted());
@@ -355,7 +388,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                     } else if(sentimentFilter.equals(abusive)) {
 
-                        if (abusive.equals(replyList.get(i).getSentimentAnalysis())) {
+                        if (abusive.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -370,7 +403,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                             m_Ids.add(replyList.get(i).getId());
                             mTweets.add(replyList.get(i).getText());
-                            mSentiments.add(replyList.get(i).getSentimentAnalysis());
+                            mSentiments.add(tempSelectedAlgo);
 //
                             mNames.add(replyList.get(i).getName());
                             mRetweeteds.add(replyList.get(i).getRetweeted());
@@ -384,7 +417,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
                         }
                     } else if(sentimentFilter.equals(suggestive)) {
 
-                        if (suggestive.equals(replyList.get(i).getSentimentAnalysis())) {
+                        if (suggestive.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -399,7 +432,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                             m_Ids.add(replyList.get(i).getId());
                             mTweets.add(replyList.get(i).getText());
-                            mSentiments.add(replyList.get(i).getSentimentAnalysis());
+                            mSentiments.add(tempSelectedAlgo);
 //
                             mNames.add(replyList.get(i).getName());
                             mRetweeteds.add(replyList.get(i).getRetweeted());
@@ -413,7 +446,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
                         }
                     } else if(sentimentFilter.equals(seriousConcern)) {
 
-                        if (seriousConcern.equals(replyList.get(i).getSentimentAnalysis())) {
+                        if (seriousConcern.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -428,7 +461,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                             m_Ids.add(replyList.get(i).getId());
                             mTweets.add(replyList.get(i).getText());
-                            mSentiments.add(replyList.get(i).getSentimentAnalysis());
+                            mSentiments.add(tempSelectedAlgo);
 //
                             mNames.add(replyList.get(i).getName());
                             mRetweeteds.add(replyList.get(i).getRetweeted());
@@ -442,7 +475,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
                         }
                     } else if(sentimentFilter.equals(disappointed)) {
 
-                        if (disappointed.equals(replyList.get(i).getSentimentAnalysis())) {
+                        if (disappointed.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -457,7 +490,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                             m_Ids.add(replyList.get(i).getId());
                             mTweets.add(replyList.get(i).getText());
-                            mSentiments.add(replyList.get(i).getSentimentAnalysis());
+                            mSentiments.add(tempSelectedAlgo);
 //
                             mNames.add(replyList.get(i).getName());
                             mRetweeteds.add(replyList.get(i).getRetweeted());
@@ -479,7 +512,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                         m_Ids.add(replyList.get(i).getId());
                         mTweets.add(replyList.get(i).getText());
-                        mSentiments.add(replyList.get(i).getSentimentAnalysis());
+                        mSentiments.add(tempSelectedAlgo);
 
                         mNames.add(replyList.get(i).getName());
                         mRetweeteds.add(replyList.get(i).getRetweeted());

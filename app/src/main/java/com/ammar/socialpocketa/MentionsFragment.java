@@ -1,5 +1,7 @@
 package com.ammar.socialpocketa;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -67,6 +69,12 @@ public class MentionsFragment extends Fragment {
 
     public static String sentimentFilter = "";
 
+    private static final String SHARED_PREF_NAME = "settings";
+
+    private static final String KEY_SELECTED_ALGO = "keySelectedAlgo";
+
+//    SettingFragment settingFragment;
+
 
     //private ArrayList<String> s = new ArrayList<>();
 
@@ -101,6 +109,8 @@ public class MentionsFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.rvMentions);
         pbMention = rootView.findViewById(R.id.pb_mention);
 //        pbMention.setVisibility(View.VISIBLE);
+
+//        settingFragment = new SettingFragment();
 
         apiResponse();
 
@@ -223,6 +233,17 @@ public class MentionsFragment extends Fragment {
                     String disappointed = "Disappointed";
 
 
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+                    String logReg = "LogReg";
+                    String rnn = "RNN";
+                    String naiveBayes = "NaiveBayes";
+
+                    String currentSelectedAlgo = sharedPreferences.getString(KEY_SELECTED_ALGO, "LogReg");
+
+                    String tempSelectedAlgo = "";
+
+
                     //Creating a String array for the ListView
 //                    String[] _ids = new String[postList.size()];
 //                    String[] texts = new String[postList.size()];
@@ -233,9 +254,24 @@ public class MentionsFragment extends Fragment {
                     for (int i = 0; i < postList.size(); i++) {
 
 
+                        if (currentSelectedAlgo.equals(logReg)) {
+
+                            tempSelectedAlgo = postList.get(i).getSentimentAnalysisLogreg();
+
+                        } else if (currentSelectedAlgo.equals(rnn)) {
+
+                            tempSelectedAlgo = postList.get(i).getSentimentAnalysisRnn();
+
+                        } else {
+
+                            tempSelectedAlgo = postList.get(i).getSentimentAnalysisNaiveBayes();
+
+                        }
+
+
                         if(sentimentFilter.equals(appreciative)) {
 
-                            if(appreciative.equals( postList.get(i).getSentimentAnalysisLogreg() ) ) {
+                            if(appreciative.equals( tempSelectedAlgo ) ) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -251,8 +287,20 @@ public class MentionsFragment extends Fragment {
 
                                 m_Ids.add(postList.get(i).getId());
                                 mTweets.add(postList.get(i).getText());
-                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
-//
+
+
+
+
+
+                                if (currentSelectedAlgo.equals("LogReg")) {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                                } else if (currentSelectedAlgo.equals("RNN")) {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisRnn());
+                                } else {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisNaiveBayes());
+                                }
+
+//                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
                                 mNames.add(postList.get(i).getName());
                                 mRetweeteds.add(postList.get(i).getRetweeted());
                                 mCreatedAt.add(postList.get(i).getCreatedAt());
@@ -270,7 +318,7 @@ public class MentionsFragment extends Fragment {
 
                         } else if(sentimentFilter.equals(abusive)) {
 
-                            if (abusive.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+                            if (abusive.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -285,8 +333,17 @@ public class MentionsFragment extends Fragment {
 
                                 m_Ids.add(postList.get(i).getId());
                                 mTweets.add(postList.get(i).getText());
-                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
-//
+
+//                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+
+                                if (currentSelectedAlgo.equals("LogReg")) {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                                } else if (currentSelectedAlgo.equals("RNN")) {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisRnn());
+                                } else {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisNaiveBayes());
+                                }
+
                                 mNames.add(postList.get(i).getName());
                                 mRetweeteds.add(postList.get(i).getRetweeted());
                                 mCreatedAt.add(postList.get(i).getCreatedAt());
@@ -299,7 +356,7 @@ public class MentionsFragment extends Fragment {
                             }
                         } else if(sentimentFilter.equals(suggestive)) {
 
-                            if (suggestive.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+                            if (suggestive.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -314,8 +371,21 @@ public class MentionsFragment extends Fragment {
 
                                 m_Ids.add(postList.get(i).getId());
                                 mTweets.add(postList.get(i).getText());
-                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
-//
+
+
+
+                                // mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+
+                                if (currentSelectedAlgo.equals("LogReg")) {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                                } else if (currentSelectedAlgo.equals("RNN")) {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisRnn());
+                                } else {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisNaiveBayes());
+                                }
+
+
+
                                 mNames.add(postList.get(i).getName());
                                 mRetweeteds.add(postList.get(i).getRetweeted());
                                 mCreatedAt.add(postList.get(i).getCreatedAt());
@@ -328,7 +398,7 @@ public class MentionsFragment extends Fragment {
                             }
                         } else if(sentimentFilter.equals(seriousConcern)) {
 
-                            if (seriousConcern.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+                            if (seriousConcern.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -343,8 +413,21 @@ public class MentionsFragment extends Fragment {
 
                                 m_Ids.add(postList.get(i).getId());
                                 mTweets.add(postList.get(i).getText());
-                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
-//
+
+
+
+                                // mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+
+                                if (currentSelectedAlgo.equals("LogReg")) {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                                } else if (currentSelectedAlgo.equals("RNN")) {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisRnn());
+                                } else {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisNaiveBayes());
+                                }
+
+
+
                                 mNames.add(postList.get(i).getName());
                                 mRetweeteds.add(postList.get(i).getRetweeted());
                                 mCreatedAt.add(postList.get(i).getCreatedAt());
@@ -357,7 +440,7 @@ public class MentionsFragment extends Fragment {
                             }
                         } else if(sentimentFilter.equals(disappointed)) {
 
-                            if (disappointed.equals(postList.get(i).getSentimentAnalysisLogreg())) {
+                            if (disappointed.equals(tempSelectedAlgo)) {
 
 //                            if (appreciative.contentEquals(postList.get(i).getSentimentAnalysisLogreg() ) ) {
 
@@ -372,8 +455,21 @@ public class MentionsFragment extends Fragment {
 
                                 m_Ids.add(postList.get(i).getId());
                                 mTweets.add(postList.get(i).getText());
-                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
-//
+
+
+
+                                // mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+
+                                if (currentSelectedAlgo.equals("LogReg")) {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                                } else if (currentSelectedAlgo.equals("RNN")) {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisRnn());
+                                } else {
+                                    mSentiments.add(postList.get(i).getSentimentAnalysisNaiveBayes());
+                                }
+
+
+
                                 mNames.add(postList.get(i).getName());
                                 mRetweeteds.add(postList.get(i).getRetweeted());
                                 mCreatedAt.add(postList.get(i).getCreatedAt());
@@ -394,7 +490,20 @@ public class MentionsFragment extends Fragment {
 
                             m_Ids.add(postList.get(i).getId());
                             mTweets.add(postList.get(i).getText());
-                            mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+
+
+
+                            // mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+
+                            if (currentSelectedAlgo.equals("LogReg")) {
+                                mSentiments.add(postList.get(i).getSentimentAnalysisLogreg());
+                            } else if (currentSelectedAlgo.equals("RNN")) {
+                                mSentiments.add(postList.get(i).getSentimentAnalysisRnn());
+                            } else {
+                                mSentiments.add(postList.get(i).getSentimentAnalysisNaiveBayes());
+                            }
+
+
 
                             mNames.add(postList.get(i).getName());
                             mRetweeteds.add(postList.get(i).getRetweeted());
