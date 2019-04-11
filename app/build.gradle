@@ -41,7 +41,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.4.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
 
-    //circle imageview
+    //circleimageview
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 	//Retrofit
@@ -50,4 +50,9 @@ dependencies {
 
 
     implementation 'org.simpleframework:simple-xml:2.7.1'
+
+
+//    MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+
 }

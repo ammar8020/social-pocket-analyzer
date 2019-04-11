@@ -1,9 +1,10 @@
+
 package com.ammar.socialpocketa.models.ReplyMentionAnalysis.MentionAnalysis;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MentionRnnCount {
+public class LogregCounts_ {
 
     @SerializedName("Appreciated")
     @Expose

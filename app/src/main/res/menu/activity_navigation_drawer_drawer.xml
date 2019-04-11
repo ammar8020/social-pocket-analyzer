@@ -17,9 +17,9 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Engage" />
         <item
-            android:id="@+id/nav_schedule_post"
+            android:id="@+id/nav_replies_visualization"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Chat with Bot" />
+            android:title="Replies Visualization" />
     </group>
 
     <item android:title="Communicate">

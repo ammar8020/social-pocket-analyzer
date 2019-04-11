@@ -12,11 +12,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ammar.socialpocketa.data.SharedPrefManager;
-import com.ammar.socialpocketa.sync.MentionService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
@@ -165,6 +163,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_engage:
                 fragment = new EngageFragment();
                 break;
+            case R.id.nav_replies_visualization:
+                fragment = new RepliesVisualizationFragment();
+                break;
 
 
             case R.id.nav_settings:
@@ -199,7 +200,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.navigation_notifications:
-                fragment = new NotificationsFragment();
+                fragment = new MentionsVisualizationFragment();
                 break;
 
             case R.id.navigation_mentions:

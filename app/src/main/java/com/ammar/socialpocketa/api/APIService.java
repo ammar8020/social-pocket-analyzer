@@ -2,7 +2,7 @@ package com.ammar.socialpocketa.api;
 
 import com.ammar.socialpocketa.models.LatestReply;
 import com.ammar.socialpocketa.models.Profile;
-import com.ammar.socialpocketa.models.ReplyMentionAnalysisDetail;
+import com.ammar.socialpocketa.models.RMAnalysisDetail;
 import com.ammar.socialpocketa.models.TrendDetail;
 import com.ammar.socialpocketa.models.TweetDetail;
 import com.ammar.socialpocketa.models.Hashtag;
@@ -10,7 +10,6 @@ import com.ammar.socialpocketa.models.Login;
 import com.ammar.socialpocketa.models.Mention;
 import com.ammar.socialpocketa.models.Home;
 import com.ammar.socialpocketa.models.Register;
-import com.ammar.socialpocketa.models.trendDetail.Trend;
 
 import java.util.List;
 
@@ -91,8 +90,8 @@ public interface APIService {
 //    the ReplyMentionAnalysisDetail call
     // defined the Call type as ReplyMentionAnalysisDetail
     @GET("api/visualization/replies-mentions-analysis")
-    Call<ReplyMentionAnalysisDetail> getReplyMentionAnalysis();
-
+//    Call<ReplyMentionAnalysisDetail> getReplyMentionAnalysis();
+    Call<RMAnalysisDetail> getReplyMentionAnalysis();
 
 
 }
