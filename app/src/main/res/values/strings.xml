@@ -49,11 +49,19 @@
     <string name="twitterUsername">\@Ammary07</string>
 
 
-
     <!-- fragment_setting -->
     <string name="log_reg">Logistic Regression</string>
     <string name="rnn">Recurrent Neural Network</string>
     <string name="naive_bayes">Naive Bayes</string>
+
+
+
+    <!-- Twitter SDK -->
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">8X65tNQZSUkeD0xx5hIjbr3nb</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">pHMUcJ1jSphXnTcPI5w9czKF0QSoYDzfrC952d8FEMJYlNzGse</string>
+    <string name="custom_log_in_with_twitter">Custom Log in with Twitter</string>
+    <string name="get_profile_image">Fetch Profile Image</string>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->

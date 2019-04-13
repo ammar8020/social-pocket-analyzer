@@ -334,18 +334,18 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                     if (currentSelectedAlgo.equals(logReg)) {
 
-                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysis();
-//                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysisLogreg();
+//                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysis();
+                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysisLogreg();
 
                     } else if (currentSelectedAlgo.equals(rnn)) {
 
-                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysis();
-//                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysisRnn();
+//                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysis();
+                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysisRnn();
 
                     } else {
 
-                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysis();
-//                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysisNaiveBayes();
+//                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysis();
+                        tempSelectedAlgo = replyList.get(i).getSentimentAnalysisNaiveBayes();
 
                     }
 
@@ -523,7 +523,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
                         mFavoriteds.add(replyList.get(i).getFavorited());
 
 
-                        Log.d(TAG, "onResponse: Sentiment = " + replyList.get(i).getSentimentAnalysis());
+                        Log.d(TAG, "onResponse: Sentiment = " + replyList.get(i).getSentimentAnalysisLogreg());
                         //names[i] = postList.get(i).getUser();
 
                         //mRTweets.get(i).concat(texts[i]);

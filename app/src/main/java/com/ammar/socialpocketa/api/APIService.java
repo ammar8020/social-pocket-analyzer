@@ -1,6 +1,7 @@
 package com.ammar.socialpocketa.api;
 
 import com.ammar.socialpocketa.models.LatestReply;
+import com.ammar.socialpocketa.models.LoginTwitter;
 import com.ammar.socialpocketa.models.Profile;
 import com.ammar.socialpocketa.models.RMAnalysisDetail;
 import com.ammar.socialpocketa.models.TrendDetail;
@@ -92,6 +93,16 @@ public interface APIService {
     @GET("api/visualization/replies-mentions-analysis")
 //    Call<ReplyMentionAnalysisDetail> getReplyMentionAnalysis();
     Call<RMAnalysisDetail> getReplyMentionAnalysis();
+
+
+    @FormUrlEncoded
+    @POST("api/users/twittertokens")
+    Call<LoginTwitter> getLoginTwitter(
+            @Field("user") String user,
+            @Field("twitterUsername") String twitterUsername,
+            @Field("token") String token,
+            @Field("tokenSecret") String tokenSecret
+    );
 
 
 }

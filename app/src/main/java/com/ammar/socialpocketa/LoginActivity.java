@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,9 @@ import com.ammar.socialpocketa.api.APIService;
 import com.ammar.socialpocketa.api.APIUrl;
 import com.ammar.socialpocketa.data.SharedPrefManager;
 import com.ammar.socialpocketa.models.Login;
+import com.ammar.socialpocketa.models.LoginTwitter;
+import com.auth0.android.jwt.Claim;
+import com.auth0.android.jwt.JWT;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +37,16 @@ public class LoginActivity extends AppCompatActivity {
     EditText txtEmail, txtPassword;
     Button btnLogin;
     public static String authToken = "";
+
+    public static String getDecodedToken() {
+        return decodedToken;
+    }
+
+    public static void setDecodedToken(String decodedToken) {
+        LoginActivity.decodedToken = decodedToken;
+    }
+
+    private static String decodedToken = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +138,24 @@ public class LoginActivity extends AppCompatActivity {
 
                     String tempAuthToken = response.body().getToken();
 
+
+//                    String[] parts = string.split("-");
+//                    String part1 = parts[0];
+
+
+                    Log.d(TAG, "onResponse: tempAuthToken: " + tempAuthToken.split(" ")[1]);
+
+                    JWT jwt = new JWT(tempAuthToken.split(" ")[1]);
+
+                    Claim claimDecodedToken = jwt.getClaim("id");
+
+                    decodedToken = claimDecodedToken.asString();
+
+
+                    Log.d(TAG, "onResponse: JWT: " + jwt);
+
+                    Log.d(TAG, "onResponse: decodedToken: " + decodedToken);
+
                     RetrofitClient.getToken(tempAuthToken);
 
                     if (tempAuthToken == null) {
@@ -135,7 +167,10 @@ public class LoginActivity extends AppCompatActivity {
                     setAuthToken(tempAuthToken);
 
 
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                    startActivity(new Intent(getApplicationContext(), LoginTwitter2.class));
+
                 }
 
                 //else if(resMsg.equals("Bad Request")) {

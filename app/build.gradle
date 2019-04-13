@@ -17,6 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // Temporary fix until alpha10
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+
+
 }
 
 dependencies {
@@ -44,15 +51,21 @@ dependencies {
     //circleimageview
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
-	//Retrofit
+    //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
 
     implementation 'org.simpleframework:simple-xml:2.7.1'
 
-
 //    MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+
+//    Twitter SDK
+    implementation 'com.twitter.sdk.android:twitter:3.1.0'
+    implementation 'com.twitter.sdk.android:twitter-core:3.1.0'
+
+//    Decode JWT
+    implementation 'com.auth0.android:jwtdecode:1.2.0'
 
 }

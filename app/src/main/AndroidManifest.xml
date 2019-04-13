@@ -16,56 +16,64 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<activity android:name=".HomeFragment">
 
-        </activity>-->
+        <!--
+        <activity android:name=".HomeFragment">
+
+        </activity>
+        -->
         <activity android:name=".LoginActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".RegisterActivity">
 
-
-
-        </activity>
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".TweetDetailsActivity" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
-
-            <!--<intent-filter>
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-
+            </intent-filter>
+            -->
 
         </activity>
-
-
 
         <!-- defining the service class here -->
         <service
             android:name=".sync.MentionService"
-            android:enabled="true">
-
-        </service>
-
+            android:enabled="true" />
 
         <receiver
             android:name=".sync.MentionRestarterBroadcastReceiver"
             android:enabled="true"
             android:exported="true"
-            android:label="RestartServiceWhenStopped">
+            android:label="RestartServiceWhenStopped" />
 
-        </receiver>
+        <activity android:name=".LoginTwitterActivity">
 
+        </activity>
+
+
+        <activity android:name=".LoginTwitter2">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+
+        <activity android:name=".Homepage">
+
+        </activity>
 
 
     </application>
