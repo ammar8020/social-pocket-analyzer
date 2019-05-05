@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ammar.socialpocketa.models.LoginTwitter;
@@ -25,6 +27,8 @@ public class LoginTwitter2 extends AppCompatActivity {
     //Declaring Twitter loginButton
     TwitterLoginButton loginButton;
 
+    ProgressBar pbLoginTwitter;
+
     /**
      * @param savedInstanceState - saves instance state
      * onCreate method takes savedInstanceState as parameter and calls it's super method
@@ -37,6 +41,8 @@ public class LoginTwitter2 extends AppCompatActivity {
         Twitter.initialize(this);  //Make sure that this statement is added before setContentView() method
         setContentView(R.layout.activity_login_twitter);
 
+
+        pbLoginTwitter =findViewById(R.id.pb_login_twitter);
 
         //Instantiating loginButton
         loginButton = findViewById(R.id.login_button);
@@ -84,6 +90,10 @@ public class LoginTwitter2 extends AppCompatActivity {
         intent.putExtra("token", token);
         intent.putExtra("secret", secret);
         startActivity(intent);
+
+//        To remove this activity from the stack in order to avoid it
+//        from opening on pressing the back button
+        finish();
     }
 
     /**
@@ -97,5 +107,8 @@ public class LoginTwitter2 extends AppCompatActivity {
 
         // Pass the activity result to the login button.
         loginButton.onActivityResult(requestCode, resultCode, data);
+
+        pbLoginTwitter.setVisibility(View.VISIBLE);
+
     }
 }

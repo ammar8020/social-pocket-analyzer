@@ -169,18 +169,34 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
 
 
+//        holder.rlEngage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d(TAG, "onClick: Engage Clicked ");
+//
+//                Log.d(TAG, "onClick: ID is " + m_Ids.get(position));
+//                Log.d(TAG, "onClick: Name is " + mNames.get(position));
+//                Log.d(TAG, "onClick: Tweet  is " + mTweets.get(position));
+//
+////                AddData(mTweets.get(position));
+//
+//
+//            }
+//        });
+
+
         holder.rlEngage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: Engage Clicked ");
+                Log.d(TAG, "onClick: clicked on: " + mNames.get(position));
 
-                Log.d(TAG, "onClick: ID is " + m_Ids.get(position));
-                Log.d(TAG, "onClick: Name is " + mNames.get(position));
-                Log.d(TAG, "onClick: Tweet  is " + mTweets.get(position));
+                Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
 
-//                AddData(mTweets.get(position));
-
-
+                Intent intent = new Intent(mContext, TweetDetailsActivity.class);
+                intent.putExtra("image", mProfileImageUrl.get(position));
+                intent.putExtra("name", mNames.get(position));
+                intent.putExtra("_id", m_Ids.get(position));
+                mContext.startActivity(intent);
             }
         });
 

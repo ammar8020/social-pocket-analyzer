@@ -1,9 +1,9 @@
 
-package com.ammar.socialpocketa.models.ReplyMentionAnalysis;
+package com.ammar.socialpocketa.models.replyMentionAnalysis;
 
-import com.ammar.socialpocketa.models.ReplyMentionAnalysis.ReplyAnalysis.LogregCounts;
-import com.ammar.socialpocketa.models.ReplyMentionAnalysis.ReplyAnalysis.NaivebayesCounts;
-import com.ammar.socialpocketa.models.ReplyMentionAnalysis.ReplyAnalysis.RnnCounts;
+import com.ammar.socialpocketa.models.replyMentionAnalysis.ReplyAnalysis.LogregCounts;
+import com.ammar.socialpocketa.models.replyMentionAnalysis.ReplyAnalysis.NaivebayesCounts;
+import com.ammar.socialpocketa.models.replyMentionAnalysis.ReplyAnalysis.RnnCounts;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

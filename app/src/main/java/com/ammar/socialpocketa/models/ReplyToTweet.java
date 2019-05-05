@@ -1,9 +1,9 @@
-package com.ammar.socialpocketa.models.reply;
+package com.ammar.socialpocketa.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Reply {
+public class ReplyToTweet {
 
     @SerializedName("_id")
     @Expose
@@ -203,59 +203,5 @@ public class Reply {
     public void setV(Integer v) {
         this.v = v;
     }
-
-
-//    @Override
-//    public String toString() {
-//        return "Reply{" +
-//                "id='" + id + '\'' +
-//                ", id1='" + id1 + '\'' +
-//                ", idStr='" + idStr + '\'' +
-//                ", user='" + user + '\'' +
-//                ", screenName='" + screenName + '\'' +
-//                ", name='" + name + '\'' +
-//                ", text='" + text + '\'' +
-//                ", inReplyToStatusId='" + inReplyToStatusId + '\'' +
-//                ", sentimentAnalysisLogreg='" + sentimentAnalysisLogreg + '\'' +
-//                ", sentimentAnalysisNaiveBayes='" + sentimentAnalysisNaiveBayes + '\'' +
-//                ", sentimentAnalysisRnn='" + sentimentAnalysisRnn + '\'' +
-//                ", createdAt='" + createdAt + '\'' +
-//                ", retweeted=" + retweeted +
-//                ", profileImageUrl='" + profileImageUrl + '\'' +
-//                ", retweetCount='" + retweetCount + '\'' +
-//                ", favoriteCount='" + favoriteCount + '\'' +
-//                ", favorited=" + favorited +
-//                ", v=" + v +
-//                '}';
-//    }
-
-
-
-
-    @Override
-    public String toString() {
-        return "{" +
-                "id:'" + id + '\'' +
-                ", id1:'" + id1 + '\'' +
-                ", idStr:'" + idStr + '\'' +
-                ", user:'" + user + '\'' +
-                ", screenName:'" + screenName + '\'' +
-                ", name='" + name + '\'' +
-                ", text='" + text + '\'' +
-                ", inReplyToStatusId='" + inReplyToStatusId + '\'' +
-                ", sentimentAnalysisLogreg='" + sentimentAnalysisLogreg + '\'' +
-                ", sentimentAnalysisNaiveBayes='" + sentimentAnalysisNaiveBayes + '\'' +
-                ", sentimentAnalysisRnn='" + sentimentAnalysisRnn + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", retweeted=" + retweeted +
-                ", profileImageUrl='" + profileImageUrl + '\'' +
-                ", retweetCount='" + retweetCount + '\'' +
-                ", favoriteCount='" + favoriteCount + '\'' +
-                ", favorited=" + favorited +
-                ", v=" + v +
-                '}';
-    }
-
-
 
 }

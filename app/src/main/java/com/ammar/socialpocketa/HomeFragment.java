@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.ammar.socialpocketa.models.Home;
 import com.ammar.socialpocketa.sync.MentionService;
+import com.ammar.socialpocketa.utils.TimeUtil;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -31,7 +34,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment
+        implements MyCustomDialog.OnInputListener{
 
     private static final String TAG = "HomeFragment";
 
@@ -115,7 +119,7 @@ public class HomeFragment extends Fragment {
 
 
         if (!isMyServiceRunning(mMentionService.getClass())) {
-//            getActivity().startService(mServiceIntent);
+            getActivity().startService(mServiceIntent);
         }
 
 
@@ -132,6 +136,29 @@ public class HomeFragment extends Fragment {
         pbHome = rootView.findViewById(R.id.pb_home);
 //        tvEngage = rootView.findViewById(R.id.tv_engage);
         rlEngage = rootView.findViewById(R.id.rl_engage);
+
+
+
+
+//        FloatingActionButton fab = rootView.findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//
+//                Log.d(TAG, "onClick: opening dialog.");
+//
+//                MyCustomDialog dialog = new MyCustomDialog();
+//                dialog.show(getActivity().getFragmentManager(), "MyCustomDialog");
+//
+//            }
+//        });
+
+
+
+
 
         pbHome.setVisibility(View.VISIBLE);
 
@@ -289,6 +316,8 @@ public class HomeFragment extends Fragment {
                 String[] texts = new String[postList.size()];
                 //String[] names = new String[postList.size()];
 
+                String convertedTime = "";
+
                 //looping through all the texts and inserting the text inside the string array
                 for (int i = 0; i < postList.size(); i++) {
 
@@ -298,7 +327,21 @@ public class HomeFragment extends Fragment {
 
                     mNames.add(postList.get(i).getName());
                     mRetweeteds.add(postList.get(i).getRetweeted());
-                    mCreatedAt.add(postList.get(i).getCreatedAt());
+
+
+
+                    convertedTime = TimeUtil.getTimeAgo(postList.get(i).getCreatedAt()).toString();
+
+//                                Log.d(TAG, "onResponse: convertedTime: " + convertedTime);
+
+
+                    mCreatedAt.add(convertedTime);
+
+//                                mCreatedAt.add(postList.get(i).getCreatedAt());
+
+
+
+
                     mProfileImageUrls.add(postList.get(i).getProfileImageUrl());
                     mRetweetCounts.add(postList.get(i).getRetweetCount());
                     mFavoriteCounts.add(postList.get(i).getFavoriteCount());
@@ -404,6 +447,11 @@ public class HomeFragment extends Fragment {
 
     }
 
+    @Override
+    public void sendInput(String input) {
+
+    }
+
 
 //    public static List<Home> getPostList() {
 //        return postList;
@@ -412,6 +460,10 @@ public class HomeFragment extends Fragment {
 //    public static void setPostList(List<Home> postList) {
 //        HomeFragment.postList = postList;
 //    }
+
+
+
+
 
 
 }

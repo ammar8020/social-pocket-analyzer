@@ -5,10 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
 
-/**
- * @author Priyanka
- */
-
 public class Homepage extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

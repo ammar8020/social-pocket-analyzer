@@ -295,7 +295,7 @@ public class LoginTwitterActivity extends AppCompatActivity {
 
         APIService service = retrofit.create(APIService.class);
 
-        Call<LoginTwitter> call = service.getLoginTwitter(userId, username, token, secret);
+        Call<LoginTwitter> call = service.loginTwitter(userId, username, token, secret);
 
         call.enqueue(new retrofit2.Callback<LoginTwitter>() {
             @Override
@@ -316,6 +316,11 @@ public class LoginTwitterActivity extends AppCompatActivity {
 
                     startActivity(intent);
 
+
+//        To remove this activity from the stack in order to avoid it
+//        from opening on pressing the back button
+                    finish();
+
                 }
                 else {
 
@@ -324,6 +329,9 @@ public class LoginTwitterActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginTwitterActivity.this, LoginTwitter2.class);
 
                     startActivity(intent);
+
+
+
 
                 }
 

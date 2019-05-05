@@ -61,13 +61,15 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:text="Login"
-            android:background="@color/green"/>
+            android:textSize="15sp"
+            android:background="@color/green"
+            android:layout_gravity="center"/>
 
         <TextView android:id="@+id/link_signup"
             android:layout_width="fill_parent"
@@ -75,7 +77,7 @@
             android:layout_marginBottom="24dp"
             android:text="No account yet? Create one"
             android:gravity="center"
-            android:textSize="16dip"
+            android:textSize="18dip"
             android:textColor="@color/white"/>
 
     </LinearLayout>

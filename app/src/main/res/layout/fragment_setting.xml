@@ -4,9 +4,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="100dp">
+    android:layout_marginTop="10dp">
 
 
     <TextView
@@ -16,6 +16,7 @@
         android:textSize="20sp"
         android:layout_gravity="center"
         android:paddingBottom="30dp"
+        android:textStyle="bold"
         />
 
 
@@ -43,6 +44,30 @@
             android:layout_height="wrap_content"
             android:text="@string/naive_bayes" />
     </RadioGroup>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="For your Info:"
+        android:textSize="25sp"
+        android:paddingTop="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecting the Algorithm provide you fascility to choose the Algorithm of your choice depending upon the accuracy. Here we have accuracies of above mentioned Algorithms i.e. 91% 92% 88% respectively."
+        android:textSize="17sp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="20dp"
+        />
+
 
 
 </LinearLayout>

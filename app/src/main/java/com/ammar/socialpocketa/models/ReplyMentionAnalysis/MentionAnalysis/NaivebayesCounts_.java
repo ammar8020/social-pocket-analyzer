@@ -1,5 +1,5 @@
 
-package com.ammar.socialpocketa.models.ReplyMentionAnalysis.MentionAnalysis;
+package com.ammar.socialpocketa.models.replyMentionAnalysis.MentionAnalysis;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

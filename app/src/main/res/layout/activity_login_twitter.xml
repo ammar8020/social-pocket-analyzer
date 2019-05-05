@@ -4,14 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context=".LoginTwitter2">
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login with Twitter provide you fascility to see your tweets in SPA and enables us to perform Intention Analysis on your tweets, replies, hashtags, mentions. You can also create a new tweet, reply to multiple replies at the same time here. Its all about you. Click here to Login now."
+        android:textSize="18sp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+
+        />
 
     <com.twitter.sdk.android.core.identity.TwitterLoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@id/desc"
+        android:layout_centerHorizontal="true"
+         />
 
     <ProgressBar
         android:id="@+id/pb_login_twitter"

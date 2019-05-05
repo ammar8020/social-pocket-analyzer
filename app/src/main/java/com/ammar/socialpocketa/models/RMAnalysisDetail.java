@@ -1,8 +1,8 @@
 
 package com.ammar.socialpocketa.models;
 
-import com.ammar.socialpocketa.models.ReplyMentionAnalysis.MentionsCount;
-import com.ammar.socialpocketa.models.ReplyMentionAnalysis.RepliesCount;
+import com.ammar.socialpocketa.models.replyMentionAnalysis.MentionsCount;
+import com.ammar.socialpocketa.models.replyMentionAnalysis.RepliesCount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

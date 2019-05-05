@@ -19,4 +19,14 @@
     </com.github.mikephil.charting.charts.PieChart>
 
 
+    <!--<com.github.mikephil.charting.charts.BarChart-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="400dp"-->
+        <!--android:id="@+id/bargraph"-->
+        <!--android:visibility="invisible">-->
+
+    <!--</com.github.mikephil.charting.charts.BarChart>-->
+
+
+
 </RelativeLayout>

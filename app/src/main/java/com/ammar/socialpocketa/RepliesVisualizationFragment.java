@@ -13,6 +13,9 @@ import android.widget.ProgressBar;
 import android.graphics.Color;
 import android.widget.Toast;
 
+import com.ammar.socialpocketa.api.APIService;
+import com.ammar.socialpocketa.api.APIUrl;
+import com.ammar.socialpocketa.models.CreateTweet;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
@@ -31,6 +34,8 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class RepliesVisualizationFragment extends Fragment {
@@ -70,6 +75,8 @@ public class RepliesVisualizationFragment extends Fragment {
 
 
         apiResponse();
+
+//        apiRequest();
 
 
         return rootView;
@@ -337,6 +344,102 @@ public class RepliesVisualizationFragment extends Fragment {
         pieChart.setData(pieData);
         pieChart.invalidate();
     }
+
+
+
+
+
+
+
+
+
+//    public void apiRequest() {
+//
+//
+////        pbCreateTweet.setVisibility(View.VISIBLE);
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(APIUrl.BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        APIService service = retrofit.create(APIService.class);
+//
+//
+//        String input = "okayy";
+//
+//
+//        Log.d(TAG, "apiRequest: input String: " + input);
+//
+//        Call<CreateTweet> call = service.createTweet(input);
+//
+//        call.enqueue(new Callback<CreateTweet>() {
+//            @Override
+//            public void onResponse(Call<CreateTweet> call, Response<CreateTweet> response) {
+//
+//
+////                if(response.body() != null) {
+////
+////                    Toast.makeText(getActivity(), "Tweet Created Successfully", Toast.LENGTH_SHORT).show();
+////
+////                } else {
+////                    Toast.makeText(getActivity(), "Failed to create a Tweet", Toast.LENGTH_SHORT).show();
+////
+////                }
+//
+////                pbCreateTweet.setVisibility(View.INVISIBLE);
+//
+//
+////                Log.d(TAG, "onResponse: input string: " + input);
+//
+//
+//                Log.d(TAG, "onResponse: response.body().getText(): " + response.body().getText());
+//
+//
+//                Log.d(TAG, "onResponse: response.body().getText().getText(): " + response.body().getText().getText());
+//
+//
+//
+//
+//                Toast.makeText(getActivity(), "Tweet Created Successfully", Toast.LENGTH_SHORT).show();
+//
+//
+//
+//
+//
+//
+//
+////                if(input.equals(response.body().getText().getText())) {
+////
+////                    Toast.makeText(getActivity(), "Tweet Created Successfully", Toast.LENGTH_SHORT).show();
+////
+////                } else
+////
+////                    Toast.makeText(getActivity(), "Tweet not Successfully", Toast.LENGTH_SHORT).show();
+////            }
+//
+//
+//
+//////                getDialog().dismiss();
+//
+//
+//            }
+//
+//
+//            @Override
+//            public void onFailure(Call<CreateTweet> call, Throwable t) {
+////                progressDialog.dismiss();
+//                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//
+//
+//    }
+
+
+
+
 
 
 

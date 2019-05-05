@@ -72,7 +72,7 @@ public class HashtagAdapter extends RecyclerView.Adapter<HashtagAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tweet, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_tweet_alter, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }

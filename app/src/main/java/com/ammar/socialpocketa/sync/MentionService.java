@@ -150,7 +150,7 @@ public class MentionService extends Service {
         initializeTimerTask();
 
         //schedule the timer, to wake up every 1 second or so...
-        timer.schedule(timerTask, 1000, 1000 * 10);
+        timer.schedule(timerTask, 1000 * 10, 1000 * 60 * 2);
     }
 
     /**

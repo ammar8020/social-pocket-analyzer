@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.ammar.socialpocketa.utils.DbImageUtil;
 import com.ammar.socialpocketa.data.DatabaseHelper;
@@ -178,11 +179,24 @@ public class EngageFragment extends Fragment {
         String disappointed = "Disappointed";
 
 
+        Boolean appreciativeFound = false;
+        Boolean abusiveFound = false;
+        Boolean suggestiveFound = false;
+        Boolean seriousConcernFound = false;
+        Boolean disappointedFound = false;
 
 
-        while(data.moveToNext()){
-            // get the value from the database in column 1
-            // then add it to the ArrayList
+        if (data == null) {
+
+            pbEngage.setVisibility(View.INVISIBLE);
+            Toast.makeText(getActivity(), "No Mentions found", Toast.LENGTH_LONG).show();
+
+        } else {
+
+
+            while (data.moveToNext()) {
+                // get the value from the database in column 1
+                // then add it to the ArrayList
 //            listData.add(data.getString(1));
 //
 //
@@ -211,45 +225,48 @@ public class EngageFragment extends Fragment {
 //            mFavoriteds.add(true);
 
 
-            if(sentimentFilter.equals(appreciative)) {
+                if (sentimentFilter.equals(appreciative)) {
 
-                if(appreciative.equals( data.getString(10) ) ) {
+                    if (appreciative.equals(data.getString(10))) {
 
+
+                        appreciativeFound = true;
 
 //                     get the value from the database in column 1
 //                     then add it to the ArrayList
-                    listData.add(data.getString(1));
+                        listData.add(data.getString(1));
 
 
-                    byte[] image = data.getBlob(2);
+                        byte[] image = data.getBlob(2);
 
-                    bitmapImage = DbImageUtil.getImage(image);
+                        bitmapImage = DbImageUtil.getImage(image);
 
-                    imageData.add(bitmapImage);
+                        imageData.add(bitmapImage);
 
 //                    Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
 
 
-                    m_Ids.add(data.getString(3));
-                    mIdStr.add(data.getString(4));
-                    mNames.add(data.getString(5));
-                    mScreenName.add(data.getString(6));
-                    mCreatedAt.add(data.getString(7));
-                    mRetweetCounts.add(data.getString(8));
-                    mFavoriteCounts.add(data.getString(9));
-                    mSentimentAnalysisLogReg.add(data.getString(10));
-                    mSentimentAnalysisNaiveBayes.add(data.getString(11));
-                    mSentimentAnalysisRnn.add(data.getString(12));
+                        m_Ids.add(data.getString(3));
+                        mIdStr.add(data.getString(4));
+                        mNames.add(data.getString(5));
+                        mScreenName.add(data.getString(6));
+                        mCreatedAt.add(data.getString(7));
+                        mRetweetCounts.add(data.getString(8));
+                        mFavoriteCounts.add(data.getString(9));
+                        mSentimentAnalysisLogReg.add(data.getString(10));
+                        mSentimentAnalysisNaiveBayes.add(data.getString(11));
+                        mSentimentAnalysisRnn.add(data.getString(12));
 
-                    mRetweeteds.add(true);
-                    mFavoriteds.add(true);
+                        mRetweeteds.add(true);
+                        mFavoriteds.add(true);
 
-                }
+                    }
 
-                } else if(sentimentFilter.equals(abusive)) {
+                } else if (sentimentFilter.equals(abusive)) {
 
-                    if(abusive.equals( data.getString(10) ) ) {
+                    if (abusive.equals(data.getString(10))) {
 
+                        abusiveFound = true;
 
 //                     get the value from the database in column 1
 //                     then add it to the ArrayList
@@ -281,163 +298,214 @@ public class EngageFragment extends Fragment {
 
                     }
 
-                    } else if(sentimentFilter.equals(suggestive)) {
+                } else if (sentimentFilter.equals(suggestive)) {
 
-                        if(suggestive.equals( data.getString(10) ) ) {
+                    if (suggestive.equals(data.getString(10))) {
 
+                        suggestiveFound = true;
 
 //                     get the value from the database in column 1
 //                     then add it to the ArrayList
-                            listData.add(data.getString(1));
+                        listData.add(data.getString(1));
 
 
-                            byte[] image = data.getBlob(2);
+                        byte[] image = data.getBlob(2);
 
-                            bitmapImage = DbImageUtil.getImage(image);
+                        bitmapImage = DbImageUtil.getImage(image);
 
-                            imageData.add(bitmapImage);
+                        imageData.add(bitmapImage);
 
 //                            Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
 
 
-                            m_Ids.add(data.getString(3));
-                            mIdStr.add(data.getString(4));
-                            mNames.add(data.getString(5));
-                            mScreenName.add(data.getString(6));
-                            mCreatedAt.add(data.getString(7));
-                            mRetweetCounts.add(data.getString(8));
-                            mFavoriteCounts.add(data.getString(9));
-                            mSentimentAnalysisLogReg.add(data.getString(10));
-                            mSentimentAnalysisNaiveBayes.add(data.getString(11));
-                            mSentimentAnalysisRnn.add(data.getString(12));
+                        m_Ids.add(data.getString(3));
+                        mIdStr.add(data.getString(4));
+                        mNames.add(data.getString(5));
+                        mScreenName.add(data.getString(6));
+                        mCreatedAt.add(data.getString(7));
+                        mRetweetCounts.add(data.getString(8));
+                        mFavoriteCounts.add(data.getString(9));
+                        mSentimentAnalysisLogReg.add(data.getString(10));
+                        mSentimentAnalysisNaiveBayes.add(data.getString(11));
+                        mSentimentAnalysisRnn.add(data.getString(12));
 
-                            mRetweeteds.add(true);
-                            mFavoriteds.add(true);
-                        }
+                        mRetweeteds.add(true);
+                        mFavoriteds.add(true);
+                    }
 
 
-                        } else if(sentimentFilter.equals(seriousConcern)) {
+                } else if (sentimentFilter.equals(seriousConcern)) {
 
-                            if(seriousConcern.equals( data.getString(10) ) ) {
+                    if (seriousConcern.equals(data.getString(10))) {
 
+                        seriousConcernFound= true;
 
 //                     get the value from the database in column 1
 //                     then add it to the ArrayList
-                                listData.add(data.getString(1));
+                        listData.add(data.getString(1));
 
 
-                                byte[] image = data.getBlob(2);
+                        byte[] image = data.getBlob(2);
 
-                                bitmapImage = DbImageUtil.getImage(image);
+                        bitmapImage = DbImageUtil.getImage(image);
 
-                                imageData.add(bitmapImage);
+                        imageData.add(bitmapImage);
 
 //                                Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
 
 
-                                m_Ids.add(data.getString(3));
-                                mIdStr.add(data.getString(4));
-                                mNames.add(data.getString(5));
-                                mScreenName.add(data.getString(6));
-                                mCreatedAt.add(data.getString(7));
-                                mRetweetCounts.add(data.getString(8));
-                                mFavoriteCounts.add(data.getString(9));
-                                mSentimentAnalysisLogReg.add(data.getString(10));
-                                mSentimentAnalysisNaiveBayes.add(data.getString(11));
-                                mSentimentAnalysisRnn.add(data.getString(12));
+                        m_Ids.add(data.getString(3));
+                        mIdStr.add(data.getString(4));
+                        mNames.add(data.getString(5));
+                        mScreenName.add(data.getString(6));
+                        mCreatedAt.add(data.getString(7));
+                        mRetweetCounts.add(data.getString(8));
+                        mFavoriteCounts.add(data.getString(9));
+                        mSentimentAnalysisLogReg.add(data.getString(10));
+                        mSentimentAnalysisNaiveBayes.add(data.getString(11));
+                        mSentimentAnalysisRnn.add(data.getString(12));
 
-                                mRetweeteds.add(true);
-                                mFavoriteds.add(true);
+                        mRetweeteds.add(true);
+                        mFavoriteds.add(true);
 
-                            }
+                    }
 
 
-                            } else if(sentimentFilter.equals(disappointed)) {
+                } else if (sentimentFilter.equals(disappointed)) {
 
-                                if(disappointed.equals( data.getString(10) ) ) {
+                    if (disappointed.equals(data.getString(10))) {
 
+                        disappointedFound = true;
 
 //                     get the value from the database in column 1
 //                     then add it to the ArrayList
-                                    listData.add(data.getString(1));
+                        listData.add(data.getString(1));
 
 
-                                    byte[] image = data.getBlob(2);
+                        byte[] image = data.getBlob(2);
 
-                                    bitmapImage = DbImageUtil.getImage(image);
+                        bitmapImage = DbImageUtil.getImage(image);
 
-                                    imageData.add(bitmapImage);
+                        imageData.add(bitmapImage);
 
 //                                    Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
 
 
-                                    m_Ids.add(data.getString(3));
-                                    mIdStr.add(data.getString(4));
-                                    mNames.add(data.getString(5));
-                                    mScreenName.add(data.getString(6));
-                                    mCreatedAt.add(data.getString(7));
-                                    mRetweetCounts.add(data.getString(8));
-                                    mFavoriteCounts.add(data.getString(9));
-                                    mSentimentAnalysisLogReg.add(data.getString(10));
-                                    mSentimentAnalysisNaiveBayes.add(data.getString(11));
-                                    mSentimentAnalysisRnn.add(data.getString(12));
+                        m_Ids.add(data.getString(3));
+                        mIdStr.add(data.getString(4));
+                        mNames.add(data.getString(5));
+                        mScreenName.add(data.getString(6));
+                        mCreatedAt.add(data.getString(7));
+                        mRetweetCounts.add(data.getString(8));
+                        mFavoriteCounts.add(data.getString(9));
+                        mSentimentAnalysisLogReg.add(data.getString(10));
+                        mSentimentAnalysisNaiveBayes.add(data.getString(11));
+                        mSentimentAnalysisRnn.add(data.getString(12));
 
-                                    mRetweeteds.add(true);
-                                    mFavoriteds.add(true);
+                        mRetweeteds.add(true);
+                        mFavoriteds.add(true);
 
-                                }
+                    }
 
-                            } else {
-
+                } else {
 
 
 //                                    get the value from the database in column 1
 //                     then add it to the ArrayList
-                                    listData.add(data.getString(1));
+                    listData.add(data.getString(1));
 
 
-                                    byte[] image = data.getBlob(2);
+                    byte[] image = data.getBlob(2);
 
-                                    bitmapImage = DbImageUtil.getImage(image);
+                    bitmapImage = DbImageUtil.getImage(image);
 
-                                    imageData.add(bitmapImage);
+                    imageData.add(bitmapImage);
 
 //                                    Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
 
 
+                    m_Ids.add(data.getString(3));
+                    mIdStr.add(data.getString(4));
+                    mNames.add(data.getString(5));
+                    mScreenName.add(data.getString(6));
+                    mCreatedAt.add(data.getString(7));
+                    mRetweetCounts.add(data.getString(8));
+                    mFavoriteCounts.add(data.getString(9));
+                    mSentimentAnalysisLogReg.add(data.getString(10));
+                    mSentimentAnalysisNaiveBayes.add(data.getString(11));
+                    mSentimentAnalysisRnn.add(data.getString(12));
 
-                                    m_Ids.add(data.getString(3));
-                                    mIdStr.add(data.getString(4));
-                                    mNames.add(data.getString(5));
-                                    mScreenName.add(data.getString(6));
-                                    mCreatedAt.add(data.getString(7));
-                                    mRetweetCounts.add(data.getString(8));
-                                    mFavoriteCounts.add(data.getString(9));
-                                    mSentimentAnalysisLogReg.add(data.getString(10));
-                                    mSentimentAnalysisNaiveBayes.add(data.getString(11));
-                                    mSentimentAnalysisRnn.add(data.getString(12));
-
-                                    mRetweeteds.add(true);
-                                    mFavoriteds.add(true);
-
+                    mRetweeteds.add(true);
+                    mFavoriteds.add(true);
 
 
-                                }
-
-
-
-
-
-
-
+                }
 
 
 //            i++;
 
 
+            }
 
 
-        }
+
+
+
+            if(sentimentFilter.equals(appreciative)) {
+
+
+                if (appreciativeFound.equals(false)) {
+
+
+                    Toast.makeText(getActivity(), "No Appreciative Mention found", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            } else if (sentimentFilter.equals(abusive)) {
+
+                if (abusiveFound.equals(false)) {
+
+
+                    Toast.makeText(getActivity(), "No Abusive Mention found", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            } else if (sentimentFilter.equals(suggestive)) {
+
+                if (suggestiveFound.equals(false)) {
+
+
+                    Toast.makeText(getActivity(), "No Suggestive Mention found", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            } else if (sentimentFilter.equals(seriousConcern)) {
+
+                if (seriousConcernFound.equals(false)) {
+
+
+                    Toast.makeText(getActivity(), "No Serious Concern Mention found", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            } else if (sentimentFilter.equals(disappointed)) {
+
+                if (disappointedFound.equals(false)) {
+
+
+                    Toast.makeText(getActivity(), "No Disappointed Mention found", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            }
+
+
+
 
 //        EngageAdapter engageAdapter = new EngageAdapter(listData);
 
@@ -454,8 +522,8 @@ public class EngageFragment extends Fragment {
 //            mFavoriteds.add(true);
 //        }
 
-        pbEngage.setVisibility(View.GONE);
-        rvEngage.setVisibility(View.VISIBLE);
+            pbEngage.setVisibility(View.GONE);
+            rvEngage.setVisibility(View.VISIBLE);
 
 //        HomeAdapter adapter = new HomeAdapter(getContext(), m_Ids, mNames,
 //                listData, mSentiments, mRetweeteds, mCreatedAt, mProfileImageUrls,
@@ -464,22 +532,21 @@ public class EngageFragment extends Fragment {
 //        rvEngage.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-
 //        MentionsAdapter adapter = new MentionsAdapter(getContext(), m_Ids, mNames,
 //                listData, mSentiments, mRetweeteds, mCreatedAt, mProfileImageUrls,
 //                mRetweetCounts, mFavoriteCounts, mFavoriteds);
 
 
-                EngageAdapter adapter = new EngageAdapter(getContext(), m_Ids, mNames,
-                listData, mSentimentAnalysisLogReg, mRetweeteds, mCreatedAt, imageData,
-                mRetweetCounts, mFavoriteCounts, mFavoriteds);
+            EngageAdapter adapter = new EngageAdapter(getContext(), m_Ids, mNames,
+                    listData, mSentimentAnalysisLogReg, mRetweeteds, mCreatedAt, imageData,
+                    mRetweetCounts, mFavoriteCounts, mFavoriteds);
 
 
-        rvEngage.setAdapter(adapter);
-        rvEngage.setLayoutManager(new LinearLayoutManager(getContext()));
+            rvEngage.setAdapter(adapter);
+            rvEngage.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-
+        }
 
 
 

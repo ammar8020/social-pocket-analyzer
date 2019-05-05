@@ -1,9 +1,11 @@
 package com.ammar.socialpocketa.api;
 
+import com.ammar.socialpocketa.models.CreateTweet;
 import com.ammar.socialpocketa.models.LatestReply;
 import com.ammar.socialpocketa.models.LoginTwitter;
 import com.ammar.socialpocketa.models.Profile;
 import com.ammar.socialpocketa.models.RMAnalysisDetail;
+import com.ammar.socialpocketa.models.ReplyToTweet;
 import com.ammar.socialpocketa.models.TrendDetail;
 import com.ammar.socialpocketa.models.TweetDetail;
 import com.ammar.socialpocketa.models.Hashtag;
@@ -11,7 +13,9 @@ import com.ammar.socialpocketa.models.Login;
 import com.ammar.socialpocketa.models.Mention;
 import com.ammar.socialpocketa.models.Home;
 import com.ammar.socialpocketa.models.Register;
+import com.ammar.socialpocketa.models.reply.Reply;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -84,7 +88,7 @@ public interface APIService {
 
     //the LatestReply call
     // defined the Call type as a List and the List type as LatestReply.
-    @GET("api/visualization/latestMentions")
+    @GET("api/visualization/latestReplies")
     Call<List<LatestReply>> getLatestReply();
 
 
@@ -97,12 +101,60 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST("api/users/twittertokens")
-    Call<LoginTwitter> getLoginTwitter(
+    Call<LoginTwitter> loginTwitter(
             @Field("user") String user,
             @Field("twitterUsername") String twitterUsername,
             @Field("token") String token,
             @Field("tokenSecret") String tokenSecret
     );
+
+
+
+    @FormUrlEncoded
+    @POST("api/posts/tweet")
+    Call<CreateTweet> createTweet(
+            @Field("twtext") String twtext
+    );
+
+
+//    That's how we pass an array in Retrofit
+
+//    @Field("user_uuids[]") ArrayList<String> user_uuids
+
+
+//    @FormUrlEncoded
+//    @POST("api/posts/reply")
+//    Call<Reply> replyToTweet(
+//
+////            @Field("replies[]") Reply[] replies,
+//            @Field("replies[]") ArrayList<Reply> replies,
+//
+////            @Field("replies[]") ArrayList<String> replies,
+//            @Field("replyBackText") String replyBackText
+//    );
+
+
+
+    @FormUrlEncoded
+    @POST("api/posts/replyalter")
+    Call<Reply> replyToTweet(
+
+
+            @Field("replyBackText") String replyBackText,
+
+
+            @Field("id_str") ArrayList<String> id_str,
+
+
+//            @Field("replies[]") Reply[] replies,
+            @Field("screenNames") ArrayList<String> screenNames
+
+
+
+//            @Field("replies[]") ArrayList<String> replies,
+
+    );
+
 
 
 }
