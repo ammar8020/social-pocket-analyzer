@@ -113,19 +113,20 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder>{
         }
 
 
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on: " + mNames.get(position));
+//        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d(TAG, "onClick: clicked on: " + mNames.get(position));
+//
+//                Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
+//
+//                Intent intent = new Intent(mContext, TweetDetailsActivity.class);
+//                intent.putExtra("image", mProfileImageUrl.get(position));
+//                intent.putExtra("name", mNames.get(position));
+//                mContext.startActivity(intent);
+//            }
+//        });
 
-                Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(mContext, TweetDetailsActivity.class);
-                intent.putExtra("image", mProfileImageUrl.get(position));
-                intent.putExtra("name", mNames.get(position));
-                mContext.startActivity(intent);
-            }
-        });
     }
 
     @Override

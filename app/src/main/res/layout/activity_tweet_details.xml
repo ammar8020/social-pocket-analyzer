@@ -8,7 +8,7 @@
     tools:context=".TweetDetailsActivity">
 
 
-    <include layout="@layout/layout_tweet"/>
+    <include layout="@layout/layout_tweet_alter"/>
 
     <ProgressBar
         android:id="@+id/pb_reply"
@@ -31,8 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="12dp"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </RelativeLayout>

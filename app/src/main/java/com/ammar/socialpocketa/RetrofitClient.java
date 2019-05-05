@@ -31,7 +31,7 @@ public class RetrofitClient {
 
 
 
-    private static String authToken = "";
+    public static String authToken = "";
 
     private static String tempToken = "";
 

@@ -1,6 +1,7 @@
 package com.ammar.socialpocketa;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -282,6 +283,21 @@ public class MainActivity extends AppCompatActivity
 //    }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
 
+        if (RetrofitClient.authToken == null) {
+
+            Log.d(TAG, "onResume: Setting Token in Main Activity");
+
+            Log.d(TAG, "onResume: SharedPrefManager.getKeyToken(): " + SharedPrefManager.getKeyToken());
+
+            RetrofitClient.getToken(SharedPrefManager.getKeyToken());
+
+        }
+
+
+    }
 }

@@ -152,20 +152,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
 
 
-        holder.tweet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on: " + mNames.get(position));
-
-                Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(mContext, TweetDetailsActivity.class);
-                intent.putExtra("image", mProfileImageUrl.get(position));
-                intent.putExtra("name", mNames.get(position));
-                intent.putExtra("_id", m_Ids.get(position));
-                mContext.startActivity(intent);
-            }
-        });
+//        holder.tweet.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                sentIntent(position);
+//
+//            }
+//        });
 
 
 
@@ -188,15 +182,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
         holder.rlEngage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on: " + mNames.get(position));
 
-                Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
+                sentIntent(position);
 
-                Intent intent = new Intent(mContext, TweetDetailsActivity.class);
-                intent.putExtra("image", mProfileImageUrl.get(position));
-                intent.putExtra("name", mNames.get(position));
-                intent.putExtra("_id", m_Ids.get(position));
-                mContext.startActivity(intent);
             }
         });
 
@@ -258,4 +246,30 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
         }
     }
+
+
+
+    public void sentIntent(Integer position) {
+
+
+        Log.d(TAG, "onClick: clicked on: " + mTweets.get(position));
+
+//                Toast.makeText(mContext, mTweets.get(position), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(mContext, TweetDetailsActivity.class);
+        intent.putExtra("image", mProfileImageUrl.get(position));
+        intent.putExtra("name", mNames.get(position));
+        intent.putExtra("_id", m_Ids.get(position));
+        intent.putExtra("time", mCreatedAt.get(position));
+        intent.putExtra("tweet", mTweets.get(position));
+        intent.putExtra("sentiment", mSentiments.get(position));
+        intent.putExtra("favoriteCount", mFavoriteCount.get(position));
+        intent.putExtra("retweetCount", mRetweetCount.get(position));
+
+        mContext.startActivity(intent);
+
+
+    }
+
+
 }

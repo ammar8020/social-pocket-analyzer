@@ -195,23 +195,61 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
             String name = getIntent().getStringExtra("name");
             String image = getIntent().getStringExtra("image");
+            String time = getIntent().getStringExtra("time");
+            String tweet = getIntent().getStringExtra("tweet");
+            String sentiment = getIntent().getStringExtra("sentiment");
+            String favoriteCount = getIntent().getStringExtra("favoriteCount");
+            String retweetCount = getIntent().getStringExtra("retweetCount");
 
-            setImage(image, name);
+
+//            setImage(image, name);
+
+
+            Log.d(TAG, "setImage: setting the image and name to widgets.");
+
+            TextView tvName = findViewById(R.id.tv_name);
+            tvName.setText(name);
+
+            ImageView ivImage = findViewById(R.id.imgView_proPic);
+            Glide.with(this)
+                    .asBitmap()
+                    .load(image)
+                    .into(ivImage);
+
+            TextView tvTime = findViewById(R.id.tv_time);
+            tvTime.setText(time);
+
+            TextView tvTweet = findViewById(R.id.tv_tweet);
+            tvTweet.setText(tweet);
+
+            ImageView ivSentiment = findViewById(R.id.sentiment);
+            Glide.with(this)
+                    .asBitmap()
+                    .load(sentiment)
+                    .into(ivSentiment);
+
+            TextView tvFavoriteCount = findViewById(R.id.tv_like);
+            tvFavoriteCount.setText(favoriteCount);
+
+            TextView tvRetweetCount = findViewById(R.id.tv_comment);
+            tvRetweetCount.setText(retweetCount);
+
+
         }
     }
 
-    private void setImage(String image, String name){
-        Log.d(TAG, "setImage: setting the image and name to widgets.");
-
-        TextView tvName = findViewById(R.id.tv_name);
-        tvName.setText(name);
-
-        ImageView ivImage = findViewById(R.id.imgView_proPic);
-        Glide.with(this)
-                .asBitmap()
-                .load(image)
-                .into(ivImage);
-    }
+//    private void setImage(String image, String name){
+//        Log.d(TAG, "setImage: setting the image and name to widgets.");
+//
+//        TextView tvName = findViewById(R.id.tv_name);
+//        tvName.setText(name);
+//
+//        ImageView ivImage = findViewById(R.id.imgView_proPic);
+//        Glide.with(this)
+//                .asBitmap()
+//                .load(image)
+//                .into(ivImage);
+//    }
 
     private void initComments(){
         Log.d(TAG, "initComments: preparing comments.");
