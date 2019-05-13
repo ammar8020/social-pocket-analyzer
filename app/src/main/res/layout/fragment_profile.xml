@@ -22,12 +22,13 @@
             android:background="@drawable/circle_border">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_profile_pic"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_margin="9dp"
                 android:background="@drawable/circle"
                 android:padding="3dp"
-                android:src="@drawable/bridge" />
+                 />
 
         </RelativeLayout>
 
@@ -39,34 +40,41 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15sp"
             android:fontFamily="sans-serif-light"
-            android:text="Ammar Ahmed"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="32sp" />
 
 
         <TextView
-            android:id="@+id/tv_address"
+            android:id="@+id/tv_screen_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_name"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
-            android:text="new york, usa"
-            android:textAllCaps="true"
+            android:text=""
             android:textColor="@color/address"
             android:textSize="14sp" />
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_settings" />
+        <ProgressBar
+            android:id="@+id/pb_profile"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true" />
+
+        <!--<ImageView-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:adjustViewBounds="true"-->
+            <!--android:scaleType="centerInside"-->
+            <!--android:src="@drawable/ic_settings" />-->
 
     </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/linlay1"
@@ -96,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="453K"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="25sp" />
 
@@ -134,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="873"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="25sp" />
 
@@ -176,15 +184,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email"
+                    android:text="Description"
                     android:textColor="@color/headings"
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="ammar@gmail.com"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -205,15 +214,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Phone"
+                    android:text="Total Tweets"
                     android:textColor="@color/headings"
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_total_tweets"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="+1-202-555-0157"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="18sp" />
 

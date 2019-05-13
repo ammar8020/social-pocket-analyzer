@@ -8,14 +8,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ammar.socialpocketa.models.Profile;
+import com.bumptech.glide.Glide;
 
 import java.util.Arrays;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,8 +27,14 @@ public class ProfileFragment extends Fragment {
 
     private static final String TAG = "ProfileFragment";
 
-    TextView followersCount;
-    TextView followingsCount;
+    ProgressBar pbProfile;
+    TextView tvFollowersCount;
+    TextView tvFollowingsCount;
+    TextView tvDescription;
+    TextView tvTotalTweets;
+    TextView tvName, tvScreenName;
+    CircleImageView civProfilePic;
+
 
     @Nullable
     @Override
@@ -34,9 +43,14 @@ public class ProfileFragment extends Fragment {
         //change R.layout.yourlayoutfilename for each of your fragments
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        followersCount = rootView.findViewById(R.id.followers_count);
-
-        followingsCount = rootView.findViewById(R.id.followings_count);
+        pbProfile = rootView.findViewById(R.id.pb_profile);
+        tvFollowersCount = rootView.findViewById(R.id.followers_count);
+        tvFollowingsCount = rootView.findViewById(R.id.followings_count);
+        tvDescription = rootView.findViewById(R.id.tv_description);
+        tvTotalTweets = rootView.findViewById(R.id.tv_total_tweets);
+        tvName = rootView.findViewById(R.id.tv_name);
+        tvScreenName = rootView.findViewById(R.id.tv_screen_name);
+        civProfilePic = rootView.findViewById(R.id.civ_profile_pic);
 
         apiResponse();
 
@@ -56,6 +70,8 @@ public class ProfileFragment extends Fragment {
 
     public void apiResponse() {
 
+        pbProfile.setVisibility(View.VISIBLE);
+
         //now making the call object
         //Here using the api method that we created inside the api interface
         Call<Profile> call = RetrofitClient
@@ -69,10 +85,24 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(Call<Profile> call, Response<Profile> response) {
 
+                pbProfile.setVisibility(View.GONE);
+
                 try {
 
-                    followersCount.setText(response.body().getFollowerCount().toString());
-                    followingsCount.setText(response.body().getFollowingCount().toString());
+                    tvFollowersCount.setText(response.body().getFollowersCount().toString());
+                    tvFollowingsCount.setText(response.body().getFriendsCount().toString());
+                    tvDescription.setText(response.body().getDescription().toString());
+                    tvTotalTweets.setText(response.body().getStatusesCount().toString());
+                    tvName.setText(response.body().getName());
+                    tvScreenName.setText(response.body().getScreenName());
+
+
+                    Glide.with(getActivity())
+                            .asBitmap()
+                            .load(response.body().getProfileImageUrlHttps())
+                            .into(civProfilePic);
+
+
 
                 } catch (NullPointerException e) {
                     Log.e(TAG, "onResponse: NullPointerException " + e.getMessage() );

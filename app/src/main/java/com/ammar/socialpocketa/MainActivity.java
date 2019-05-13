@@ -1,7 +1,9 @@
 package com.ammar.socialpocketa;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
 
 //        ctx = this;
@@ -300,4 +305,16 @@ public class MainActivity extends AppCompatActivity
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }

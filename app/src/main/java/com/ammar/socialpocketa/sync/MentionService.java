@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -149,8 +151,8 @@ public class MentionService extends Service {
         //initialize the TimerTask's job
         initializeTimerTask();
 
-        //schedule the timer, to wake up every 1 second or so...
-        timer.schedule(timerTask, 1000 * 10, 1000 * 60 * 2);
+        //schedule the timer, to wake up every 10 seconds or so...
+        timer.schedule(timerTask, 1000 * 2, 1000 * 60 * 2);
     }
 
     /**
@@ -173,10 +175,18 @@ public class MentionService extends Service {
 
                 mDatabaseHelper = new DatabaseHelper(getApplicationContext());
 
-                apiResponse();
+                if ( isNetworkAvailable() ) {
+                    apiResponse();
 
-                displayDataFromDb();
+                    displayDataFromDb();
 
+                    Log.d(TAG, "run: Network is Available so Fetching mentions from Twitter ");
+                    
+                } else {
+
+                    Log.d(TAG, "run: Network not Available.");
+                    
+                }
 
             }
         };
@@ -756,6 +766,16 @@ public class MentionService extends Service {
 
 
     }
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+    
+    
 
 //    public void setBitmapImage(Bitmap bitmap) {
 //
