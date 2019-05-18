@@ -16,6 +16,12 @@ public class SharedPrefManager {
     private static final String KEY_USER_ID = "keyuserid";
     private static final String KEY_USER_NAME = "keyusername";
     private static final String KEY_USER_EMAIL = "keyuseremail";
+
+//    private static final String KEY_TWITTER_USER_NAME = "keytwitterusername";
+
+    private static final String KEY_USER_ID2= "keyuserid2";
+
+
     private static final String KEY_TOKEN = "keytoken";
 
     public SharedPrefManager(Context context) {
@@ -49,6 +55,22 @@ public class SharedPrefManager {
         return true;
     }
 
+//    public boolean storeTwitterUserName(String twitterUserName) {
+//        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString(KEY_TWITTER_USER_NAME, twitterUserName);
+//        editor.apply();
+//        return true;
+//    }
+
+        public boolean storeUserId(String userId) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_USER_ID2, userId);
+        editor.apply();
+        return true;
+    }
+
 
     public boolean isLoggedIn() {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -61,8 +83,8 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new Register(
                 sharedPreferences.getString(KEY_USER_ID, "0"),
-                sharedPreferences.getString(KEY_USER_NAME, null),
-                sharedPreferences.getString(KEY_USER_EMAIL, null)
+                sharedPreferences.getString(KEY_USER_NAME, ""),
+                sharedPreferences.getString(KEY_USER_EMAIL, "")
                 );
     }
 

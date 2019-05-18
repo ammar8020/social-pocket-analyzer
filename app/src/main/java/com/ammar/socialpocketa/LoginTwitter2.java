@@ -68,12 +68,15 @@ public class LoginTwitter2 extends AppCompatActivity {
 
                 //Calling login method and passing twitter session
                 login(session, token, secret);
+                pbLoginTwitter.setVisibility(View.GONE);
             }
 
             @Override
             public void failure(TwitterException exception) {
                 //Displaying Toast message
                 Toast.makeText(LoginTwitter2.this, "Authentication failed!", Toast.LENGTH_LONG).show();
+
+                pbLoginTwitter.setVisibility(View.GONE);
             }
         });
     }

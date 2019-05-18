@@ -41,6 +41,7 @@ public class MentionService extends Service {
 
     private static final String TAG = "MentionService";
 
+    private static String mUserId = "";
 
     //private HomeAdapter adapter;
     private static List<Mention> postList;
@@ -152,7 +153,7 @@ public class MentionService extends Service {
         initializeTimerTask();
 
         //schedule the timer, to wake up every 10 seconds or so...
-        timer.schedule(timerTask, 1000 * 2, 1000 * 60 * 2);
+        timer.schedule(timerTask, 1000 * 6, 1000 * 10);
     }
 
     /**
@@ -181,11 +182,14 @@ public class MentionService extends Service {
                     displayDataFromDb();
 
                     Log.d(TAG, "run: Network is Available so Fetching mentions from Twitter ");
-                    
+
+//                    Toast.makeText(MentionService.this, "Network is Available so Fetching mentions from Twitter", Toast.LENGTH_SHORT).show();
+
                 } else {
 
                     Log.d(TAG, "run: Network not Available.");
-                    
+
+//                    Toast.makeText(MentionService.this, "Network not Available.", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -354,7 +358,10 @@ public class MentionService extends Service {
 //                                continue;
 //
 //                            }
-                            if ( data.getString(1).equals( postList.get(i).getText() ) ) {
+
+//                            if ( data.getString(1).equals( postList.get(i).getText() ) ) {
+
+                            if ( data.getString(3).equals( postList.get(i).getId() ) ) {
 
                                 Log.d(TAG, "onResponse: Tweet Data found in Database");
 
@@ -454,13 +461,22 @@ public class MentionService extends Service {
                             Mention getPostList = postList.get(i);
 
 
+//                            AddData(postList.get(i).getText(), byteImage, getPostList.getId(),
+//                                    getPostList.getIdStr(), getPostList.getName(),
+//                                    getPostList.getScreenName(), getPostList.getCreatedAt(),
+//                                    getPostList.getRetweetCount(),
+//                                    getPostList.getFavoriteCount(), getPostList.getSentimentAnalysisLogreg(),
+//                                    getPostList.getSentimentAnalysisNaiveBayes(), getPostList.getSentimentAnalysisRnn()
+//                                    );
+
                             AddData(postList.get(i).getText(), byteImage, getPostList.getId(),
-                                    getPostList.getIdStr(), getPostList.getName(),
+                                    getPostList.getUser(), getPostList.getName(),
                                     getPostList.getScreenName(), getPostList.getCreatedAt(),
                                     getPostList.getRetweetCount(),
                                     getPostList.getFavoriteCount(), getPostList.getSentimentAnalysisLogreg(),
-                                    getPostList.getSentimentAnalysisNaiveBayes(), getPostList.getSentimentAnalysisRnn()
-                                    );
+                                    getPostList.getSentimentAnalysisNaiveBayes(),
+                                    getPostList.getSentimentAnalysisRnn(), mUserId
+                            );
 
 
                             int notificationId;
@@ -469,10 +485,11 @@ public class MentionService extends Service {
 
 
                             String CHANNEL_ID = "123";
-                            String textTitle = " Mentioned you";
+//                            String textTitle = " Mentioned you";
+
 //                                String textContent = mTweets.get(2);
 
-
+                            String textTitle = "A New Analysis Available";
 
 //                            Glide.with(getApplicationContext())
 //                                    .asBitmap()
@@ -494,8 +511,12 @@ public class MentionService extends Service {
                             NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                                     .setLargeIcon(tempBitmapCircular)
                                     .setSmallIcon(R.drawable.icon_mentions)
-                                    .setContentTitle(postList.get(i).getName() + textTitle)
-                                    .setContentText(postList.get(i).getText())
+
+//                                    .setContentTitle(postList.get(i).getName() + textTitle)
+//                                    .setContentText(postList.get(i).getText())
+
+                                    .setContentTitle(textTitle)
+                                    .setContentText(postList.get(i).getName() + " mentioned you")
                                     .setPriority(NotificationCompat.PRIORITY_MAX)
                                     .setDefaults(Notification.DEFAULT_ALL);
 
@@ -679,7 +700,9 @@ public class MentionService extends Service {
 
             @Override
             public void onFailure(Call<List<Mention>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
 
@@ -697,13 +720,13 @@ public class MentionService extends Service {
     public void AddData(String newEntry, byte[] byteImage, String _ID, String IDStr, String Name,
                         String ScreenName, String CreatedAt,
                         String RetweetCount, String FavoriteCount, String SentimentAnalysisLogreg,
-                        String SentimentAnalysisNaiveBayes, String SentimentAnalysisRnn) {
+                        String SentimentAnalysisNaiveBayes, String SentimentAnalysisRnn, String mentionedUserId) {
 
-
+//        IdStr stores actually id of the user who mentioned
         boolean insertData = mDatabaseHelper.addData(newEntry, byteImage, _ID, IDStr, Name,
                  ScreenName, CreatedAt,
                 RetweetCount, FavoriteCount, SentimentAnalysisLogreg,
-                SentimentAnalysisNaiveBayes, SentimentAnalysisRnn);
+                SentimentAnalysisNaiveBayes, SentimentAnalysisRnn, mentionedUserId);
 
         Log.d(TAG, "AddData: Adding byte Image to DB: " + byteImage);
 
@@ -782,6 +805,13 @@ public class MentionService extends Service {
 //
 //
 //    }
+
+
+    public static void setUserId(String userId) {
+
+        mUserId = userId;
+
+    }
 
 
 }

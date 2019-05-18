@@ -143,8 +143,8 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                 Log.d(TAG, "onClick: opening dialog.");
 
-//                MyCustomDialog dialog = new MyCustomDialog();
-//                dialog.show(getFragmentManager(), "MyCustomDialog");
+//                TweetDialog dialog = new TweetDialog();
+//                dialog.show(getFragmentManager(), "TweetDialog");
 
                 ReplyDialog dialog = new ReplyDialog();
                 dialog.show(getFragmentManager(), "ReplyDialog");

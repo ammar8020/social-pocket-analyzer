@@ -15,14 +15,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+         >
 
         <!--
         <activity android:name=".HomeFragment">
 
         </activity>
         -->
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,11 +32,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".TweetDetailsActivity" />
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".TweetDetailsActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
 
             <!--
             <intent-filter>
@@ -57,12 +68,15 @@
             android:exported="true"
             android:label="RestartServiceWhenStopped" />
 
-        <activity android:name=".LoginTwitterActivity">
+        <activity android:name=".LoginTwitterActivity"
+            android:screenOrientation="portrait">
+
 
         </activity>
 
 
-        <activity android:name=".LoginTwitter2">
+        <activity android:name=".LoginTwitter2"
+            android:screenOrientation="portrait">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -71,7 +85,8 @@
         </activity>
 
 
-        <activity android:name=".Homepage">
+        <activity android:name=".Homepage"
+            android:screenOrientation="portrait">
 
         </activity>
 

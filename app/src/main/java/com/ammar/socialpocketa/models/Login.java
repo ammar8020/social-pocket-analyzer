@@ -12,6 +12,18 @@ public class Login {
     @Expose
     private String token;
 
+    @SerializedName("email")
+    @Expose
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     public Login(Boolean success, String token) {
         this.success = success;
@@ -33,5 +45,6 @@ public class Login {
     public void setToken(String token) {
         this.token = token;
     }
+
 
 }

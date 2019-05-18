@@ -137,7 +137,7 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST("api/posts/replyalter")
-    Call<Reply> replyToTweet(
+    Call<ReplyToTweet> replyToTweet(
 
 
             @Field("replyBackText") String replyBackText,

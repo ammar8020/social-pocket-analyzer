@@ -3,6 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:text="Green = Appreciative     Red = Abusive
+        Pink = Serious Concern
+        Yellow = Disappointed
+        Blue = Suggestive"
+        android:textSize="12sp" />
 
     <ProgressBar
         android:id="@+id/pb_visualization"
@@ -13,10 +24,15 @@
 
 
     <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/idPieChart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/idPieChart">
+        android:layout_height="486dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
     </com.github.mikephil.charting.charts.PieChart>
+
+
 
 
     <!--<com.github.mikephil.charting.charts.BarChart-->

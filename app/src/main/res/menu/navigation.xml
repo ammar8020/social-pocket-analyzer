@@ -6,19 +6,25 @@
         android:icon="@drawable/baseline_home_black_24dp"
         android:title="@string/title_home" />
 
-    <item
-        android:id="@+id/navigation_search"
-        android:icon="@drawable/baseline_search_black_24dp"
-        android:title="@string/title_search" />
+    <!--<item-->
+        <!--android:id="@+id/navigation_search"-->
+        <!--android:icon="@drawable/baseline_search_black_24dp"-->
+        <!--android:title="@string/title_search" />-->
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/baseline_notifications_black_24dp"
-        android:title="@string/title_notifications" />
+    android:id="@+id/nav_replies_visualization"
+    android:icon="@drawable/baseline_bar_chart_black_24dp"
+    android:title="Replies Visualization" />
+
 
     <item
         android:id="@+id/navigation_mentions"
         android:icon="@drawable/icon_mentions"
         android:title="@string/title_mentions" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/baseline_pie_chart_black_24dp"
+        android:title="@string/title_mentions_visualization" />
 
 </menu>

@@ -316,7 +316,7 @@ public class LatestRepliesFragment extends Fragment {
                     Log.d(TAG, "onResponse: replyList: " + replyList);
 
 
-                    if (replyList == null) {
+                    if (replyList.size() < 1) {
 
                         pbLatestReplies.setVisibility(View.INVISIBLE);
                         Toast.makeText(getContext(), "No Latest Replies found", Toast.LENGTH_LONG).show();

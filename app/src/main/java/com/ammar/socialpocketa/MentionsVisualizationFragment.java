@@ -266,6 +266,14 @@ public class MentionsVisualizationFragment extends Fragment {
                     }
 
 
+                    if (tempAppreciativeCount == 0 && tempAbusiveCount == 0 &&
+                            tempDisappointedCount == 0 && tempSuggestiveCount == 0 &&
+                            tempSeriousConcernCount == 0) {
+
+                        Toast.makeText(getContext(), "There are no mentions available to visualize", Toast.LENGTH_SHORT).show();
+
+                    }
+
 
 
                     final Integer[] yData = {tempAppreciativeCount, tempAbusiveCount, tempSuggestiveCount,
@@ -367,7 +375,7 @@ public class MentionsVisualizationFragment extends Fragment {
         }
 
         //create the data set
-        PieDataSet pieDataSet = new PieDataSet(yEntrys, "Mentions Analysis");
+        PieDataSet pieDataSet = new PieDataSet(yEntrys, "");
         pieDataSet.setSliceSpace(2);
         pieDataSet.setValueTextSize(12);
 

@@ -1,6 +1,8 @@
 package com.ammar.socialpocketa;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -38,6 +40,10 @@ public class EngageFragment extends Fragment {
     RecyclerView rvEngage;
 
     ProgressBar pbEngage;
+
+    private static final String SHARED_PREF_NAME = "usersharedpref";
+
+    private static final String KEY_USER_ID2 = "keyuserid2";
 
 
 //    private List<String> m_Ids = new ArrayList<>();
@@ -186,12 +192,23 @@ public class EngageFragment extends Fragment {
         Boolean disappointedFound = false;
 
 
-        if (data == null) {
+//        Boolean dataFound = false;
 
-            pbEngage.setVisibility(View.INVISIBLE);
-            Toast.makeText(getActivity(), "No Mentions found", Toast.LENGTH_LONG).show();
+        Boolean checkEngaged = false;
 
-        } else {
+//        if (!data.moveToNext()) {
+//
+//            pbEngage.setVisibility(View.INVISIBLE);
+//            Toast.makeText(getActivity(), "No Mentions found", Toast.LENGTH_LONG).show();
+//
+//        } else {
+
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+            String userId = sharedPreferences.getString(KEY_USER_ID2, "");
+
+//            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+//            String defaultValue = getResources().getString(1);
 
 
             while (data.moveToNext()) {
@@ -224,6 +241,19 @@ public class EngageFragment extends Fragment {
 //            mRetweeteds.add(true);
 //            mFavoriteds.add(true);
 
+//                dataFound = true;
+
+
+
+                Log.d(TAG, "populateListView: userId: " + userId);
+
+                Log.d(TAG, "populateListView: mentionedUserId data.getString(13) " + data.getString(13));
+
+//                data.getString(13) is actually mentionedUserId
+
+                if (userId.equals(data.getString(13))) {
+
+                    checkEngaged = true;
 
                 if (sentimentFilter.equals(appreciative)) {
 
@@ -245,6 +275,8 @@ public class EngageFragment extends Fragment {
 
 //                    Log.d(TAG, "populateListView: ImageData in the form of bitmapImage: " + imageData.get(i));
 
+
+                        //        IdStr actually stores id of the user who mentioned
 
                         m_Ids.add(data.getString(3));
                         mIdStr.add(data.getString(4));
@@ -338,7 +370,7 @@ public class EngageFragment extends Fragment {
 
                     if (seriousConcern.equals(data.getString(10))) {
 
-                        seriousConcernFound= true;
+                        seriousConcernFound = true;
 
 //                     get the value from the database in column 1
 //                     then add it to the ArrayList
@@ -442,65 +474,87 @@ public class EngageFragment extends Fragment {
                 }
 
 
+            }
+
+
 //            i++;
+
+
 
 
             }
 
 
+//            if (!dataFound) {
+//
+//                pbEngage.setVisibility(View.INVISIBLE);
+//                Toast.makeText(getActivity(), "No Mentions found", Toast.LENGTH_SHORT).show();
+//
+//            }   else
+
+            if (!checkEngaged) {
+
+                pbEngage.setVisibility(View.INVISIBLE);
+                Toast.makeText(getActivity(), "No Mentions found", Toast.LENGTH_SHORT).show();
 
 
+            }
 
-            if(sentimentFilter.equals(appreciative)) {
-
-
-                if (appreciativeFound.equals(false)) {
+            else {
 
 
-                    Toast.makeText(getActivity(), "No Appreciative Mention found", Toast.LENGTH_SHORT).show();
+                if (sentimentFilter.equals(appreciative)) {
+
+
+                    if (appreciativeFound.equals(false)) {
+
+
+                        Toast.makeText(getActivity(), "No Appreciative Mention found", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                } else if (sentimentFilter.equals(abusive)) {
+
+                    if (abusiveFound.equals(false)) {
+
+
+                        Toast.makeText(getActivity(), "No Abusive Mention found", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                } else if (sentimentFilter.equals(suggestive)) {
+
+                    if (suggestiveFound.equals(false)) {
+
+
+                        Toast.makeText(getActivity(), "No Suggestive Mention found", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                } else if (sentimentFilter.equals(seriousConcern)) {
+
+                    if (seriousConcernFound.equals(false)) {
+
+
+                        Toast.makeText(getActivity(), "No Serious Concern Mention found", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                } else if (sentimentFilter.equals(disappointed)) {
+
+                    if (disappointedFound.equals(false)) {
+
+
+                        Toast.makeText(getActivity(), "No Disappointed Mention found", Toast.LENGTH_SHORT).show();
+
+                    }
+
 
                 }
-
-
-            } else if (sentimentFilter.equals(abusive)) {
-
-                if (abusiveFound.equals(false)) {
-
-
-                    Toast.makeText(getActivity(), "No Abusive Mention found", Toast.LENGTH_SHORT).show();
-
-                }
-
-
-            } else if (sentimentFilter.equals(suggestive)) {
-
-                if (suggestiveFound.equals(false)) {
-
-
-                    Toast.makeText(getActivity(), "No Suggestive Mention found", Toast.LENGTH_SHORT).show();
-
-                }
-
-
-            } else if (sentimentFilter.equals(seriousConcern)) {
-
-                if (seriousConcernFound.equals(false)) {
-
-
-                    Toast.makeText(getActivity(), "No Serious Concern Mention found", Toast.LENGTH_SHORT).show();
-
-                }
-
-
-            } else if (sentimentFilter.equals(disappointed)) {
-
-                if (disappointedFound.equals(false)) {
-
-
-                    Toast.makeText(getActivity(), "No Disappointed Mention found", Toast.LENGTH_SHORT).show();
-
-                }
-
 
             }
 
@@ -546,7 +600,7 @@ public class EngageFragment extends Fragment {
             rvEngage.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        }
+//        }
 
 
 

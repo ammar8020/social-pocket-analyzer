@@ -61,15 +61,16 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:text="Login"
-            android:textSize="15sp"
-            android:background="@color/green"
-            android:layout_gravity="center"/>
+            android:background="@color/tw__composer_blue"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/white"/>
 
         <TextView android:id="@+id/link_signup"
             android:layout_width="fill_parent"
@@ -77,8 +78,17 @@
             android:layout_marginBottom="24dp"
             android:text="No account yet? Create one"
             android:gravity="center"
-            android:textSize="18dip"
+            android:textSize="19sp"
             android:textColor="@color/white"/>
 
+        <ProgressBar
+            android:id="@+id/pb_login"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+
     </LinearLayout>
+
 </ScrollView>

@@ -67,7 +67,11 @@ public class RegisterActivity extends AppCompatActivity {
                     txtConPassword.setError("This field is required");
                 } else if (txtPassword.getText().toString().trim().compareTo(txtConPassword.getText().toString().trim()) != 0) {
                     txtConPassword.setError("Not matched with the Password");
-                } else {
+                } else if (txtPassword.getText().toString().trim().length() < 8) {
+                    txtPassword.setError("Password must include 8 characters!");
+                }
+
+                else {
                     Snackbar.make(v, "No validation errors, continue signup", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
                     userSignUp();
@@ -135,12 +139,14 @@ public class RegisterActivity extends AppCompatActivity {
                 //if there is no error
                 //displaying the message from the response as toast
                 else if(resMsg.equals("OK")) {
-                    Toast.makeText(getApplicationContext(), response.body().getEmail(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "An email verification has been sent to you. Please verify your Email First", Toast.LENGTH_LONG).show();
 
                     //starting profile activity
-                    finish();
+//                    finish();
                     SharedPrefManager.getInstance(getApplicationContext()).userRegister(response.body().getId(), response.body().getName(), response.body().getEmail());
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                    finish();
 
                 }
 

@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your Custom Dialog Heading"
+            android:text="Your Tweet here"
             android:textSize="18sp"
             android:textColor="#000"
             android:id="@+id/heading"/>
@@ -32,15 +32,17 @@
             android:id="@+id/input"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SEND"
+            android:id="@+id/action_ok"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:textSize="18sp"
-            android:textColor="#33bbff"
-            android:id="@+id/action_ok"/>
+            android:layout_alignParentEnd="true"
+            android:background="@color/green"
+            android:text="Tweet"
+            android:textColor="@color/white"
+            android:textSize="21sp"
+            android:textAlignment="center"
+            />
 
         <ProgressBar
             android:id="@+id/pb_create_tweet"
@@ -50,15 +52,16 @@
             android:layout_centerVertical="true" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CANCEL"
+            android:id="@+id/action_cancel"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginRight="20dp"
-            android:textSize="18sp"
-            android:textColor="#33bbff"
-            android:id="@+id/action_cancel"/>
+            android:layout_alignParentStart="true"
+            android:background="@color/primary_dark"
+            android:text="Cancel"
+            android:textColor="@color/white"
+            android:textSize="21sp"
+            android:textAlignment="center" />
 
     </RelativeLayout>
 

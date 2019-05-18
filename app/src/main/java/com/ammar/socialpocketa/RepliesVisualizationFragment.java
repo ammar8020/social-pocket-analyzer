@@ -213,6 +213,16 @@ public class RepliesVisualizationFragment extends Fragment {
 
 
 
+                    if (tempAppreciativeCount == 0 && tempAbusiveCount == 0 &&
+                            tempDisappointedCount == 0 && tempSuggestiveCount == 0 &&
+                            tempSeriousConcernCount == 0) {
+
+                        Toast.makeText(getContext(), "There are no replies available to visualize", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+
 
                     final Integer[] yData = {tempAppreciativeCount, tempAbusiveCount, tempSuggestiveCount,
                             tempSeriousConcernCount, tempDisappointedCount};
@@ -308,12 +318,18 @@ public class RepliesVisualizationFragment extends Fragment {
             yEntrys.add(new PieEntry(yData[i] , i));
         }
 
+//        if(yEntrys.size() < 1) {
+//
+//            Toast.makeText(getActivity(), "No replies found to display", Toast.LENGTH_SHORT).show();
+//
+//        }
+
         for(int i = 1; i < xData.length; i++){
             xEntrys.add(xData[i]);
         }
 
         //create the data set
-        PieDataSet pieDataSet = new PieDataSet(yEntrys, "Replies Analysis");
+        PieDataSet pieDataSet = new PieDataSet(yEntrys, "");
         pieDataSet.setSliceSpace(2);
         pieDataSet.setValueTextSize(12);
 

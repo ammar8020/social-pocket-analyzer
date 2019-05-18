@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ammar.socialpocketa.models.Hashtag;
@@ -42,6 +43,7 @@ public class HashtagFragment extends Fragment {
     ProgressBar pbHashtag;
     RecyclerView recyclerView;
     RecyclerView rvTrends;
+    TextView tvTrendsHeading;
 
 //    //private HomeAdapter adapter;
 //    private static List<Hashtag> postList;
@@ -121,6 +123,8 @@ public class HashtagFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.rv_hashtag);
         rvTrends = rootView.findViewById(R.id.rv_trend);
 
+        tvTrendsHeading = rootView.findViewById(R.id.tv_trends_heading);
+
         initTrends();
 
         Log.d(TAG, "onCreateView: done init");
@@ -135,6 +139,11 @@ public class HashtagFragment extends Fragment {
                 if (etKeyword.length() == 0) {
 
                     Toast.makeText(getContext(), "Please Enter any hashtag first ", Toast.LENGTH_SHORT).show();
+
+                } else if (etKeyword.length() > 280) {
+
+                    Toast.makeText(getContext(), "Hashtag Character length cannot be greater than 280 ", Toast.LENGTH_SHORT).show();
+
 
                 } else {
 
@@ -452,7 +461,7 @@ public class HashtagFragment extends Fragment {
 
 
 
-
+        tvTrendsHeading.setVisibility(View.GONE);
 
 //        rvTrends.setVisibility(View.INVISIBLE);
         rvTrends.setVisibility(View.GONE);
@@ -576,7 +585,7 @@ public class HashtagFragment extends Fragment {
 //                    List<Boolean> favoriteds = new ArrayList<>();
 
 
-                    if (postList == null) {
+                    if (postList.size() < 1) {
 
                         pbHashtag.setVisibility(View.INVISIBLE);
                         Toast.makeText(getActivity(), "No Tweets found for given Hashtag", Toast.LENGTH_LONG).show();
@@ -1064,6 +1073,10 @@ public class HashtagFragment extends Fragment {
 
         if (etKeyword.length() == 0) {
             Toast.makeText(getContext(), "Please Enter any hashtag first ", Toast.LENGTH_SHORT).show();
+
+        } else if (etKeyword.getText().toString().contains(" ")) {
+
+            Toast.makeText(getContext(), "Spaces are not allowed", Toast.LENGTH_SHORT).show();
 
         } else {
 

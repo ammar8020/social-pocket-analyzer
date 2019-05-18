@@ -3,15 +3,18 @@ package com.ammar.socialpocketa;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +23,13 @@ import com.ammar.socialpocketa.api.APIUrl;
 import com.ammar.socialpocketa.data.SharedPrefManager;
 import com.ammar.socialpocketa.models.Login;
 import com.ammar.socialpocketa.models.LoginTwitter;
+import com.ammar.socialpocketa.models.Mention;
+import com.ammar.socialpocketa.utils.TimeUtil;
 import com.auth0.android.jwt.Claim;
 import com.auth0.android.jwt.JWT;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +44,10 @@ public class LoginActivity extends AppCompatActivity {
     TextView linkSignup;
     EditText txtEmail, txtPassword;
     Button btnLogin;
+
+    ProgressDialog progressDialog;
+
+    ProgressBar pbLogin;
     public static String authToken = "";
 
     public static String getDecodedToken() {
@@ -73,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.input_email);
         txtPassword = findViewById(R.id.input_password);
         btnLogin = findViewById(R.id.btn_login);
+        pbLogin = findViewById(R.id.pb_login);
 
         linkSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
                     txtEmail.setError("Please enter a valid email.");
                 } else if(txtPassword.getText().toString().trim().isEmpty()) {
                     txtPassword.setError("Password is required!");
+                } else if (txtPassword.getText().toString().trim().length() < 8) {
+                    txtPassword.setError("Password must include 8 characters!");
                 } else {
                     Snackbar.make(view, "No validation errors, continue login", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     /*Intent intent = new Intent(getApplicationContext(), HomeFragment.class);
@@ -108,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void userSignIn() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Signing In...");
         progressDialog.show();
 
@@ -127,12 +142,13 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
 
                 String resMsg = response.message();
 
+
                 if (resMsg.equals("OK")) {
-                    finish();
+//                    finish();
                     SharedPrefManager.getInstance(getApplicationContext()).userLogin(email, response.body().getToken());
                     //Toast.makeText(getApplicationContext(), response.body().getToken(), Toast.LENGTH_LONG).show();
 
@@ -159,24 +175,46 @@ public class LoginActivity extends AppCompatActivity {
                     RetrofitClient.getToken(tempAuthToken);
 
                     if (tempAuthToken == null) {
-                        finish();
+//                        finish();
                         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-
+                        finish();
                     }
 
                     setAuthToken(tempAuthToken);
 
 
+                    apiResponse();
+
 //                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-                    startActivity(new Intent(getApplicationContext(), LoginTwitter2.class));
+//                    startActivity(new Intent(getApplicationContext(), LoginTwitter2.class));
+
+
+
 
                 }
 
-                //else if(resMsg.equals("Bad Request")) {
-                else {
+
+//                else if ( response.body().getEmail() != null) {
+//            }
+
+//                else {
+
+                else if (resMsg.equals("Forbidden")) {
+                        Toast.makeText(LoginActivity.this, "An email verification has been sent to you. Please verify your Email First", Toast.LENGTH_SHORT).show();
+
+                        progressDialog.dismiss();
+                }
+
+
+                else if(resMsg.equals("Not Found")) {
                     Toast.makeText(getApplicationContext(), "Invalid email or password", Toast.LENGTH_LONG).show();
+
+                    progressDialog.dismiss();
+
                 }
+
+//                }
             }
 
             @Override
@@ -203,6 +241,75 @@ public class LoginActivity extends AppCompatActivity {
         return authToken;
 
     }
+
+
+
+
+
+
+    public void apiResponse() {
+
+//        pbLogin.setVisibility(View.VISIBLE);
+
+        //now making the call object
+        //Here using the api method that we created inside the api interface
+        Call<List<Mention>> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .getMentions();
+
+
+        call.enqueue(new Callback<List<Mention>>() {
+
+            @Override
+            public void onResponse(Call<List<Mention>> call, Response<List<Mention>> response) {
+
+
+//                pbLogin.setVisibility(View.GONE);
+
+                progressDialog.dismiss();
+
+                try {
+
+                    if (response.code() == 400) {
+
+                        Toast.makeText(LoginActivity.this, "SignIn with twitter to analyze your tweets", Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(getApplicationContext(), LoginTwitter2.class));
+
+                        finish();
+
+                    } else if (response.code() == 200) {
+
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                        finish();
+                    }
+
+
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "onResponse: NullPointerException " + e.getMessage());
+//                    noOfTweets = 0;
+                }
+
+
+            }
+
+
+            @Override
+            public void onFailure(Call<List<Mention>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+
+                progressDialog.dismiss();
+            }
+        });
+
+    }
+
+
+
+
+
 
 
 }

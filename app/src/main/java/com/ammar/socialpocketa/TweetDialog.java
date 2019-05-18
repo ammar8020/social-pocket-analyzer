@@ -29,9 +29,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class MyCustomDialog extends DialogFragment {
+public class TweetDialog extends DialogFragment {
 
-    private static final String TAG = "MyCustomDialog";
+    private static final String TAG = "TweetDialog";
 
     public interface OnInputListener{
         void sendInput(String input);
@@ -92,7 +92,23 @@ public class MyCustomDialog extends DialogFragment {
                 //"Best Practice" but it takes longer
 //                mOnInputListener.sendInput(input);
 
-                apiRequest();
+
+                if (mInput.length() == 0) {
+
+                    Toast.makeText(getActivity(), "Please Enter any Tweet first ", Toast.LENGTH_SHORT).show();
+
+                } else if (mInput.length() > 280) {
+
+                    Toast.makeText(getActivity(), "Tweet Character length cannot be greater than 280 ", Toast.LENGTH_SHORT).show();
+
+
+                } else {
+
+                    apiRequest();
+
+                }
+
+
 
 
 //                getDialog().dismiss();

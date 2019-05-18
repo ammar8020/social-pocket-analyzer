@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -135,9 +136,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="5 replies"
+                    android:text="15"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv_retweet"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toStartOf="@+id/tv_comment"
+                    app:srcCompat="@drawable/tw__composer_logo_blue" />
 
             </RelativeLayout>
 

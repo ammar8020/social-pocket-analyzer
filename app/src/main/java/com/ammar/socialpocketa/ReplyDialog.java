@@ -16,8 +16,7 @@ import android.widget.Toast;
 
 import com.ammar.socialpocketa.api.APIService;
 import com.ammar.socialpocketa.api.APIUrl;
-import com.ammar.socialpocketa.models.reply.Reply;
-import com.ammar.socialpocketa.models.reply.Reply;
+import com.ammar.socialpocketa.models.ReplyToTweet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +61,7 @@ public class ReplyDialog extends DialogFragment {
         dialogHeading = view.findViewById(R.id.heading);
 
         dialogHeading.setText("Reply here");
+        mActionOk.setText("Reply");
 
         pbCreateTweet.setVisibility(View.INVISIBLE);
 
@@ -91,8 +91,27 @@ public class ReplyDialog extends DialogFragment {
 //                mOnInputListener.sendInput(input);
 
 //                apiRequest();
+//
+//                apiRequest2();
 
-                apiRequest2();
+
+                if (mInput.length() == 0) {
+
+                    Toast.makeText(getActivity(), "Please Enter any Reply first ", Toast.LENGTH_SHORT).show();
+
+                } else if (mInput.length() > 280) {
+
+                    Toast.makeText(getActivity(), "Reply Character length cannot be greater than 280 ", Toast.LENGTH_SHORT).show();
+
+
+                } else {
+
+
+                    apiRequest2();
+
+
+                }
+
 
 
 //                getDialog().dismiss();
@@ -344,7 +363,7 @@ public class ReplyDialog extends DialogFragment {
 
         //now making the call object
         //Here using the api method that we created inside the api interface
-        Call<Reply> call = RetrofitClient
+        Call<ReplyToTweet> call = RetrofitClient
                 .getInstance()
                 .getApi()
                 .replyToTweet(input, idStrArrList, screenNamesArrList);
@@ -353,19 +372,19 @@ public class ReplyDialog extends DialogFragment {
 //                .replyToTweet(filteredReplyArr, input);
 
 
-        Toast.makeText(getActivity(), "Your reply will be sent to the desired people", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "Your reply will be sent to the desired people", Toast.LENGTH_SHORT).show();
 
 
-        pbCreateTweet.setVisibility(View.INVISIBLE);
+//        pbCreateTweet.setVisibility(View.INVISIBLE);
 
 
 //        getDialog().dismiss();
 
 
 
-        call.enqueue(new Callback<Reply>() {
+        call.enqueue(new Callback<ReplyToTweet>() {
             @Override
-            public void onResponse(Call<Reply> call, Response<Reply> response) {
+            public void onResponse(Call<ReplyToTweet> call, Response<ReplyToTweet> response) {
 
 
 //                if(response.body() != null) {
@@ -405,9 +424,10 @@ public class ReplyDialog extends DialogFragment {
 
 
 
-                Toast.makeText(getActivity(), "Reply to Tweet Successfully", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Reply to Tweet Successfully", Toast.LENGTH_SHORT).show();
 
 
+                Toast.makeText(getActivity(), "Your reply will be sent to the selected users", Toast.LENGTH_SHORT).show();
 
 
                 getDialog().dismiss();
@@ -432,7 +452,7 @@ public class ReplyDialog extends DialogFragment {
 
 
             @Override
-            public void onFailure(Call<Reply> call, Throwable t) {
+            public void onFailure(Call<ReplyToTweet> call, Throwable t) {
 //                progressDialog.dismiss();
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
             }

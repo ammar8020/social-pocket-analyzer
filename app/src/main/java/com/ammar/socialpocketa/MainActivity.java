@@ -1,9 +1,11 @@
 package com.ammar.socialpocketa;
 
-import android.content.ComponentName;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -20,14 +22,37 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ammar.socialpocketa.data.SharedPrefManager;
+import com.ammar.socialpocketa.models.Profile;
+import com.ammar.socialpocketa.sync.MentionService;
+import com.bumptech.glide.Glide;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
 
     private static final String TAG = "MainActivity";
+
+    private static final String SHARED_PREF_NAME = "usersharedpref";
+
+    private static final String KEY_USER_ID2 = "keyuserid2";
+
+
+    ProgressBar pbNavHeader;
+    TextView tvNavName, tvNavScreenName;
+    CircleImageView civNavProfilePic;
+
+    Intent mServiceIntent;
+    private MentionService mMentionService;
 
 //    Intent mServiceIntent;
 //    private MentionService mSensorService;
@@ -58,6 +83,12 @@ public class MainActivity extends AppCompatActivity
 //        }
 
 
+//        pbNavHeader = findViewById(R.id.pb_nav_header);
+//        tvNavName = findViewById(R.id.tv_nav_name);
+//        tvNavScreenName = findViewById(R.id.tv_nav_screen_name);
+//        civNavProfilePic = findViewById(R.id.civ_nav_profile_pic);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -81,6 +112,23 @@ public class MainActivity extends AppCompatActivity
 
         //add this line to display Profile when the activity is loaded
         //displaySelectedScreen(R.id.nav_profile);
+
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+        String userId = sharedPreferences.getString(KEY_USER_ID2, "");
+
+        MentionService.setUserId(userId);
+
+
+        mMentionService = new MentionService(getApplicationContext());
+        mServiceIntent = new Intent(getApplicationContext(), mMentionService.getClass());
+
+
+        if (!isMyServiceRunning(mMentionService.getClass())) {
+            getApplicationContext().startService(mServiceIntent);
+        }
+
 
 
         HomeFragment postFragment = new HomeFragment();
@@ -111,11 +159,19 @@ public class MainActivity extends AppCompatActivity
 
                 Log.d(TAG, "onClick: opening dialog.");
 
-                MyCustomDialog dialog = new MyCustomDialog();
-                dialog.show(getFragmentManager(), "MyCustomDialog");
+                TweetDialog dialog = new TweetDialog();
+                dialog.show(getFragmentManager(), "TweetDialog");
 
             }
         });
+
+
+
+        if (!isNetworkAvailable()) {
+
+            Toast.makeText(this, "Please connect to Internet to use our features", Toast.LENGTH_SHORT).show();
+
+        }
 
 
 
@@ -129,6 +185,28 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                Log.i ("isMyServiceRunning?", true+"");
+                return true;
+            }
+        }
+        Log.i ("isMyServiceRunning?", false+"");
+        return false;
+    }
+
+
+
+    @Override
+    public void onDestroy() {
+        getApplicationContext().stopService(mServiceIntent);
+        Log.i("MAINACT", "onDestroy!");
+        super.onDestroy();
+
+    }
 
 
 
@@ -248,6 +326,13 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
+        pbNavHeader = findViewById(R.id.pb_nav_header);
+        tvNavName = findViewById(R.id.tv_nav_name);
+        tvNavScreenName = findViewById(R.id.tv_nav_screen_name);
+        civNavProfilePic = findViewById(R.id.civ_nav_profile_pic);
+
+        apiResponse();
+
 
     }
 
@@ -312,7 +397,63 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    public void apiResponse() {
 
+        pbNavHeader.setVisibility(View.VISIBLE);
+
+        //now making the call object
+        //Here using the api method that we created inside the api interface
+        Call<Profile> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .getProfile();
+
+
+        call.enqueue(new Callback<Profile>() {
+
+            @Override
+            public void onResponse(Call<Profile> call, Response<Profile> response) {
+
+                pbNavHeader.setVisibility(View.GONE);
+
+                try {
+
+
+                    tvNavName.setText(response.body().getName());
+                    tvNavScreenName.setText(response.body().getScreenName());
+
+
+                    Glide.with(getApplicationContext())
+                            .asBitmap()
+                            .load(response.body().getProfileImageUrlHttps())
+                            .into(civNavProfilePic);
+
+
+
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "onResponse: NullPointerException " + e.getMessage() );
+                }
+
+
+            }
+
+
+            @Override
+            public void onFailure(Call<Profile> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
 
 

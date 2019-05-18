@@ -6,28 +6,34 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_camera"
             android:title="Profile" />
+
+        <item
+            android:id="@+id/navigation_search"
+            android:icon="@drawable/baseline_search_black_24dp"
+            android:title="Analysis on Hashtags" />
+
         <item
             android:id="@+id/nav_latest_replies"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_comment_btn"
             android:title="Latest Replies" />
         <item
             android:id="@+id/nav_engage"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Engage" />
-        <item
-            android:id="@+id/nav_replies_visualization"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Replies Visualization" />
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Engaged" />
+        <!--<item-->
+            <!--android:id="@+id/nav_replies_visualization"-->
+            <!--android:icon="@drawable/ic_menu_manage"-->
+            <!--android:title="Replies Visualization" />-->
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="More">
         <menu>
             <item
                 android:id="@+id/nav_settings"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Settings" />
+                android:icon="@drawable/ic_settings"
+                android:title="Choose Algorithm" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_menu_send"

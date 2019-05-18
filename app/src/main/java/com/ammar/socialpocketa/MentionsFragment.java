@@ -238,7 +238,7 @@ public class MentionsFragment extends Fragment {
 
 
 
-                    if (postList == null) {
+                    if (postList.size() < 1) {
 
                         pbMention.setVisibility(View.INVISIBLE);
                         Toast.makeText(getActivity(), "No Mentions found", Toast.LENGTH_LONG).show();
