@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.ammar.socialpocketa.models.LoginTwitter;
+import com.ammar.socialpocketa.R;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;

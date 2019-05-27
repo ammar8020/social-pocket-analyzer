@@ -1,8 +1,7 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.dialogs;
 
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -14,19 +13,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ammar.socialpocketa.api.APIService;
-import com.ammar.socialpocketa.api.APIUrl;
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.api.RetrofitClient;
 import com.ammar.socialpocketa.models.CreateTweet;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class TweetDialog extends DialogFragment {

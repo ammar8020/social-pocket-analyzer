@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.activities.TweetDetailsActivity;
 import com.ammar.socialpocketa.data.DatabaseHelper;
 import com.bumptech.glide.Glide;
 

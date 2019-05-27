@@ -1,9 +1,5 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.fragments;
 
-import android.app.ActivityManager;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,9 +14,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.api.RetrofitClient;
+import com.ammar.socialpocketa.dialogs.TweetDialog;
+import com.ammar.socialpocketa.adapters.HomeAdapter;
 import com.ammar.socialpocketa.data.SharedPrefManager;
 import com.ammar.socialpocketa.models.Home;
-import com.ammar.socialpocketa.sync.MentionService;
 import com.ammar.socialpocketa.utils.TimeUtil;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment
-        implements TweetDialog.OnInputListener{
+        implements TweetDialog.OnInputListener {
 
     private static final String TAG = "HomeFragment";
 

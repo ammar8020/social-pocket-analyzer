@@ -1,8 +1,7 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.dialogs;
 
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -14,8 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ammar.socialpocketa.api.APIService;
-import com.ammar.socialpocketa.api.APIUrl;
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.api.RetrofitClient;
+import com.ammar.socialpocketa.activities.TweetDetailsActivity;
 import com.ammar.socialpocketa.models.ReplyToTweet;
 
 import java.util.ArrayList;
@@ -24,8 +24,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ReplyDialog extends DialogFragment {
@@ -306,13 +304,18 @@ public class ReplyDialog extends DialogFragment {
 
         List<String> idStr = TweetDetailsActivity.getIdStr();
 
+//        TweetDetailsActivity tweetDetailsActivity = new TweetDetailsActivity();
+//        List<String> idStr = tweetDetailsActivity.getIdStr();
+
         Log.d(TAG, "apiRequest: idStr " + idStr);
 
 
 
         List<String> screenNames = TweetDetailsActivity.getScreenNames();
 
-        Log.d(TAG, "apiRequest: idStr " + screenNames);
+//        List<String> screenNames = tweetDetailsActivity.getScreenNames();
+
+        Log.d(TAG, "apiRequest: screenNames " + screenNames);
 
 
 

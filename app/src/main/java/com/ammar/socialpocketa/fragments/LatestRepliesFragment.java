@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,12 +18,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.api.RetrofitClient;
+import com.ammar.socialpocketa.adapters.ReplyAdapter;
 import com.ammar.socialpocketa.models.LatestReply;
-import com.ammar.socialpocketa.models.reply.Reply;
 import com.ammar.socialpocketa.utils.TimeUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;

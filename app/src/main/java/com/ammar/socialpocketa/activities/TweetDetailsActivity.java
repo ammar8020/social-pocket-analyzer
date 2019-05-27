@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,13 +18,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.dialogs.ReplyDialog;
+import com.ammar.socialpocketa.api.RetrofitClient;
+import com.ammar.socialpocketa.adapters.ReplyAdapter;
 import com.ammar.socialpocketa.models.TweetDetail;
 import com.ammar.socialpocketa.models.reply.Reply;
 import com.ammar.socialpocketa.utils.TimeUtil;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -107,8 +109,11 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
     static List<String> idStr = new ArrayList<>();
 
+//    List<String> idStr = new ArrayList<>();
 
     static List<String> screenNames = new ArrayList<>();
+
+//    List<String> screenNames = new ArrayList<>();
 
 
 
@@ -119,6 +124,14 @@ public class TweetDetailsActivity extends AppCompatActivity {
     public static List<String> getScreenNames() {
         return screenNames;
     }
+
+//    public List<String> getIdStr() {
+//        return idStr;
+//    }
+//
+//    public List<String> getScreenNames() {
+//        return screenNames;
+//    }
 
     @Nullable
     @Override
@@ -307,6 +320,13 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
 
     public void apiResponse() {
+
+
+        idStr = new ArrayList<>();
+
+//    List<String> idStr = new ArrayList<>();
+
+        screenNames = new ArrayList<>();
 
 
         pbReply.setVisibility(View.VISIBLE);
@@ -528,6 +548,10 @@ public class TweetDetailsActivity extends AppCompatActivity {
                                         appreciativeFound = true;
 
 
+//                                        idStr = new ArrayList<String>();
+//
+//                                        screenNames = new ArrayList<String>();
+
                                         idStr.add(replyList.get(i).getIdStr());
 
                                         screenNames.add(replyList.get(i).getScreenName());
@@ -611,6 +635,9 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                                         abusiveFound = true;
 
+//                                        idStr = new ArrayList<String>();
+//
+//                                        screenNames = new ArrayList<String>();
 
                                         idStr.add(replyList.get(i).getIdStr());
 
@@ -671,6 +698,10 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                                     suggestiveFound = true;
 
+//                                    idStr = new ArrayList<String>();
+//
+//                                    screenNames = new ArrayList<String>();
+
                                     idStr.add(replyList.get(i).getIdStr());
 
                                     screenNames.add(replyList.get(i).getScreenName());
@@ -720,6 +751,10 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
 
                                     seriousConcernFound = true;
+
+//                                    idStr = new ArrayList<String>();
+//
+//                                    screenNames = new ArrayList<String>();
 
                                     idStr.add(replyList.get(i).getIdStr());
 
@@ -774,6 +809,10 @@ public class TweetDetailsActivity extends AppCompatActivity {
 
                                     disappointedFound = true;
 
+//                                    idStr = new ArrayList<String>();
+//
+//                                    screenNames = new ArrayList<String>();
+
                                     idStr.add(replyList.get(i).getIdStr());
 
                                     screenNames.add(replyList.get(i).getScreenName());
@@ -816,7 +855,9 @@ public class TweetDetailsActivity extends AppCompatActivity {
 //                            texts[i] = postList.get(i).getText();
 //                            sentiments[i] = postList.get(i).getSentimentAnalysisLogreg();
 
-
+//                                idStr = new ArrayList<String>();
+//
+//                                screenNames = new ArrayList<String>();
 
                                 idStr.add(replyList.get(i).getIdStr());
 

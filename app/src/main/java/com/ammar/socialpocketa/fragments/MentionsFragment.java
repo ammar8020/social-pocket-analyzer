@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,16 +15,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.api.RetrofitClient;
+import com.ammar.socialpocketa.adapters.MentionsAdapter;
 import com.ammar.socialpocketa.models.Mention;
 import com.ammar.socialpocketa.utils.TimeUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //import okhttp3.ResponseBody;

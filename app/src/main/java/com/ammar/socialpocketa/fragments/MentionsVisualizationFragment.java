@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,9 +13,8 @@ import android.widget.ProgressBar;
 import android.graphics.Color;
 import android.widget.Toast;
 
-import com.ammar.socialpocketa.api.APIService;
-import com.ammar.socialpocketa.api.APIUrl;
-import com.ammar.socialpocketa.models.CreateTweet;
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.api.RetrofitClient;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
@@ -26,22 +25,20 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.util.ArrayList;
+
 
 import com.ammar.socialpocketa.models.RMAnalysisDetail;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class RepliesVisualizationFragment extends Fragment {
+public class MentionsVisualizationFragment extends Fragment {
 
 
-    private static final String TAG = "RepliesVisualFragment";
+    private static final String TAG = "MentionsVisualFragment";
 
     ProgressBar pbVisualization;
 
@@ -51,6 +48,20 @@ public class RepliesVisualizationFragment extends Fragment {
 
     private static final String KEY_SELECTED_ALGO = "keySelectedAlgo";
 
+
+
+//    BarChart barChart;
+//    ArrayList<String> dates;
+//    Random random;
+//    ArrayList<BarEntry> barEntries;
+//
+//
+//
+//    public static String sentimentFilter = "";
+
+
+
+
 //    Integer[] yData = new Integer[5];
 //    String[] xData = new String[5];
 
@@ -59,24 +70,50 @@ public class RepliesVisualizationFragment extends Fragment {
 //    PieChart pieChart;
 
 
+
+
+
+
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//        setHasOptionsMenu(true);
+//
+//    }
+
+
+
+
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_replies_visualization, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_mentions_visualization, container, false);
 
         Log.d(TAG, "onCreateView: started " + TAG);
 
         pbVisualization = rootView.findViewById(R.id.pb_visualization);
 
 
+
         pieChart = rootView.findViewById(R.id.idPieChart);
 
 
-        apiResponse();
 
-//        apiRequest();
+
+//        barChart = (BarChart) rootView.findViewById(R.id.bargraph);
+
+//        createRandomBarGraph("2016/05/05", "2016/06/01");
+
+
+
+
+
+        apiResponse();
 
 
         return rootView;
@@ -92,8 +129,11 @@ public class RepliesVisualizationFragment extends Fragment {
     public void apiResponse() {
 
 
+//        barChart.setVisibility(View.GONE);
+
         pbVisualization.setVisibility(View.VISIBLE);
 
+        pieChart.setVisibility(View.VISIBLE);
         //now making the call object
         //Here using the api method that we created inside the api interface
 //        Call<ReplyMentionAnalysisDetail> call = RetrofitClient
@@ -133,9 +173,9 @@ public class RepliesVisualizationFragment extends Fragment {
 //                    Log.d(TAG, "onResponse: response.body().getMentionCount().getReplyLogregCount() " + response.body().getReplyCount().getReplyLogregCount() );
 
 
-                    Log.d(TAG, "onResponse: response.body().getRepliesCount " + response.body().getRepliesCount() );
+                    Log.d(TAG, "onResponse: response.body().getMentionsCount " + response.body().getMentionsCount() );
 
-                    Log.d(TAG, "onResponse: " + response.body().getRepliesCount().getLogregCounts().getAppreciated() );
+                    Log.d(TAG, "onResponse: " + response.body().getMentionsCount().getLogregCounts().getAppreciated() );
 
 
 
@@ -186,52 +226,50 @@ public class RepliesVisualizationFragment extends Fragment {
 
 //                        tempSelectedAlgo = postList.get(i).getSentimentAnalysisLogreg();
 
-                        tempAppreciativeCount = response.body().getRepliesCount().getLogregCounts().getAppreciated();
-                        tempAbusiveCount = response.body().getRepliesCount().getLogregCounts().getAbusive();
-                        tempSuggestiveCount = response.body().getRepliesCount().getLogregCounts().getSuggestion();
-                        tempSeriousConcernCount = response.body().getRepliesCount().getLogregCounts().getSeriousConcern();
-                        tempDisappointedCount = response.body().getRepliesCount().getLogregCounts().getDisappointed();
+                        tempAppreciativeCount = response.body().getMentionsCount().getLogregCounts().getAppreciated();
+                        tempAbusiveCount = response.body().getMentionsCount().getLogregCounts().getAbusive();
+                        tempSuggestiveCount = response.body().getMentionsCount().getLogregCounts().getSuggestion();
+                        tempSeriousConcernCount = response.body().getMentionsCount().getLogregCounts().getSeriousConcern();
+                        tempDisappointedCount = response.body().getMentionsCount().getLogregCounts().getDisappointed();
 
 
                     } else if (currentSelectedAlgo.equals(rnn)) {
 
-                        tempAppreciativeCount = response.body().getRepliesCount().getRnnCounts().getAppreciated();
-                        tempAbusiveCount = response.body().getRepliesCount().getRnnCounts().getAbusive();
-                        tempSuggestiveCount = response.body().getRepliesCount().getRnnCounts().getSuggestion();
-                        tempSeriousConcernCount = response.body().getRepliesCount().getRnnCounts().getSeriousConcern();
-                        tempDisappointedCount = response.body().getRepliesCount().getRnnCounts().getDisappointed();
+                        tempAppreciativeCount = response.body().getMentionsCount().getRnnCounts().getAppreciated();
+                        tempAbusiveCount = response.body().getMentionsCount().getRnnCounts().getAbusive();
+                        tempSuggestiveCount = response.body().getMentionsCount().getRnnCounts().getSuggestion();
+                        tempSeriousConcernCount = response.body().getMentionsCount().getRnnCounts().getSeriousConcern();
+                        tempDisappointedCount = response.body().getMentionsCount().getRnnCounts().getDisappointed();
 
                     } else {
 
-                        tempAppreciativeCount = response.body().getRepliesCount().getNaivebayesCounts().getAppreciated();
-                        tempAbusiveCount = response.body().getRepliesCount().getNaivebayesCounts().getAbusive();
-                        tempSuggestiveCount = response.body().getRepliesCount().getNaivebayesCounts().getSuggestion();
-                        tempSeriousConcernCount = response.body().getRepliesCount().getNaivebayesCounts().getSeriousConcern();
-                        tempDisappointedCount = response.body().getRepliesCount().getNaivebayesCounts().getDisappointed();
+                        tempAppreciativeCount = response.body().getMentionsCount().getNaivebayesCounts().getAppreciated();
+                        tempAbusiveCount = response.body().getMentionsCount().getNaivebayesCounts().getAbusive();
+                        tempSuggestiveCount = response.body().getMentionsCount().getNaivebayesCounts().getSuggestion();
+                        tempSeriousConcernCount = response.body().getMentionsCount().getNaivebayesCounts().getSeriousConcern();
+                        tempDisappointedCount = response.body().getMentionsCount().getNaivebayesCounts().getDisappointed();
 
                     }
-
 
 
                     if (tempAppreciativeCount == 0 && tempAbusiveCount == 0 &&
                             tempDisappointedCount == 0 && tempSuggestiveCount == 0 &&
                             tempSeriousConcernCount == 0) {
 
-                        Toast.makeText(getContext(), "There are no replies available to visualize", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "There are no mentions available to visualize", Toast.LENGTH_SHORT).show();
 
                     }
 
 
 
-
                     final Integer[] yData = {tempAppreciativeCount, tempAbusiveCount, tempSuggestiveCount,
-                            tempSeriousConcernCount, tempDisappointedCount};
+                             tempSeriousConcernCount, tempDisappointedCount};
                     final String[] xData = {appreciative, abusive, suggestive, seriousConcern, disappointed};
 
 
 //        pieChart.setDescription("Sales by employee (In Thousands $)");
                     final Description desc = new Description();
-                    desc.setText("Replies Count Visualization");
+                    desc.setText("Mentions Count Visualization");
                     pieChart.setDescription(desc);
 
                     pieChart.setRotationEnabled(true);
@@ -240,7 +278,7 @@ public class RepliesVisualizationFragment extends Fragment {
                     //pieChart.setCenterTextColor(Color.BLACK);
                     pieChart.setHoleRadius(25f);
                     pieChart.setTransparentCircleAlpha(0);
-                    pieChart.setCenterText("Replies Chart");
+                    pieChart.setCenterText("Mentions Chart");
                     pieChart.setCenterTextSize(10);
                     //pieChart.setDrawEntryLabels(true);
                     //pieChart.setEntryLabelTextSize(20);
@@ -318,12 +356,6 @@ public class RepliesVisualizationFragment extends Fragment {
             yEntrys.add(new PieEntry(yData[i] , i));
         }
 
-//        if(yEntrys.size() < 1) {
-//
-//            Toast.makeText(getActivity(), "No replies found to display", Toast.LENGTH_SHORT).show();
-//
-//        }
-
         for(int i = 1; i < xData.length; i++){
             xEntrys.add(xData[i]);
         }
@@ -367,92 +399,143 @@ public class RepliesVisualizationFragment extends Fragment {
 
 
 
-
-
-//    public void apiRequest() {
+//    public void createRandomBarGraph(String Date1, String Date2){
 //
 //
-////        pbCreateTweet.setVisibility(View.VISIBLE);
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(APIUrl.BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        APIService service = retrofit.create(APIService.class);
+//        pieChart.setVisibility(View.GONE);
+//        barChart.setVisibility(View.VISIBLE);
 //
 //
-//        String input = "okayy";
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
 //
+//        try {
+//            Date date1 = simpleDateFormat.parse(Date1);
+//            Date date2 = simpleDateFormat.parse(Date2);
 //
-//        Log.d(TAG, "apiRequest: input String: " + input);
+//            Calendar mDate1 = Calendar.getInstance();
+//            Calendar mDate2 = Calendar.getInstance();
+//            mDate1.clear();
+//            mDate2.clear();
 //
-//        Call<CreateTweet> call = service.createTweet(input);
+//            mDate1.setTime(date1);
+//            mDate2.setTime(date2);
 //
-//        call.enqueue(new Callback<CreateTweet>() {
-//            @Override
-//            public void onResponse(Call<CreateTweet> call, Response<CreateTweet> response) {
+//            dates = new ArrayList<>();
+//            dates = getList(mDate1,mDate2);
 //
-//
-////                if(response.body() != null) {
-////
-////                    Toast.makeText(getActivity(), "Tweet Created Successfully", Toast.LENGTH_SHORT).show();
-////
-////                } else {
-////                    Toast.makeText(getActivity(), "Failed to create a Tweet", Toast.LENGTH_SHORT).show();
-////
-////                }
-//
-////                pbCreateTweet.setVisibility(View.INVISIBLE);
-//
-//
-////                Log.d(TAG, "onResponse: input string: " + input);
-//
-//
-//                Log.d(TAG, "onResponse: response.body().getText(): " + response.body().getText());
-//
-//
-//                Log.d(TAG, "onResponse: response.body().getText().getText(): " + response.body().getText().getText());
-//
-//
-//
-//
-//                Toast.makeText(getActivity(), "Tweet Created Successfully", Toast.LENGTH_SHORT).show();
-//
-//
-//
-//
-//
-//
-//
-////                if(input.equals(response.body().getText().getText())) {
-////
-////                    Toast.makeText(getActivity(), "Tweet Created Successfully", Toast.LENGTH_SHORT).show();
-////
-////                } else
-////
-////                    Toast.makeText(getActivity(), "Tweet not Successfully", Toast.LENGTH_SHORT).show();
-////            }
-//
-//
-//
-//////                getDialog().dismiss();
-//
-//
+//            barEntries = new ArrayList<>();
+//            float max = 0f;
+//            float value = 0f;
+//            random = new Random();
+//            for(int j = 0; j< dates.size();j++){
+//                max = 100f;
+//                value = random.nextFloat()*max;
+//                barEntries.add(new BarEntry(value,j));
 //            }
 //
+//        }catch(ParseException e){
+//            e.printStackTrace();
+//        }
 //
-//            @Override
-//            public void onFailure(Call<CreateTweet> call, Throwable t) {
-////                progressDialog.dismiss();
-//                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        });
+//        BarDataSet barDataSet = new BarDataSet(barEntries,"Dates");
+//        BarData barData = new BarData((IBarDataSet) dates,barDataSet);
+//        barChart.setData(barData);
+////        barChart.setDescription("My First Bar Graph!");
+//
+//    }
+//
+//    public ArrayList<String> getList(Calendar startDate, Calendar endDate){
+//        ArrayList<String> list = new ArrayList<String>();
+//        while(startDate.compareTo(endDate)<=0){
+//            list.add(getDate(startDate));
+//            startDate.add(Calendar.DAY_OF_MONTH,1);
+//        }
+//        return list;
+//    }
+//
+//    public String getDate(Calendar cld){
+//        String curDate = cld.get(Calendar.YEAR) + "/" + (cld.get(Calendar.MONTH) + 1) + "/"
+//                +cld.get(Calendar.DAY_OF_MONTH);
+//        try{
+//            Date date = new SimpleDateFormat("yyyy/MM/dd").parse(curDate);
+//            curDate =  new SimpleDateFormat("yyy/MM/dd").format(date);
+//        }catch(ParseException e){
+//            e.printStackTrace();
+//        }
+//        return curDate;
+//    }
+
+
+
+
+
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//
+//        getActivity().getMenuInflater().inflate(R.menu.visualization, menu);
+//
+//
+//        switch (sentimentFilter) {
+//
+//            case "Pie Chart":
+//                menu.getItem(0).setChecked(true);
+//                break;
+//
+//            case "Bar Chart":
+//                menu.getItem(1).setChecked(true);
+//                break;
+//
+//        }
+//
+//            super.onCreateOptionsMenu(menu, inflater);
+//
+//    }
+//
+//
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//
+//        if (id == R.id.action_pie_chart) {
+//
+//            Log.d(TAG, "onOptionsItemSelected: Pie Chart clicked");
+//
+//            item.setChecked(!item.isChecked()); //toggle checkbox-state
+//
+//            sentimentFilter = "Pie Chart";
+//
+//            apiResponse();
+//
+//        } else {
+//
+//
+//            Log.d(TAG, "onOptionsItemSelected: Bar Chart clicked");
+//
+//            item.setChecked(!item.isChecked()); //toggle checkbox-state
+//
+//
+//
+//            sentimentFilter = "Bar Chart";
+//
+//
+////            barChartApiResponse();
+//
+//            createRandomBarGraph("2016/05/05", "2016/06/01");
+//
+//
+//        }
+//
+//        return super.onOptionsItemSelected(item);
 //
 //
 //
 //    }
-
 
 
 

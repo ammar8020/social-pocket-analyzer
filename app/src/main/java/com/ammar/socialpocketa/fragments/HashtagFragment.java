@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,12 +21,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.api.RetrofitClient;
+import com.ammar.socialpocketa.adapters.HashtagAdapter;
+import com.ammar.socialpocketa.adapters.TrendsAdapter;
 import com.ammar.socialpocketa.models.Hashtag;
 import com.ammar.socialpocketa.models.TrendDetail;
 import com.ammar.socialpocketa.models.trendDetail.Trend;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //import okhttp3.ResponseBody;

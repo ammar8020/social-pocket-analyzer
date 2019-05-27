@@ -1,13 +1,11 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -18,17 +16,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.api.RetrofitClient;
 import com.ammar.socialpocketa.api.APIService;
 import com.ammar.socialpocketa.api.APIUrl;
 import com.ammar.socialpocketa.data.SharedPrefManager;
 import com.ammar.socialpocketa.models.Login;
-import com.ammar.socialpocketa.models.LoginTwitter;
 import com.ammar.socialpocketa.models.Mention;
-import com.ammar.socialpocketa.utils.TimeUtil;
 import com.auth0.android.jwt.Claim;
 import com.auth0.android.jwt.JWT;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.activities;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -26,7 +26,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.api.RetrofitClient;
+import com.ammar.socialpocketa.dialogs.TweetDialog;
 import com.ammar.socialpocketa.data.SharedPrefManager;
+import com.ammar.socialpocketa.fragments.EngageFragment;
+import com.ammar.socialpocketa.fragments.HashtagFragment;
+import com.ammar.socialpocketa.fragments.HomeFragment;
+import com.ammar.socialpocketa.fragments.LatestRepliesFragment;
+import com.ammar.socialpocketa.fragments.MentionsFragment;
+import com.ammar.socialpocketa.fragments.MentionsVisualizationFragment;
+import com.ammar.socialpocketa.fragments.ProfileFragment;
+import com.ammar.socialpocketa.fragments.RepliesVisualizationFragment;
+import com.ammar.socialpocketa.fragments.SettingFragment;
 import com.ammar.socialpocketa.models.Profile;
 import com.ammar.socialpocketa.sync.MentionService;
 import com.bumptech.glide.Glide;
@@ -114,11 +126,11 @@ public class MainActivity extends AppCompatActivity
         //displaySelectedScreen(R.id.nav_profile);
 
 
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-
-        String userId = sharedPreferences.getString(KEY_USER_ID2, "");
-
-        MentionService.setUserId(userId);
+//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+//
+//        String userId = sharedPreferences.getString(KEY_USER_ID2, "");
+//
+//        MentionService.setUserId(userId);
 
 
         mMentionService = new MentionService(getApplicationContext());

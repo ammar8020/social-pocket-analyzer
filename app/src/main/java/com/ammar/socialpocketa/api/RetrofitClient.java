@@ -1,10 +1,6 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.api;
 
 import android.util.Log;
-
-import com.ammar.socialpocketa.api.APIService;
-import com.ammar.socialpocketa.api.APIUrl;
-import com.ammar.socialpocketa.data.SharedPrefManager;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;

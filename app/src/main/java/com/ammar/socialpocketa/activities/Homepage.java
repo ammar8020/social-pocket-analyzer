@@ -1,9 +1,11 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
+
+import com.ammar.socialpocketa.R;
 
 public class Homepage extends Activity {
     @Override

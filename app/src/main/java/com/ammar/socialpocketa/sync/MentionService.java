@@ -16,7 +16,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ammar.socialpocketa.R;
-import com.ammar.socialpocketa.RetrofitClient;
+import com.ammar.socialpocketa.api.RetrofitClient;
 import com.ammar.socialpocketa.data.DatabaseHelper;
 import com.ammar.socialpocketa.utils.DbImageUtil;
 import com.ammar.socialpocketa.models.Mention;
@@ -25,8 +25,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -153,7 +151,8 @@ public class MentionService extends Service {
         initializeTimerTask();
 
         //schedule the timer, to wake up every 10 seconds or so...
-        timer.schedule(timerTask, 1000 * 6, 1000 * 10);
+        timer.schedule(timerTask, 1000 * 30, 1000 * 60 * 5);
+//        timer.schedule(timerTask, 1000 * 30, 1000 * 7);
     }
 
     /**
@@ -329,6 +328,7 @@ public class MentionService extends Service {
                         mFavoriteds.add(postList.get(i).getFavorited());
 
 
+
                         Log.d(TAG, "onResponse: Tweet = " + postList.get(i).getText());
 
 
@@ -469,14 +469,22 @@ public class MentionService extends Service {
 //                                    getPostList.getSentimentAnalysisNaiveBayes(), getPostList.getSentimentAnalysisRnn()
 //                                    );
 
+
+
+                            Log.d(TAG, "onResponse: getPostList.getUser() " + getPostList.getUser());
+
                             AddData(postList.get(i).getText(), byteImage, getPostList.getId(),
                                     getPostList.getUser(), getPostList.getName(),
                                     getPostList.getScreenName(), getPostList.getCreatedAt(),
                                     getPostList.getRetweetCount(),
                                     getPostList.getFavoriteCount(), getPostList.getSentimentAnalysisLogreg(),
                                     getPostList.getSentimentAnalysisNaiveBayes(),
-                                    getPostList.getSentimentAnalysisRnn(), mUserId
+                                    getPostList.getSentimentAnalysisRnn(),
+//                                    mUserId
+                                    getPostList.getUser()
                             );
+
+
 
 
                             int notificationId;

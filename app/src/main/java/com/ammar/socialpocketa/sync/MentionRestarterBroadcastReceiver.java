@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.ammar.socialpocketa.RetrofitClient;
+import com.ammar.socialpocketa.api.RetrofitClient;
 import com.ammar.socialpocketa.data.SharedPrefManager;
 
 

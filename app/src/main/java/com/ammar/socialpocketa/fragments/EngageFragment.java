@@ -1,4 +1,4 @@
-package com.ammar.socialpocketa;
+package com.ammar.socialpocketa.fragments;
 
 
 import android.content.Context;
@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.ammar.socialpocketa.R;
+import com.ammar.socialpocketa.adapters.EngageAdapter;
 import com.ammar.socialpocketa.utils.DbImageUtil;
 import com.ammar.socialpocketa.data.DatabaseHelper;
 
@@ -495,7 +497,7 @@ public class EngageFragment extends Fragment {
             if (!checkEngaged) {
 
                 pbEngage.setVisibility(View.INVISIBLE);
-                Toast.makeText(getActivity(), "No Mentions found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "No Mentions found in Database", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -509,7 +511,7 @@ public class EngageFragment extends Fragment {
                     if (appreciativeFound.equals(false)) {
 
 
-                        Toast.makeText(getActivity(), "No Appreciative Mention found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "No Appreciative Mention found in Database", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -519,7 +521,7 @@ public class EngageFragment extends Fragment {
                     if (abusiveFound.equals(false)) {
 
 
-                        Toast.makeText(getActivity(), "No Abusive Mention found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "No Abusive Mention found in Database", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -529,7 +531,7 @@ public class EngageFragment extends Fragment {
                     if (suggestiveFound.equals(false)) {
 
 
-                        Toast.makeText(getActivity(), "No Suggestive Mention found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "No Suggestive Mention found in Database", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -539,7 +541,7 @@ public class EngageFragment extends Fragment {
                     if (seriousConcernFound.equals(false)) {
 
 
-                        Toast.makeText(getActivity(), "No Serious Concern Mention found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "No Serious Concern Mention found in Database", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -549,7 +551,7 @@ public class EngageFragment extends Fragment {
                     if (disappointedFound.equals(false)) {
 
 
-                        Toast.makeText(getActivity(), "No Disappointed Mention found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "No Disappointed Mention found in Database", Toast.LENGTH_SHORT).show();
 
                     }
 
