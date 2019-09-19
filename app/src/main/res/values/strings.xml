@@ -57,8 +57,8 @@
 
 
     <!-- Twitter SDK -->
-    <string name="com.twitter.sdk.android.CONSUMER_KEY">8X65tNQZSUkeD0xx5hIjbr3nb</string>
-    <string name="com.twitter.sdk.android.CONSUMER_SECRET">pHMUcJ1jSphXnTcPI5w9czKF0QSoYDzfrC952d8FEMJYlNzGse</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">Your_Key</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">Your_Key</string>
     <string name="custom_log_in_with_twitter">Custom Log in with Twitter</string>
     <string name="get_profile_image">Fetch Profile Image</string>
 

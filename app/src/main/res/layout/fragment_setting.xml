@@ -62,7 +62,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selecting the Algorithm provide you fascility to choose the Algorithm of your choice depending upon the accuracy. Here we have accuracies of above mentioned Algorithms i.e. 91% 92% 88% respectively."
+        android:text="Selecting the Algorithm provide you facility to choose the Algorithm of your choice depending upon the accuracy. Here we have accuracies of above mentioned Algorithms i.e. 92.5%, 96%, 90.62% respectively."
         android:textSize="17sp"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="20dp"
